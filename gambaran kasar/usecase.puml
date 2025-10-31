@@ -1,0 +1,30 @@
+@startuml
+title Use Case Diagram - Personal Website
+
+actor User as U
+
+rectangle "Personal Website" {
+    usecase "Melihat profil pemilik website" as UC1
+    usecase "Melihat informasi umum tentang Roblox" as UC2
+    usecase "Melihat informasi umum tentang Mobile Legend" as UC3
+    usecase "Melihat informasi umum tentang GitHub" as UC4
+    usecase "Melihat detail informasi Roblox" as UC5
+    usecase "Melihat detail informasi Mobile Legend" as UC6
+    usecase "Melihat detail informasi GitHub" as UC7
+}
+
+U --> UC1
+U --> UC2
+U --> UC3
+U --> UC4
+UC2 --> UC5 : <<extend>>
+UC3 --> UC6 : <<extend>>
+UC4 --> UC7 : <<extend>>
+
+note right of U
+  Tujuan User:
+  - Mengetahui info umum & detail
+  - Tentang Roblox, ML, dan GitHub
+end note
+
+@enduml
