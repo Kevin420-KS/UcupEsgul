@@ -1,0 +1,42 @@
+@startuml
+title Use Case Diagram - Personal Website (Final Version)
+
+actor User as U
+
+' ====== HOME PAGE (index.html) ======
+rectangle "Home (index.html)" {
+    usecase "Melihat profil pemilik website" as UC1
+    usecase "Melihat informasi umum tentang Roblox" as UC2
+    usecase "Melihat informasi umum tentang Mobile Legend" as UC3
+    usecase "Melihat informasi umum tentang GitHub" as UC4
+    usecase "Melihat kontak sosial media pemilik website" as UC8
+}
+
+' ====== MOREABOUT FOLDER ======
+rectangle "MoreAbout Folder" {
+    usecase "Melihat detail Roblox:\n- Cara mendapatkan item gratis\n- Membuat avatar\n- Harga & hyperlink item" as UC5
+    usecase "Melihat detail Mobile Legend:\n- Role & Hero\n- Tutorial & hyperlink hero" as UC6
+    usecase "Melihat detail GitHub:\n- Bahasa pemrograman yang dipelajari\n- Hyperlink ke repository" as UC7
+}
+
+' ====== RELATIONSHIPS ======
+U --> UC1
+U --> UC2
+U --> UC3
+U --> UC4
+U --> UC8
+
+UC2 --> UC5 : <<extend>> 
+UC3 --> UC6 : <<extend>> 
+UC4 --> UC7 : <<extend>> 
+
+' ====== NOTE ABOUT USER GOAL ======
+note right of U
+  Tujuan User:
+  - Mengenal pemilik website
+  - Membaca informasi umum (Roblox, ML, GitHub)
+  - Melihat detail lanjutan di folder MoreAbout
+  - Mengunjungi sosial media pengembang
+end note
+
+@enduml

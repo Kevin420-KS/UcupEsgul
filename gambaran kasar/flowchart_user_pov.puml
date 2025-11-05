@@ -1,0 +1,40 @@
+@startuml
+title Flowchart - Personal Website
+
+start
+
+:User membuka website (index.html);
+:Menampilkan halaman Home;
+
+if (Apakah user ingin melihat profil?) then (Ya)
+  :Tampilkan profil pemilik website;
+else (Tidak)
+endif
+
+:Menampilkan informasi umum:\n- Roblox\n- Mobile Legend\n- GitHub;
+
+if (User memilih salah satu topik?) then (Ya)
+  if (Roblox dipilih?) then (Ya)
+    :Arahkan ke folder MoreAbout/Roblox;
+    :Tampilkan detail Roblox:\n- Cara dapat item gratis\n- Avatar\n- Harga & hyperlink item;
+  elseif (Mobile Legend dipilih?) then (Ya)
+    :Arahkan ke folder MoreAbout/MobileLegend;
+    :Tampilkan detail ML:\n- Role & Hero\n- Tutorial\n- Hyperlink hero;
+  elseif (GitHub dipilih?) then (Ya)
+    :Arahkan ke folder MoreAbout/GitHub;
+    :Tampilkan detail GitHub:\n- Bahasa pemrograman\n- Link repository;
+  else (Tidak)
+    :Tetap di halaman index.html;
+  endif
+else (Tidak)
+  :User tetap di halaman Home;
+endif
+
+if (User ingin menghubungi pemilik website?) then (Ya)
+  :Scroll/klik menu Contact;
+  :Tampilkan daftar sosial media pemilik website;
+else (Tidak)
+endif
+
+stop
+@enduml
