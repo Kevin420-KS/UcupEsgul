@@ -1,6 +1,6 @@
 /* ===== RESET & BACKGROUND ===== */
 html {
-  scroll-behavior: smooth; /* efek transisi halus saat klik menu */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -45,58 +45,66 @@ nav a:hover {
   color: #ffd700;
 }
 
-/* ===== HOME SECTION ===== */
-#home {
+/* ========================================================= */
+/* ===== HOME SECTION (PERBAIKAN UTAMA) ===== */
+/* ========================================================= */
+
+.home-section {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 40px;
   max-width: 1100px;
-  margin: 100px auto;
+  margin: 120px auto;
   padding: 40px;
   flex-wrap: wrap;
 }
 
 /* Karakter di kiri */
-#home .character {
+.home-section .character {
   flex: 1 1 300px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#home .character img {
-  width: 320px;
-  max-width: 100%;
+.home-section .character img {
+  width: 450px;
+  max-width: 150%;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
 /* Kotak teks di kanan */
-#home .intro {
-  flex: 1 1 450px;
-  background: rgba(255, 255, 255, 0.92);
-  color: #000;
+.home-section .intro {
+  flex: 1 1 480px;
+  background: rgba(0, 0, 0, 0.45); /* sama seperti about */
+  backdrop-filter: blur(4px);
+  color: #fff;                     /* teks putih agar jelas */
   padding: 35px;
-  border-radius: 15px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-  text-align: left;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.22);
 }
 
-#home h1 {
-  color: #002b5b;
-  margin-top: 0;
-  font-size: 28px;
+
+.home-section h1 {
+  color: #ffd700; /* kuning seperti about */
   text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 
-#home p {
+
+.home-section p {
   line-height: 1.6;
   font-size: 16px;
 }
 
+/* ========================================================= */
 /* ===== ABOUT SECTION ===== */
+/* ========================================================= */
+
 #about {
   background: rgba(0, 0, 0, 0.5);
   margin: 80px auto;
@@ -111,7 +119,79 @@ nav a:hover {
   color: #ffd700;
 }
 
+/* INFO BOX */
+.info-box {
+  background: rgba(255, 255, 255, 0.1);
+  margin-top: 30px;
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(3px);
+}
+
+.info-box h3 {
+  color: #ffd700;
+  margin-top: 0;
+}
+
+.info-box p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.info-box .btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 18px;
+  background: #ffd700;
+  color: #000;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.info-box .btn:hover {
+  background: #fff;
+}
+
+/* ========================================================= */
+/* ===== CONTACT SECTION ===== */
+/* ========================================================= */
+
+#contact {
+  margin: 80px auto;
+  padding: 40px;
+  max-width: 800px;
+  text-align: center;
+}
+
+#contact h2 {
+  color: #ffd700;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+}
+
+.social-links li {
+  margin: 8px 0;
+}
+
+.social-links a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.social-links a:hover {
+  color: white;
+}
+
+/* ========================================================= */
 /* ===== FOOTER ===== */
+/* ========================================================= */
+
 footer {
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
@@ -120,13 +200,59 @@ footer {
   color: #ddd;
 }
 
-/* ===== RESPONSIVE (MOBILE) ===== */
-@media (max-width: 768px) {
-  #home {
-    flex-direction: column;
-  }
+/* ========================================================= */
+/* ===== RESPONSIVE ===== */
+/* ========================================================= */
 
-  #home .intro {
+@media (max-width: 768px) {
+  .home-section {
+    flex-direction: column;
     text-align: center;
   }
+
+  .home-section .intro {
+    text-align: center;
+  }
+
+  nav ul {
+    gap: 15px;
+  }
+}
+
+/* ========================================================= */
+/* ===== ANIMASI TRANSISI MASUK ===== */
+/* ========================================================= */
+
+.fade-element {
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: fadeDown 0.9s ease-out forwards;
+}
+
+@keyframes fadeDown {
+  0% {
+    opacity: 0.1;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================= */
+/* ===== EFFECT: BLUR OUT ON SCROLL ===== */
+/* ========================================================= */
+
+.blur-out {
+  transition: 
+    opacity 0.6s ease,
+    filter 0.6s ease,
+    transform 0.6s ease;
+}
+
+.blur-out.hidden {
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(0.95);
 }
