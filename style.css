@@ -289,5 +289,5 @@ html {
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-  animation: float 8s ease-in-out infinite; /* <== animasi mengambang */
+  animation: float 5s ease-in-out infinite; /* <== animasi mengambang */
 }
