@@ -46,7 +46,7 @@ nav a:hover {
 }
 
 /* ========================================================= */
-/* ===== HOME SECTION (PERBAIKAN UTAMA) ===== */
+/* ===== HOME SECTION  ===== */
 /* ========================================================= */
 
 .home-section {
@@ -85,6 +85,7 @@ nav a:hover {
   padding: 35px;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.22);
+  text-align: center;
 }
 
 
@@ -255,4 +256,38 @@ footer {
   opacity: 0;
   filter: blur(12px);
   transform: scale(0.95);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 140px;
+}
+
+/* ========================================================= */
+/* ===== FLOATING ANIMATION (untuk gambar UCUP) ===== */
+/* ========================================================= */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.6));
+  }
+  50% {
+    transform: translateY(-20px);
+    filter: drop-shadow(0 25px 15px rgba(0, 0, 0, 0.2));
+  }
+  100% {
+    transform: translateY(0px);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.6));
+  }
+}
+
+/* Terapkan animasi ke gambar karakter UCUP */
+.home-section .character img {
+  width: 450px;
+  max-width: 150%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  animation: float 8s ease-in-out infinite; /* <== animasi mengambang */
 }
