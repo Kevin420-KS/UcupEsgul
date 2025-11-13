@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal Website | UcupEsgul</title>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- ===== MAIN STYLE ===== -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- ===== ORB ABOUT STYLE (TERPISAH) ===== -->
+  <link rel="stylesheet" href="orb-about.css" />
 </head>
 <body>
 
@@ -20,61 +24,69 @@
   </header>
 
   <!-- ===== HOME SECTION ===== -->
-<section id="home" class="home-section fade-element blur-out">
-
-  <div class="intro">
-    <h1>CODE NAME : UCUP ESGUL</h1>
-    <p>Halo semuanya!!! Perkenalkan aku <strong>UcupEsgul</strong> pemilik website ini.</p>
-    <p>Aku adalah seorang mahasiswa dari <strong>Universitas Esa Unggul</strong>,</p>
-    <p>Jika kalian tertarik hal apa saja yang saya lakukan selama masa kuliah,</p>
-    <p>Silakan scroll lebih lanjut ya.</p>
-  </div>
-
-  <div class="character">
-    <img 
-      src="Images/Ucup.png" 
-      alt="UcupEsgul"
-      onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Kevin420-KS/UcupEsgul/main/Images/UCUP.png';"
-    />
-  </div>
-
-</section>
-
-  <!-- ===== ABOUT SECTION ===== -->
-  <section id="about" class="fade-element blur-out">
-    <h2>Informasi Umum</h2>
-
-    <!-- ROBLOX -->
-    <div class="info-box">
-      <h3>Roblox</h3>
-      <p>Didalam game Roblox ini banyak variasi game yang dapat dimainkan,</p>
-      <p>namun cuma beberapa yang aku mainkan untuk mendapatkan item gratis dari game yang dimainkan.</p>
-      <p>Jika anda tertarik lebih dalam tentang item apa saja yang masih bisa didapatkan di game Roblox,</p>
-      <p>silakan klik link di bawah ini untuk nama itemnya dan cara mendapatkannya.</p>
-      <a href="MoreAbout/roblox_information.html" class="btn">Free Accessories Tutorial</a>
+  <section id="home" class="home-section fade-element blur-out">
+    <div class="intro">
+      <h1>CODE NAME : UCUP ESGUL</h1>
+      <p>Halo semuanya!!! Perkenalkan aku <strong>UcupEsgul</strong> pemilik website ini.</p>
+      <p>Aku adalah seorang mahasiswa dari <strong>Universitas Esa Unggul</strong>,</p>
+      <p>Jika kalian tertarik hal apa saja yang saya lakukan selama masa kuliah,</p>
+      <p>Silakan scroll lebih lanjut ya.</p>
     </div>
 
-    <!-- MOBILE LEGEND -->
-    <div class="info-box">
-      <h3>Mobile Legend</h3>
-      <p>Didalam game Mobile Legend ini biasanya aku hanya login untuk main ranked match,</p>
-      <p>dan mendapatkan skin gratis dari event yang sedang berlangsung di dalam gamenya.</p>
-      <p>Aku dapat memberikan tips & trick untuk menguasai role tertentu di Mobile Legend,</p>
-      <p>dan cara mendapatkan skin gratis/mendapatkan skin dengan tips hemat;</p>
-      <p>Jika ingin tahu lebih dalam dari hal-hal yang aku sebutkan tadi, silakan klik link di bawah ini.</p>
-      <a href="MoreAbout/ml_information.html" class="btn">Tips & Trick (Cheap Spending, Free Skin, Mastery Lane)</a>
+    <div class="character">
+      <img
+        src="Images/Ucup.png"
+        alt="UcupEsgul"
+        onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Kevin420-KS/UcupEsgul/main/Images/UCUP.png';"
+      />
     </div>
-
-    <!-- GITHUB -->
-      <div class="info-box">
-      <h3>GitHub</h3>
-      <p>Halo! Aku saat ini menempuh studi di <strong>Universitas Esa Unggul</strong>, jurusan <strong>Teknik Informatika</strong>.</p>
-      <p>Selama kuliah, aku banyak bereksperimen dengan berbagai proyek — mulai dari pemrograman web, logika sistem, sampai eksplorasi bahasa pemrograman baru.</p>
-      <p>Kalau kamu penasaran dengan karya dan perjalanan belajarku, silakan jelajahi link di bawah ini.</p>
-      <a href="MoreAbout/github_information.html" class="btn">Lihat Proyek & Eksperimen Belajar</a>
-  </div>
-
   </section>
+
+<!-- ===== ABOUT SECTION (ORB) ===== -->
+  <section id="about" class="about-orb-section fade-element blur-out">
+    <div class="about-orb-container">
+      <img src="Images/UCUP1.png" alt="UcupEsgul About" class="about-orb-character" />
+      <div class="about-orb" id="aboutOrb">
+        <img id="orbLogo" src="Images/RB.png" alt="Orb Logo" class="orb-logo" />
+      </div>
+    </div>
+
+    <!-- POPUP INFO -->
+    <div class="about-popup" id="aboutPopup">
+      <div class="about-popup-content">
+        <span id="popupClose" class="close-btn">&times;</span>
+
+        <div class="about-orb-content">
+          <!-- ROBLOX -->
+          <div class="about-info-box" id="infoRoblox">
+            <h3>Roblox</h3>
+            <p>Didalam game Roblox ini banyak variasi game yang dapat dimainkan, namun cuma beberapa yang aku mainkan untuk mendapatkan item gratis dari game yang dimainkan.</p>
+            <p>Jika anda tertarik lebih dalam tentang item apa saja yang masih bisa didapatkan di game Roblox, silakan klik link di bawah ini untuk nama itemnya dan cara mendapatkannya.</p>
+            <a href="MoreAbout/roblox_information.html" class="about-btn">Free Accessories Tutorial</a>
+          </div>
+
+          <!-- MOBILE LEGEND -->
+          <div class="about-info-box" id="infoML">
+            <h3>Mobile Legend</h3>
+            <p>Didalam game Mobile Legend ini biasanya aku hanya login untuk main ranked match, dan mendapatkan skin gratis dari event yang sedang berlangsung di dalam gamenya.</p>
+            <p>Aku dapat memberikan tips & trick untuk menguasai role tertentu di Mobile Legend, dan cara mendapatkan skin gratis/mendapatkan skin dengan tips hemat.</p>
+            <p>Jika ingin tahu lebih dalam dari hal-hal yang aku sebutkan tadi, silakan klik link di bawah ini.</p>
+            <a href="MoreAbout/ml_information.html" class="about-btn">Tips & Trick (Cheap Spending, Free Skin, Mastery Lane)</a>
+          </div>
+
+          <!-- GITHUB -->
+          <div class="about-info-box" id="infoGitHub">
+            <h3>GitHub</h3>
+            <p>Halo! Aku saat ini menempuh studi di <strong>Universitas Esa Unggul</strong>, jurusan <strong>Teknik Informatika</strong>.</p>
+            <p>Selama kuliah, aku banyak bereksperimen dengan berbagai proyek — mulai dari pemrograman web, logika sistem, sampai eksplorasi bahasa pemrograman baru.</p>
+            <p>Kalau kamu penasaran dengan karya dan perjalanan belajarku, silakan jelajahi link di bawah ini.</p>
+            <a href="MoreAbout/github_information.html" class="about-btn">Lihat Proyek & Eksperimen Belajar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- ===== CONTACT SECTION ===== -->
   <section id="contact" class="fade-element blur-out">
@@ -94,6 +106,9 @@
     <p>&copy; 2025 - Personal Website by UcupEsgul</p>
   </footer>
 
+  <!-- ===== MAIN SCRIPT ===== -->
   <script src="script.js"></script>
+  <!-- ===== ORB ABOUT SCRIPT ===== -->
+  <script src="orb-about.js"></script>
 </body>
 </html>

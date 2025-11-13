@@ -107,12 +107,10 @@ nav a:hover {
 /* ========================================================= */
 
 #about {
-  background: rgba(0, 0, 0, 0.5);
   margin: 80px auto;
   padding: 40px;
   max-width: 800px;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
   text-align: center;
 }
 
@@ -291,3 +289,109 @@ html {
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
   animation: float 5s ease-in-out infinite; /* <== animasi mengambang */
 }
+
+/* ===== ABOUT ORB SECTION ===== */
+.about-orb-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Kontainer karakter dan orb */
+.about-orb-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Karakter utama */
+.about-orb-character {
+  width: 700px;
+  max-width: 100%;
+  height: auto;
+  z-index: 2;
+  animation: float 5s ease-in-out infinite;
+  transform: translateY(-500px); /* 🔼 geser ke atas */
+}
+
+/* Orb (bola bercahaya) */
+.about-orb {
+  position: absolute;
+  top: 20%;  /* geser ke atas */
+  left: 80%; /* geser ke kanan */
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 40% 40%,
+    rgba(0, 200, 255, 0.9) 0%,
+    rgba(0, 90, 150, 0.6) 70%,
+    rgba(0, 50, 100, 0.4) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  animation: orbGlow 3s infinite alternate ease-in-out;
+  z-index: 3;
+}
+
+/* Logo di dalam orb */
+.orb-logo {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+/* ===== POPUP ===== */
+.about-popup {
+  display: none;  /* inilah kuncinya: popup hanya muncul ketika orb diklik */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* Isi popup */
+.about-popup-content {
+  background: rgba(0,0,0,0.8);
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 700px;
+  width: 90%;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+/* Tombol close */
+.close-btn {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Isi detail setiap info */
+.about-info-box {
+  display: none;
+}
+
+.about-info-box.active {
+  display: block;
+}
+
