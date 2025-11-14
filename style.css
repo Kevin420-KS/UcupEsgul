@@ -1,101 +1,99 @@
-/* ===== RESET & BACKGROUND ===== */
+/* ===== RESET & BACKGROUND ===== */  /* area untuk atur reset HTML dan background utama */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* efek scroll halus */
 }
 
 body {
-  background-image: url("Images/BG.png");
-  background-size: cover;
+  background-image: url("Images/BG.png"); /* ganti gambar background */
+  background-size: cover; /* agar full layar */
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  font-family: "Poppins", sans-serif;
-  color: white;
+  background-attachment: fixed; /* background diam saat scroll */
+  font-family: "Poppins", sans-serif; /* font utama */
+  color: white; /* warna teks default */
   margin: 0;
   padding: 0;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR ===== */ /* style bagian header & menu */
 header {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6); /* warna transparan navbar */
   padding: 10px 0;
-  position: sticky;
+  position: sticky; /* nempel di atas */
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(8px);
+  z-index: 100; /* selalu di atas */
+  backdrop-filter: blur(8px); /* efek kaca */
 }
 
 nav ul {
-  display: flex;
+  display: flex; /* menu horizontal */
   justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 30px;
+  gap: 30px; /* jarak antar item */
 }
 
 nav a {
-  color: #fff;
+  color: #fff; /* warna teks menu */
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.3s;
+  transition: color 0.3s; /* animasi hover */
 }
 
 nav a:hover {
-  color: #ffd700;
+  color: #ffd700; /* warna saat hover */
 }
 
 /* ========================================================= */
-/* ===== HOME SECTION  ===== */
+/* ===== HOME SECTION  ===== */ /* bagian halaman utama */
 /* ========================================================= */
 
 .home-section {
-  display: flex;
+  display: flex; /* gambar & teks sejajar */
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 40px; /* jarak kiri-kanan */
   max-width: 1100px;
   margin: 120px auto;
   padding: 40px;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* responsive */
 }
 
 /* Karakter di kiri */
 .home-section .character {
-  flex: 1 1 300px;
+  flex: 1 1 300px; /* ukuran fleksibel */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .home-section .character img {
-  width: 450px;
+  width: 450px; /* ukuran karakter */
   max-width: 150%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3)); /* glow putih */
 }
 
 /* Kotak teks di kanan */
 .home-section .intro {
   flex: 1 1 480px;
-  background: rgba(0, 0, 0, 0.45); /* sama seperti about */
+  background: rgba(0, 0, 0, 0.45); /* kotak transparan */
   backdrop-filter: blur(4px);
-  color: #fff;                     /* teks putih agar jelas */
+  color: #fff;
   padding: 35px;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.22);
   text-align: center;
 }
 
-
 .home-section h1 {
-  color: #ffd700; /* kuning seperti about */
+  color: #ffd700; /* judul kuning */
   text-align: center;
   font-size: 30px;
   margin-bottom: 20px;
 }
-
 
 .home-section p {
   line-height: 1.6;
@@ -103,7 +101,7 @@ nav a:hover {
 }
 
 /* ========================================================= */
-/* ===== ABOUT SECTION ===== */
+/* ===== ABOUT SECTION ===== */ /* section ABOUT */
 /* ========================================================= */
 
 #about {
@@ -115,20 +113,20 @@ nav a:hover {
 }
 
 #about h2 {
-  color: #ffd700;
+  color: #ffd700; /* judul about */
 }
 
 /* INFO BOX */
 .info-box {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1); /* kotak semi transparan */
   margin-top: 30px;
   padding: 25px;
   border-radius: 15px;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px); /* efek kaca */
 }
 
 .info-box h3 {
-  color: #ffd700;
+  color: #ffd700; /* judul kotak */
   margin-top: 0;
 }
 
@@ -141,7 +139,7 @@ nav a:hover {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 18px;
-  background: #ffd700;
+  background: #ffd700; /* warna tombol */
   color: #000;
   border-radius: 10px;
   text-decoration: none;
@@ -150,11 +148,11 @@ nav a:hover {
 }
 
 .info-box .btn:hover {
-  background: #fff;
+  background: #fff; /* hover */
 }
 
 /* ========================================================= */
-/* ===== CONTACT SECTION ===== */
+/* ===== CONTACT SECTION ===== */ /* kontak */
 /* ========================================================= */
 
 #contact {
@@ -165,7 +163,7 @@ nav a:hover {
 }
 
 #contact h2 {
-  color: #ffd700;
+  color: #ffd700; /* judul contact */
 }
 
 .social-links {
@@ -173,12 +171,12 @@ nav a:hover {
   padding: 0;
 }
 
-.social-links li {
+social-links li {
   margin: 8px 0;
 }
 
 .social-links a {
-  color: #ffd700;
+  color: #ffd700; /* warna link */
   text-decoration: none;
   font-weight: bold;
 }
@@ -188,7 +186,7 @@ nav a:hover {
 }
 
 /* ========================================================= */
-/* ===== FOOTER ===== */
+/* ===== FOOTER ===== */ /* footer website */
 /* ========================================================= */
 
 footer {
@@ -196,16 +194,16 @@ footer {
   background: rgba(0, 0, 0, 0.6);
   padding: 15px 0;
   font-size: 14px;
-  color: #ddd;
+  color: #ddd; /* warna teks footer */
 }
 
 /* ========================================================= */
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE ===== */ /* untuk layar kecil */
 /* ========================================================= */
 
 @media (max-width: 768px) {
   .home-section {
-    flex-direction: column;
+    flex-direction: column; /* tumpuk */
     text-align: center;
   }
 
@@ -214,18 +212,18 @@ footer {
   }
 
   nav ul {
-    gap: 15px;
+    gap: 15px; /* menu lebih rapat */
   }
 }
 
 /* ========================================================= */
-/* ===== ANIMASI TRANSISI MASUK ===== */
+/* ===== ANIMASI TRANSISI MASUK ===== */ /* animasi fade */
 /* ========================================================= */
 
 .fade-element {
   opacity: 0;
   transform: translateY(-30px);
-  animation: fadeDown 0.9s ease-out forwards;
+  animation: fadeDown 0.9s ease-out forwards; /* animasi masuk */
 }
 
 @keyframes fadeDown {
@@ -240,7 +238,7 @@ footer {
 }
 
 /* ========================================================= */
-/* ===== EFFECT: BLUR OUT ON SCROLL ===== */
+/* ===== EFFECT: BLUR OUT ON SCROLL ===== */ /* blur saat disembunyikan */
 /* ========================================================= */
 
 .blur-out {
@@ -258,11 +256,11 @@ footer {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 140px;
+  scroll-padding-top: 140px; /* supaya anchor tidak ketutup navbar */
 }
 
 /* ========================================================= */
-/* ===== FLOATING ANIMATION (untuk gambar UCUP) ===== */
+/* ===== FLOATING ANIMATION (untuk gambar UCUP) ===== */ /* karakter mengambang */
 /* ========================================================= */
 
 @keyframes float {
@@ -287,10 +285,12 @@ html {
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-  animation: float 5s ease-in-out infinite; /* <== animasi mengambang */
+  animation: float 5s ease-in-out infinite; /* animasi mengambang */
 }
 
-/* ===== ABOUT ORB SECTION ===== */
+/* ===== ABOUT ORB SECTION ===== */ /* section khusus orb */
+/* ========================================================= */
+
 .about-orb-section {
   position: relative;
   display: flex;
@@ -313,18 +313,18 @@ html {
 /* Karakter utama */
 .about-orb-character {
   width: 700px;
-  max-width: 100%;
+  max-width: 150%;
   height: auto;
   z-index: 2;
   animation: float 5s ease-in-out infinite;
-  transform: translateY(-500px); /* 🔼 geser ke atas */
+  transform: translateY(-50px); /* posisi naik */
 }
 
 /* Orb (bola bercahaya) */
 .about-orb {
   position: absolute;
-  top: 20%;  /* geser ke atas */
-  left: 80%; /* geser ke kanan */
+  top: 25%;  /* geser posisi orb */
+  left: 80%;
   transform: translate(-50%, -50%);
   width: 150px;
   height: 150px;
@@ -339,8 +339,13 @@ html {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  animation: orbGlow 3s infinite alternate ease-in-out;
-  z-index: 3;
+  /* GLOW + FLOAT */
+  animation: 
+    orbGlow 3s infinite alternate ease-in-out, /* animasi glow / denyut cahaya */
+    orbFloat 4s infinite ease-in-out; /* animasi naik-turun ala karakter */
+
+  z-index: 3;  /* orb tetap di depan elemen lain */
+  transform: translate(-50%, -50%);  /* pusat orb dikunci di titik top/left */
 }
 
 /* Logo di dalam orb */
@@ -351,9 +356,11 @@ html {
   transition: opacity 0.4s ease, transform 0.3s ease;
 }
 
-/* ===== POPUP ===== */
+/* ===== POPUP ===== */ /* popup info */
+/* ========================================================= */
+
 .about-popup {
-  display: none;  /* inilah kuncinya: popup hanya muncul ketika orb diklik */
+  display: none; /* hidden default */
   position: fixed;
   top: 0;
   left: 0;
@@ -395,3 +402,12 @@ html {
   display: block;
 }
 
+#about {
+  scroll-margin-top: -100px;
+}
+
+@keyframes orbFloat {
+  0%   { transform: translate(-50%, -50%) translateY(0); }
+  50%  { transform: translate(-50%, -50%) translateY(-20px); } /* Semakin besar angkanya → makin tinggi naiknya */
+  100% { transform: translate(-50%, -50%) translateY(0); }
+}
