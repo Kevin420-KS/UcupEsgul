@@ -7,9 +7,8 @@
 
   <!-- ===== MAIN STYLE ===== -->
   <link rel="stylesheet" href="style.css" />
-  <!-- ===== ORB ABOUT STYLE (TERPISAH) ===== -->
-  <link rel="stylesheet" href="orb-about.css" />
 </head>
+
 <body>
 
   <!-- ===== NAVBAR ===== -->
@@ -42,51 +41,67 @@
     </div>
   </section>
 
-<!-- ===== ABOUT SECTION (ORB) ===== -->
+  <!-- ===== ABOUT SECTION (ORB) ===== -->
   <section id="about" class="about-orb-section fade-element blur-out">
+
     <div class="about-orb-container">
-      <img src="Images/UCUP1.png" alt="UcupEsgul About" class="about-orb-character" />
-      <div class="about-orb" id="aboutOrb">
-        <img id="orbLogo" src="Images/RB.png" alt="Orb Logo" class="orb-logo" />
+      <img src="Images/UCUP1.png"
+           alt="UcupEsgul About"
+           class="about-orb-character" />
+
+      <!-- Orb trigger -->
+      <div class="about-orb" id="aboutOrb" role="button" tabindex="0">
+        <img id="orbLogo"
+             src="Images/RB.png"
+             alt="Orb Logo"
+             class="orb-logo" />
       </div>
     </div>
 
-    <!-- POPUP INFO -->
-    <div class="about-popup" id="aboutPopup">
-      <div class="about-popup-content">
-        <span id="popupClose" class="close-btn">&times;</span>
+    <!-- ===== ABOUT MODAL ===== -->
+    <div id="aboutModal" class="about-modal" aria-hidden="true" role="dialog">
+      <div class="about-modal-inner">
+        <button class="modal-close" id="modalClose">&times;</button>
 
-        <div class="about-orb-content">
+        <h2 class="modal-title">Explore</h2>
+
+        <div class="modal-grid">
+
           <!-- ROBLOX -->
-          <div class="about-info-box" id="infoRoblox">
-            <h3>Roblox</h3>
+          <details class="game-item" data-game="roblox">
+            <summary class="game-summary">
+              <img src="Images/RB.png" alt="Roblox">
+            </summary>
             <p>Didalam game Roblox ini banyak variasi game yang dapat dimainkan, namun cuma beberapa yang aku mainkan untuk mendapatkan item gratis dari game yang dimainkan.</p>
             <p>Jika anda tertarik lebih dalam tentang item apa saja yang masih bisa didapatkan di game Roblox, silakan klik link di bawah ini untuk nama itemnya dan cara mendapatkannya.</p>
             <a href="MoreAbout/roblox_information.html" class="about-btn">Free Accessories Tutorial</a>
-          </div>
+          </details>
 
           <!-- MOBILE LEGEND -->
-          <div class="about-info-box" id="infoML">
-            <h3>Mobile Legend</h3>
+          <details class="game-item" data-game="ml">
+            <summary class="game-summary">
+              <img src="Images/ML.png" alt="Mobile Legend">
+            </summary>
             <p>Didalam game Mobile Legend ini biasanya aku hanya login untuk main ranked match, dan mendapatkan skin gratis dari event yang sedang berlangsung di dalam gamenya.</p>
             <p>Aku dapat memberikan tips & trick untuk menguasai role tertentu di Mobile Legend, dan cara mendapatkan skin gratis/mendapatkan skin dengan tips hemat.</p>
-            <p>Jika ingin tahu lebih dalam dari hal-hal yang aku sebutkan tadi, silakan klik link di bawah ini.</p>
             <a href="MoreAbout/ml_information.html" class="about-btn">Tips & Trick (Cheap Spending, Free Skin, Mastery Lane)</a>
-          </div>
+          </details>
 
           <!-- GITHUB -->
-          <div class="about-info-box" id="infoGitHub">
-            <h3>GitHub</h3>
+          <details class="game-item" data-game="github">
+            <summary class="game-summary">
+              <img src="Images/GH.png" alt="GitHub">
+            </summary>
             <p>Halo! Aku saat ini menempuh studi di <strong>Universitas Esa Unggul</strong>, jurusan <strong>Teknik Informatika</strong>.</p>
             <p>Selama kuliah, aku banyak bereksperimen dengan berbagai proyek — mulai dari pemrograman web, logika sistem, sampai eksplorasi bahasa pemrograman baru.</p>
-            <p>Kalau kamu penasaran dengan karya dan perjalanan belajarku, silakan jelajahi link di bawah ini.</p>
             <a href="MoreAbout/github_information.html" class="about-btn">Lihat Proyek & Eksperimen Belajar</a>
-          </div>
+          </details>
+
         </div>
       </div>
     </div>
-  </section>
 
+  </section>
 
   <!-- ===== CONTACT SECTION ===== -->
   <section id="contact" class="fade-element blur-out">
@@ -108,7 +123,23 @@
 
   <!-- ===== MAIN SCRIPT ===== -->
   <script src="script.js"></script>
-  <!-- ===== ORB ABOUT SCRIPT ===== -->
-  <script src="orb-about.js"></script>
+
+  <!-- ===== POPUP (TIDAK DIUBAH) ===== -->
+  <div class="about-popup" id="gamePopup" aria-hidden="true">
+    <div class="about-popup-content">
+
+      <span class="close-btn" id="popupClose">&times;</span>
+
+      <img id="popupLogo" src="" alt="Game Logo" class="popup-logo">
+
+      <h2 id="popupTitle"></h2>
+
+      <p id="popupText"></p>
+
+      <a id="popupLink" href="#" class="about-btn" target="_blank">Lihat Selengkapnya</a>
+
+    </div>
+  </div>
+
 </body>
 </html>
