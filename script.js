@@ -3,7 +3,131 @@
 ==================================*/
 window.addEventListener("DOMContentLoaded", () => {
 
-  /* === ANIMASI FADE + BLUR SAAT SCROLL === */
+  /* ================================
+     HOME SECTION SLIDE ANIMATION
+     
+     FUNGSI: Mengatur animasi di HOME section (#home)
+     - Karakter UCUP.png turun dari atas
+     - Tunggu 5 DETIK
+     - Karakter geser ke KIRI & kotak "CODE NAME" muncul dari bawah
+     
+     CARA KERJA:
+     1. Pertama kali load/refresh → animasi penuh
+     2. Kembali ke home dari section lain → langsung tampil (tanpa animasi ulang)
+  ==================================*/
+  
+  const homeSection = document.querySelector(".home-section");
+  const homeHash = "#home";
+  
+  // Key untuk menyimpan status animasi sudah pernah dijalankan
+  const ANIMATION_KEY = "ucup_home_animation_played";
+  
+  // Fungsi untuk trigger animasi home
+  function triggerHomeAnimation(forceReset = false) {
+    if (!homeSection) return;
+    
+    // Jika forceReset true (first load), lakukan reset penuh + animasi
+    if (forceReset) {
+      homeSection.classList.remove("show-animation", "slide-active");
+      
+      // Delay kecil supaya reset terlihat
+      setTimeout(() => {
+        // Step 1: Karakter turun dari atas
+        homeSection.classList.add("show-animation");
+        
+        // Step 2: Tunggu 5 DETIK, baru geser & munculkan info
+        // UBAH ANGKA 5000 (dalam milidetik) UNTUK MENGUBAH WAKTU TUNGGU
+        // 5000 = 5 detik, 3000 = 3 detik, dst.
+        setTimeout(() => {
+          homeSection.classList.add("slide-active");
+        }, 5000); // <<=== TIMING ANIMASI (dalam ms, 5000 = 5 detik)
+        
+      }, 50);
+    } else {
+      // Jika returning (bukan first load), langsung tampilkan state final tanpa animasi ulang
+      // Ini mencegah text hilang sementara
+      homeSection.classList.add("show-animation", "slide-active");
+    }
+    
+    // Simpan status bahwa animasi sudah pernah dijalankan
+    sessionStorage.setItem(ANIMATION_KEY, "true");
+  }
+  
+  // Cek apakah ini kunjungan pertama kali (atau refresh halaman)
+  const hasPlayedAnimation = sessionStorage.getItem(ANIMATION_KEY);
+  
+  if (!hasPlayedAnimation) {
+    // Pertama kali load atau setelah refresh - trigger animasi dengan reset
+    triggerHomeAnimation(true);
+  } else {
+    // Sudah pernah trigger - langsung tampilkan dalam state final
+    homeSection.classList.add("show-animation", "slide-active");
+  }
+  
+  // Monitor perubahan URL hash untuk deteksi navigasi
+  let currentHash = window.location.hash || homeHash;
+  
+  // Fungsi untuk cek apakah user kembali ke home
+  function checkHomeReturn() {
+    const newHash = window.location.hash || homeHash;
+    
+    // Jika hash berubah dari non-home ke home
+    if (currentHash !== homeHash && newHash === homeHash) {
+      // Langsung tampilkan state final (tanpa reset yang bikin text hilang)
+      triggerHomeAnimation(false);
+    }
+    
+    currentHash = newHash;
+  }
+  
+  // Listen perubahan hash (saat klik menu navbar)
+  window.addEventListener("hashchange", checkHomeReturn);
+  
+  /* ================================
+     SCROLL DETECTION
+     
+     FUNGSI: Mendeteksi ketika user scroll manual ke section home
+     Jika terdeteksi scroll ke home, update hash URL
+  ==================================*/
+  let lastScrollY = window.scrollY;
+  let scrollTimeout;
+  
+  window.addEventListener("scroll", () => {
+    const currentScrollY = window.scrollY;
+    
+    // Clear timeout sebelumnya
+    clearTimeout(scrollTimeout);
+    
+    // Set timeout baru untuk deteksi scroll selesai
+    scrollTimeout = setTimeout(() => {
+      // Cek apakah home section terlihat di viewport
+      if (homeSection) {
+        const rect = homeSection.getBoundingClientRect();
+        const isHomeVisible = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
+        
+        // Jika home visible dan user scroll ke atas (dari section lain)
+        if (isHomeVisible && currentScrollY < lastScrollY) {
+          const newHash = window.location.hash || homeHash;
+          
+          // Jika sebelumnya bukan di home
+          if (currentHash !== homeHash) {
+            window.location.hash = homeHash;
+            checkHomeReturn();
+          }
+        }
+      }
+    }, 100); // Tunggu 100ms setelah scroll berhenti
+    
+    lastScrollY = currentScrollY;
+  });
+
+
+  /* ================================
+     FADE + BLUR SCROLL ANIMATION
+     
+     FUNGSI: Animasi fade-in saat element masuk ke viewport
+     Digunakan untuk section home, about, dan contact
+  ==================================*/
   const fadeElements = document.querySelectorAll(".fade-element");
 
   fadeElements.forEach((el, i) => {
@@ -26,7 +150,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
   /* ================================
-     ORB → MODAL (CENTER GLASS)
+     ORB CLICK → MODAL GLASSMORPHISM
+     
+     FUNGSI: Mengatur interaksi ORB (bulatan biru) di ABOUT section
+     - Klik ORB → muncul modal glassmorphism dengan 3 card
+     - Klik X atau ESC atau klik di luar modal → tutup modal
+     - Saat modal terbuka, background akan blur
   ==================================*/
   const orb = document.getElementById("aboutOrb");
   const orbLogo = document.getElementById("orbLogo");
@@ -35,30 +164,31 @@ window.addEventListener("DOMContentLoaded", () => {
   const aboutSection = document.getElementById("about");
   const modalInner = modal ? modal.querySelector(".about-modal-inner") : null;
 
-  // utility: toggle modal and blur
+  // Fungsi untuk toggle modal (buka/tutup)
   const toggleModal = (show) => {
     if (!modal) return;
     const willShow = typeof show === "boolean" ? show : !modal.classList.contains("show");
 
     if (willShow) {
+      // BUKA MODAL
       modal.classList.add("show");
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden"; // prevent background scroll
-      // add class to about section to trigger blur effect
-      aboutSection.classList.add("showing-about-modal");
+      aboutSection.classList.add("showing-about-modal"); // tambah blur effect
       orb.setAttribute("aria-pressed", "true");
-      // focus modal for accessibility
       if (modalInner) modalInner.focus && modalInner.focus();
     } else {
+      // TUTUP MODAL
       modal.classList.remove("show");
       modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-      aboutSection.classList.remove("showing-about-modal");
+      document.body.style.overflow = ""; // restore scroll
+      aboutSection.classList.remove("showing-about-modal"); // hapus blur effect
       orb.setAttribute("aria-pressed", "false");
       orb.focus();
     }
   };
 
+  // Event: Klik ORB → buka modal
   if (orb) {
     orb.addEventListener("click", () => toggleModal(true));
     orb.addEventListener("keydown", (e) => {
@@ -69,18 +199,19 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Event: Klik tombol X → tutup modal
   if (modalClose) {
     modalClose.addEventListener("click", () => toggleModal(false));
   }
 
-  // close modal on ESC
+  // Event: Tekan ESC → tutup modal
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal && modal.classList.contains("show")) {
       toggleModal(false);
     }
   });
 
-  // click outside modalInner closes modal
+  // Event: Klik di luar modal → tutup modal
   if (modal) {
     modal.addEventListener("click", (e) => {
       if (!modalInner) return;
@@ -91,19 +222,30 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ================================
-     AUTO ROTATE LOGO DI ORB (AMAN)
+     AUTO ROTATE LOGO DI ORB
+     
+     FUNGSI: Logo di dalam ORB akan berganti otomatis setiap 3 detik
+     Urutan: RB.png → ML.png → GH.png → RB.png (loop)
+     
+     CARA UBAH TIMING:
+     Ganti angka 3000 (dalam milidetik) di setInterval
+     3000 = 3 detik, 5000 = 5 detik, dst.
   ==================================*/
   const orbLogos = ["Images/RB.png", "Images/ML.png", "Images/GH.png"];
   let orbIndex = 0;
+  
   if (orbLogo) {
     setInterval(() => {
       orbIndex = (orbIndex + 1) % orbLogos.length;
       orbLogo.src = orbLogos[orbIndex];
-    }, 3000);
+    }, 3000); // <<=== TIMING AUTO ROTATE (dalam ms, 3000 = 3 detik)
   }
 
   /* ================================
      POPUP CLOSE HANDLERS (EXTRA)
+     
+     FUNGSI: Mengatur popup tambahan (jika ada)
+     Untuk menutup popup saat klik X atau klik di luar popup
   ==================================*/
   const popupClose = document.getElementById("popupClose");
   const gamePopup = document.getElementById("gamePopup");
@@ -124,12 +266,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
   /* ================================
      CARD FOCUS MODE - INTERACTIVE DETAILS
-     ⚠️ PINDAHKAN KE SINI (DI DALAM DOMContentLoaded)!
+     
+     FUNGSI: Mengatur efek zoom card saat card diklik/dibuka
+     - Saat card dibuka (details open) → card membesar, card lain mengecil & blur
+     - Saat card ditutup → kembali normal (3 card sejajar)
+     
+     DIGUNAKAN UNTUK: 3 card di modal (Roblox, Mobile Legend, GitHub)
   ==================================*/
   const modalGrid = document.querySelector(".modal-grid");
   const gameItems = document.querySelectorAll(".game-item");
 
-  // Function untuk handle toggle details
+  // Function untuk handle toggle details (buka/tutup card)
   function handleDetailsToggle() {
     // Cek apakah ada card yang terbuka
     const openCard = document.querySelector(".game-item[open]");
@@ -158,32 +305,14 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Optional: Auto-close card lain ketika satu card dibuka
-  // (Uncomment jika ingin hanya 1 card yang bisa terbuka)
-  /*
-  if (gameItems.length > 0) {
-    gameItems.forEach((item) => {
-      item.addEventListener("toggle", (e) => {
-        if (e.target.open) {
-          // Tutup semua card lain
-          gameItems.forEach((otherItem) => {
-            if (otherItem !== e.target && otherItem.open) {
-              otherItem.open = false;
-            }
-          });
-        }
-        handleDetailsToggle();
-      });
-    });
-  }
-  */
-
-}); // ← end DOMContentLoaded (TUTUP DI SINI!)
+}); // <<=== AKHIR DOMContentLoaded
 
 
 /* ================================
    DATA POPUP ABOUT (ROBLOX / ML / GITHUB)
-   - fungsi ini diletakkan di global scope supaya bisa dipanggil dari HTML
+   
+   FUNGSI: Data untuk popup tambahan (jika digunakan)
+   Berisi informasi title, text, logo, dan link untuk setiap game
 ==================================*/
 const popupData = {
   roblox: {
@@ -206,6 +335,7 @@ const popupData = {
   }
 };
 
+// Fungsi untuk membuka popup (jika dipanggil dari HTML)
 function openAboutPopup(type) {
   const data = popupData[type];
   if (!data) return;

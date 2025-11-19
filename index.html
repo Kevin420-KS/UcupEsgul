@@ -23,34 +23,50 @@
   </header>
 
   <!-- ===== HOME SECTION ===== -->
+  <!-- SECTION INI BERISI ANIMASI KARAKTER UCUP.PNG DAN INFO TEXT -->
   <section id="home" class="home-section fade-element blur-out">
-    <div class="intro">
-      <h1>CODE NAME : UCUP ESGUL</h1>
-      <p>Halo semuanya!!! Perkenalkan aku <strong>UcupEsgul</strong> pemilik website ini.</p>
-      <p>Aku adalah seorang mahasiswa dari <strong>Universitas Esa Unggul</strong>,</p>
-      <p>Jika kalian tertarik hal apa saja yang saya lakukan selama masa kuliah,</p>
-      <p>Silakan scroll lebih lanjut ya.</p>
+    
+    <!-- Info Slide (muncul dari bawah) - DI KIRI -->
+    <!-- UNTUK MENGUBAH ISI TEXT, EDIT DI DALAM TAG <div class="intro"> -->
+    <div class="intro-slide slide-info">
+      <div class="intro">
+        <h1>CODE NAME : UCUP ESGUL</h1>
+        <p>Halo semuanya!!! Perkenalkan aku <strong>UcupEsgul</strong> pemilik website ini.</p>
+        <p>Aku adalah seorang mahasiswa dari <strong>Universitas Esa Unggul</strong>,</p>
+        <p>Jika kalian tertarik hal apa saja yang saya lakukan selama masa kuliah,</p>
+        <p>Silakan scroll lebih lanjut ya.</p>
+      </div>
     </div>
 
-    <div class="character">
-      <img
-        src="Images/Ucup.png"
-        alt="UcupEsgul"
-        onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Kevin420-KS/UcupEsgul/main/Images/UCUP.png';"
-      />
+    <!-- Character Slide (muncul dari atas) - DI KANAN -->
+    <!-- GAMBAR UCUP.PNG - UNTUK MENGUBAH UKURAN & POSISI, CEK DI style.css BAGIAN .character-slide -->
+    <div class="character-slide slide-char">
+      <div class="character">
+        <img
+          src="Images/Ucup.png"
+          alt="UcupEsgul"
+          onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/Kevin420-KS/UcupEsgul/main/Images/UCUP.png';"
+        />
+      </div>
     </div>
+
   </section>
 
   <!-- ===== ABOUT SECTION (ORB) ===== -->
+  <!-- SECTION INI BERISI KARAKTER UCUP1.PNG DAN ORB YANG BISA DIKLIK -->
   <section id="about" class="about-orb-section fade-element blur-out">
 
     <div class="about-orb-container">
+      <!-- GAMBAR UCUP1.PNG - UNTUK MENGUBAH UKURAN & POSISI, CEK DI style.css BAGIAN .about-orb-character -->
       <img src="Images/UCUP1.png"
            alt="UcupEsgul About"
            class="about-orb-character" />
 
-      <!-- Orb trigger -->
+      <!-- ORB TRIGGER - TOMBOL BULAT YANG BISA DIKLIK -->
+      <!-- UNTUK MENGUBAH UKURAN & POSISI ORB, CEK DI style.css BAGIAN .about-orb -->
       <div class="about-orb" id="aboutOrb" role="button" tabindex="0">
+        <!-- LOGO DI DALAM ORB - AKAN BERPUTAR OTOMATIS (RB.png → ML.png → GH.png) -->
+        <!-- AUTO ROTATE DIATUR DI script.js -->
         <img id="orbLogo"
              src="Images/RB.png"
              alt="Orb Logo"
@@ -59,15 +75,22 @@
     </div>
 
     <!-- ===== ABOUT MODAL ===== -->
+    <!-- MODAL INI MUNCUL SAAT ORB DIKLIK -->
+    <!-- UNTUK MENGUBAH UKURAN MODAL, CEK DI style.css BAGIAN .about-modal-inner -->
     <div id="aboutModal" class="about-modal" aria-hidden="true" role="dialog">
       <div class="about-modal-inner">
+        <!-- TOMBOL CLOSE (X) -->
         <button class="modal-close" id="modalClose">&times;</button>
 
+        <!-- JUDUL MODAL -->
         <h2 class="modal-title">Explore</h2>
 
+        <!-- GRID CONTAINER UNTUK 3 CARD (ROBLOX, ML, GITHUB) -->
+        <!-- UNTUK MENGUBAH UKURAN CARD, CEK DI style.css BAGIAN .modal-grid details -->
         <div class="modal-grid">
 
-          <!-- ROBLOX -->
+          <!-- ROBLOX CARD -->
+          <!-- LOGO RB.PNG - UNTUK MENGUBAH UKURAN LOGO, CEK DI style.css BAGIAN .game-summary img -->
           <details class="game-item" data-game="roblox">
             <summary class="game-summary">
               <img src="Images/RB.png" alt="Roblox">
@@ -80,7 +103,8 @@
             </div>
           </details>
 
-          <!-- MOBILE LEGEND -->
+          <!-- MOBILE LEGEND CARD -->
+          <!-- LOGO ML.PNG - UNTUK MENGUBAH UKURAN LOGO, CEK DI style.css BAGIAN .game-summary img -->
           <details class="game-item" data-game="ml">
             <summary class="game-summary">
               <img src="Images/ML.png" alt="Mobile Legend">
@@ -93,7 +117,8 @@
             </div>
           </details>
 
-          <!-- GITHUB -->
+          <!-- GITHUB CARD -->
+          <!-- LOGO GH.PNG - UNTUK MENGUBAH UKURAN LOGO, CEK DI style.css BAGIAN .game-summary img -->
           <details class="game-item" data-game="github">
             <summary class="game-summary">
               <img src="Images/GH.png" alt="GitHub">
@@ -133,7 +158,7 @@
   <!-- ===== MAIN SCRIPT ===== -->
   <script src="script.js"></script>
 
-  <!-- ===== POPUP ===== -->
+  <!-- ===== POPUP (EXTRA) ===== -->
   <div class="about-popup" id="gamePopup" aria-hidden="true">
     <div class="about-popup-content">
 
