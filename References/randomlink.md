@@ -15,3 +15,5 @@ f. https://blog.avada.io/css/fire-animation (flame animation css)
 g. https://codepen.io/aitchiss/pen/eYJXeKy (magic crystal css)
 
 h. https://blog.hubspot.com/website/drop-down-animation (dropdown css animation)
+
+i. https://prismic.io/blog/css-hover-effects (morph css animation)

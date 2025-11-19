@@ -140,7 +140,7 @@ nav a:hover {
 
 /* Karakter utama */
 .about-orb-character {
-  width: 520px; /* <<=== ukuran utama karakter */
+  width: 700px; /* <<=== ukuran utama karakter */
   max-width: 100%; /* <<=== batas ukuran saat layar kecil */
   height: auto;
   z-index: 10;
@@ -152,10 +152,10 @@ nav a:hover {
 /* Orb trigger */
 .about-orb {
   position: absolute;
-  top: 38%;
-  left: 70%;
-  width: 140px;
-  height: 140px;
+  top: 30%; /* <<=== POSISI vertikal orb */
+  left: 80%; /* <<=== POSISI horizontal orb */
+  width: 160px; /* <<=== UKURAN orb (lebar) */
+  height: 160px; /* <<=== UKURAN orb (tinggi) */
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, rgba(0,200,255,0.95) 0%, rgba(80,40,200,0.6) 65%, rgba(0,20,40,0.4) 100%);
   display: flex;
