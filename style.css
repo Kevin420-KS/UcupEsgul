@@ -212,6 +212,9 @@ nav a:hover {
   z-index: 30;
   transform: translate(-50%, -50%);
   transition: transform 0.25s ease, filter 0.25s ease;
+  
+  /* ===== EFEK FLOATING (MENGAMBANG) ===== */
+  animation: orbFloat 5s ease-in-out infinite; /* <<=== ANIMASI FLOATING UNTUK ORB */
 }
 
 .about-orb * {
@@ -228,17 +231,46 @@ nav a:hover {
 
 #about.showing-about-modal .about-orb {
   filter: brightness(1.2) saturate(1.1);
-  transform: translate(-50%, -50%) scale(1.06);
+  /* Saat modal dibuka, orb tetap float tapi dengan scale lebih besar */
+  animation: orbFloatActive 5s ease-in-out infinite; /* <<=== ANIMASI SAAT MODAL AKTIF */
+}
+
+/* Animasi floating ORB saat modal aktif (dengan scale) */
+@keyframes orbFloatActive {
+  0% { 
+    transform: translate(-50%, -50%) translateY(0px) scale(1.06); 
+  }
+  50% { 
+    transform: translate(-50%, -50%) translateY(-14px) scale(1.06); 
+  }
+  100% { 
+    transform: translate(-50%, -50%) translateY(0px) scale(1.06); 
+  }
 }
 
 /* ========================================================= */
 /* ===== ANIMASI ===== */
 /* ========================================================= */
 
+/* Animasi floating untuk karakter (UCUP.png dan UCUP1.png) */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-14px); }
   100% { transform: translateY(0px); }
+}
+
+/* Animasi floating khusus untuk ORB (mengikuti karakter UCUP1.png) */
+/* ORB akan bergerak naik-turun seperti karakter */
+@keyframes orbFloat {
+  0% { 
+    transform: translate(-50%, -50%) translateY(0px); 
+  }
+  50% { 
+    transform: translate(-50%, -50%) translateY(-14px); /* <<=== JARAK FLOATING (sama dengan karakter) */
+  }
+  100% { 
+    transform: translate(-50%, -50%) translateY(0px); 
+  }
 }
 
 /* ========================================================= */
@@ -516,11 +548,12 @@ nav a:hover {
   min-height: 400px;
 }
 
+/* Card yang TIDAK aktif: langsung hilang tanpa transisi */
 .modal-grid.has-active-card .game-item:not(.active-card) {
+  display: none !important; /* <<=== LANGSUNG HILANG (tidak pakai transisi) */
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.5);
-  filter: blur(5px);
+  transform: scale(0);
   position: absolute;
   max-width: 0;
   overflow: hidden;

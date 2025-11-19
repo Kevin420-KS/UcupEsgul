@@ -17,3 +17,5 @@ g. https://codepen.io/aitchiss/pen/eYJXeKy (magic crystal css)
 h. https://blog.hubspot.com/website/drop-down-animation (dropdown css animation)
 
 i. https://prismic.io/blog/css-hover-effects (morph css animation)
+
+j. https://freefrontend.com/css-cards/ (card css animation)
