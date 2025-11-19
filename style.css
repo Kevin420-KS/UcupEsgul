@@ -403,8 +403,8 @@ nav a:hover {
 
 /* Gambar di summary */
 .game-summary img {
-  width: 70px; /* <<=== ukuran gambar icon game (RB/ML/GH) */
-  height: 70px; /* <<=== ukuran gambar icon game */
+  width: 150px; /* <<=== ukuran gambar icon game (RB/ML/GH) */
+  height: 150px; /* <<=== ukuran gambar icon game */
   object-fit: contain;
   display: block;
   margin: auto;
