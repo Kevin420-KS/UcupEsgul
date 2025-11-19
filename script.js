@@ -122,7 +122,63 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-}); // end DOMContentLoaded
+  /* ================================
+     CARD FOCUS MODE - INTERACTIVE DETAILS
+     ⚠️ PINDAHKAN KE SINI (DI DALAM DOMContentLoaded)!
+  ==================================*/
+  const modalGrid = document.querySelector(".modal-grid");
+  const gameItems = document.querySelectorAll(".game-item");
+
+  // Function untuk handle toggle details
+  function handleDetailsToggle() {
+    // Cek apakah ada card yang terbuka
+    const openCard = document.querySelector(".game-item[open]");
+    
+    if (openCard) {
+      // Ada card yang terbuka - aktifkan focus mode
+      modalGrid.classList.add("has-active-card");
+      
+      // Remove active-card dari semua card
+      gameItems.forEach(item => item.classList.remove("active-card"));
+      
+      // Tambahkan active-card ke card yang terbuka
+      openCard.classList.add("active-card");
+      
+    } else {
+      // Tidak ada card yang terbuka - kembali ke normal
+      modalGrid.classList.remove("has-active-card");
+      gameItems.forEach(item => item.classList.remove("active-card"));
+    }
+  }
+
+  // Attach event listener ke semua details element
+  if (modalGrid && gameItems.length > 0) {
+    gameItems.forEach((item) => {
+      item.addEventListener("toggle", handleDetailsToggle);
+    });
+  }
+
+  // Optional: Auto-close card lain ketika satu card dibuka
+  // (Uncomment jika ingin hanya 1 card yang bisa terbuka)
+  /*
+  if (gameItems.length > 0) {
+    gameItems.forEach((item) => {
+      item.addEventListener("toggle", (e) => {
+        if (e.target.open) {
+          // Tutup semua card lain
+          gameItems.forEach((otherItem) => {
+            if (otherItem !== e.target && otherItem.open) {
+              otherItem.open = false;
+            }
+          });
+        }
+        handleDetailsToggle();
+      });
+    });
+  }
+  */
+
+}); // ← end DOMContentLoaded (TUTUP DI SINI!)
 
 
 /* ================================

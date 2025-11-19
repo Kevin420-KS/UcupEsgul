@@ -389,66 +389,203 @@ nav a:hover {
   position: relative;
 }
 
+/* ===== TAMBAHKAN KE style.css ANDA ===== */
+
 /* ========================================================= */
-/* ===== INTERACTIVE GAME CARD FOCUS ===== */
+/* ===== ENHANCED INTERACTIVE GAME CARD FOCUS ===== */
 /* ========================================================= */
 
 /* Wrapper grid — default tampil normal */
 .game-item {
   transition: 
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    filter 0.35s ease;
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    filter 0.4s ease,
+    max-width 0.4s ease;
+  position: relative;
 }
 
-/* Gambar di summary */
+/* Summary container - flex untuk logo dan title */
+.game-summary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Gambar logo di summary */
 .game-summary img {
-  width: 150px; /* <<=== ukuran gambar icon game (RB/ML/GH) */
-  height: 150px; /* <<=== ukuran gambar icon game */
+  width: 150px;
+  height: 150px;
   object-fit: contain;
   display: block;
-  margin: auto;
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.35));
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, width 0.4s ease, height 0.4s ease;
 }
 
 .game-summary:hover img {
   transform: scale(1.12);
 }
 
-/* ===== Jika user memilih 1 item ===== */
-/* Class ini bakal ditambah via JS */
-.game-focus .game-item {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.75);
-  filter: blur(3px);
+/* Title text dibawah logo */
+.game-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #7be3ff;
+  text-align: center;
+  letter-spacing: 0.5px;
+  transition: font-size 0.4s ease, color 0.3s ease;
 }
 
-/* Item yang dipilih */
-.game-focus .game-item.active {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  transform: scale(1.15) translateY(-8px); /* <<=== icon membesar saat aktif */
-  filter: none;
-  z-index: 50;
-  position: relative;
+.game-summary:hover .game-title {
+  color: #a0f0ff;
 }
 
-/* Buat item aktif pindah ke tengah layar */
-.game-focus {
+/* Content wrapper (paragraf dan button) */
+.game-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* ===== KETIKA ADA CARD YANG AKTIF (FOCUS MODE) ===== */
+/* Class ini akan ditambahkan via JS ke .modal-grid */
+.modal-grid.has-active-card {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  padding: 30px;
+  gap: 0;
+  padding: 20px;
+  min-height: 400px;
 }
 
-/* Detail aktif (konten terbuka) */
-.game-item.active[open] {
-  max-width: 480px;
+/* Semua card yang TIDAK aktif: mengecil & hilang */
+.modal-grid.has-active-card .game-item:not(.active-card) {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+  filter: blur(5px);
+  position: absolute;
+  max-width: 0;
+  overflow: hidden;
 }
 
-/* Perhalus box */
-.game-item.active summary img {
-  transform: scale(1.25);
+/* Card yang AKTIF: diperbesar */
+.modal-grid.has-active-card .game-item.active-card {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: scale(1.05);
+  filter: none;
+  z-index: 50;
+  max-width: 600px;
+  width: 100%;
+  min-height: 350px;
+  background: rgba(0,0,0,0.35) !important;
+  border: 2px solid rgba(123,227,255,0.3);
+  box-shadow: 0 0 30px rgba(123,227,255,0.2), 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* Logo di card aktif membesar */
+.modal-grid.has-active-card .game-item.active-card .game-summary img {
+  width: 100px;
+  height: 100px;
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 12px rgba(123,227,255,0.6));
+}
+
+/* Title di card aktif membesar */
+.modal-grid.has-active-card .game-item.active-card .game-title {
+  font-size: 22px !important;
+  color: #7be3ff;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(123,227,255,0.5);
+}
+
+/* Paragraph text di card aktif diperbesar */
+.modal-grid.has-active-card .game-item.active-card p {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  color: #f0f0f0 !important;
+  margin: 12px 0 !important;
+  text-align: justify;
+}
+
+/* Button/link di card aktif diperbesar */
+.modal-grid.has-active-card .game-item.active-card .about-btn {
+  font-size: 15px !important;
+  padding: 12px 24px !important;
+  margin-top: 20px !important;
+  box-shadow: 0 8px 24px rgba(80,40,200,0.3);
+  transform: scale(1.05);
+}
+
+.modal-grid.has-active-card .game-item.active-card .about-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(0,200,255,0.4);
+}
+
+/* ===== ANIMASI SMOOTH UNTUK DETAILS OPEN/CLOSE ===== */
+details summary {
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+details[open] summary {
+  margin-bottom: 12px;
+}
+
+/* Remove default marker dari details */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 920px) {
+  .modal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .modal-grid.has-active-card .game-item.active-card {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-summary img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .game-title {
+    font-size: 14px;
+  }
+
+  .modal-grid.has-active-card .game-item.active-card {
+    max-width: 95%;
+    min-height: 300px;
+  }
+  
+  .modal-grid.has-active-card .game-item.active-card .game-summary img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .modal-grid.has-active-card .game-item.active-card .game-title {
+    font-size: 20px !important;
+  }
+  
+  .modal-grid.has-active-card .game-item.active-card p {
+    font-size: 14px !important;
+  }
 }
