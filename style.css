@@ -91,13 +91,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 3000; /* <<=== DI ATAS SEMUA ELEMEN */
+  z-index: 3000;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
-  background: rgba(0, 0, 0, 0.7); /* <<=== WARNA BACKGROUND OVERLAY */
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0); /* ✅ TRANSPARAN */
+  backdrop-filter: none; /* ✅ TIDAK ADA BLUR */
 }
+
 
 .speed-control-modal.show {
   opacity: 1;
@@ -1275,4 +1276,59 @@ footer {
 footer p {
   margin: 0;
   font-size: 14px; /* <<=== UKURAN FONT FOOTER */
+}
+
+/* ========================================================= */
+/* ===== BLUR EFFECT KHUSUS UNTUK ABOUT MODAL ===== */
+/* ===== BLUR HANYA BACKGROUND, MODAL & NAVBAR TETAP JELAS ===== */
+/* ========================================================= */
+
+/* Blur hanya untuk section-section utama dan kontennya */
+body.blur-background .home-section > *:not(.about-modal),
+body.blur-background .about-orb-section > *:not(.about-modal),
+body.blur-background #contact > *,
+body.blur-background footer > * {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+
+/* Blur starfield background */
+body.blur-background .star-field {
+  filter: blur(6px);
+  transition: filter 0.3s ease;
+}
+
+/* Blur karakter dan orb di about section */
+body.blur-background .about-orb-container {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+
+/* JANGAN blur navbar - HARUS JELAS */
+body.blur-background header,
+body.blur-background nav,
+body.blur-background nav * {
+  filter: none !important;
+}
+
+/* JANGAN blur modal dan semua isinya - HARUS JELAS */
+body.blur-background .about-modal,
+body.blur-background .about-modal *,
+body.blur-background .about-modal-inner,
+body.blur-background .about-modal-inner *,
+body.blur-background .modal-grid,
+body.blur-background .modal-grid *,
+body.blur-background .game-item,
+body.blur-background .game-item *,
+body.blur-background .modal-close,
+body.blur-background .modal-title {
+  filter: none !important;
+}
+
+/* JANGAN blur speed control modal - HARUS JELAS */
+body.blur-background .speed-control-modal,
+body.blur-background .speed-control-modal *,
+body.blur-background .speed-control-content,
+body.blur-background .speed-control-content * {
+  filter: none !important;
 }

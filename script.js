@@ -168,7 +168,8 @@ window.addEventListener("DOMContentLoaded", () => {
       modal.classList.add("show");
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden"; // prevent background scroll
-      aboutSection.classList.add("showing-about-modal"); // tambah blur effect
+      document.body.classList.add("blur-background"); // ✅ TAMBAH INI
+      aboutSection.classList.add("showing-about-modal");
       orb.setAttribute("aria-pressed", "true");
       if (modalInner) modalInner.focus && modalInner.focus();
     } else {
@@ -176,7 +177,8 @@ window.addEventListener("DOMContentLoaded", () => {
       modal.classList.remove("show");
       modal.setAttribute("aria-hidden", "true");
       document.body.style.overflow = ""; // restore scroll
-      aboutSection.classList.remove("showing-about-modal"); // hapus blur effect
+      document.body.classList.remove("blur-background"); // ✅ TAMBAH INI
+      aboutSection.classList.remove("showing-about-modal");
       orb.setAttribute("aria-pressed", "false");
       orb.focus();
     }
@@ -369,18 +371,17 @@ const starField = document.querySelector('.star-field');
 
 // Fungsi untuk toggle modal (buka/tutup)
 function toggleSpeedModal(show) {
-  if (!speedModal) return; // Guard clause jika element tidak ada
+  if (!speedModal) return;
   
   if (show) {
-    // BUKA MODAL
+    // BUKA MODAL (TIDAK BLUR BACKGROUND)
     speedModal.classList.add('show');
     speedModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    // Tidak perlu hide body scroll
   } else {
     // TUTUP MODAL
     speedModal.classList.remove('show');
     speedModal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = ''; // Restore scroll
   }
 }
 
@@ -487,20 +488,3 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-/* ================================
-   TIPS CUSTOMIZATION:
-   
-   - Ubah range slider di HTML:
-     min="500"   → Kecepatan minimal (paling cepat)
-     max="10000" → Kecepatan maksimal (paling lambat)
-     value="5000" → Kecepatan default
-   
-   - Ubah opacity bintang di CSS:
-     opacity: 0.5 → 0.3 (lebih transparan) atau 0.8 (lebih solid)
-   
-   - Ubah warna bintang di CSS:
-     Ganti semua #cccccc, #d4d4d4, dll di box-shadow
-   
-   - Ubah ukuran bintang di CSS:
-     height: 4px; width: 4px; (bisa diperbesar/diperkecil)
-==================================*/
