@@ -349,3 +349,158 @@ function openAboutPopup(type) {
     gamePopup.setAttribute("aria-hidden", "false");
   }
 }
+
+/* ================================
+   STARFIELD SPEED CONTROL
+   
+   FUNGSI: Mengontrol kecepatan partikel bintang melalui slider
+   - Modal muncul saat klik menu "Speed Control" di navbar
+   - Slider range: 500ms (cepat) - 10000ms (lambat)
+   - Kecepatan tersimpan di localStorage
+==================================*/
+
+// ===== SPEED CONTROL MODAL =====
+const speedControlBtn = document.getElementById('speedControlBtn');
+const speedModal = document.getElementById('speedModal');
+const speedModalClose = document.getElementById('speedModalClose');
+const starSpeedSlider = document.getElementById('starSpeedSlider');
+const speedDisplay = document.getElementById('speedDisplay');
+const starField = document.querySelector('.star-field');
+
+// Fungsi untuk toggle modal (buka/tutup)
+function toggleSpeedModal(show) {
+  if (!speedModal) return; // Guard clause jika element tidak ada
+  
+  if (show) {
+    // BUKA MODAL
+    speedModal.classList.add('show');
+    speedModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+  } else {
+    // TUTUP MODAL
+    speedModal.classList.remove('show');
+    speedModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; // Restore scroll
+  }
+}
+
+// Event: Klik menu "Speed Control" di navbar
+if (speedControlBtn) {
+  speedControlBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevent default link behavior
+    toggleSpeedModal(true);
+  });
+}
+
+// Event: Klik tombol close (X)
+if (speedModalClose) {
+  speedModalClose.addEventListener('click', () => {
+    toggleSpeedModal(false);
+  });
+}
+
+// Event: Klik di luar modal (pada overlay) → tutup modal
+if (speedModal) {
+  speedModal.addEventListener('click', (e) => {
+    if (e.target === speedModal) {
+      toggleSpeedModal(false);
+    }
+  });
+}
+
+// Event: Tekan tombol ESC → tutup modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && speedModal && speedModal.classList.contains('show')) {
+    toggleSpeedModal(false);
+  }
+});
+
+/* ================================
+   SLIDER CONTROL
+   
+   FUNGSI: Mengubah kecepatan animasi partikel bintang
+   - Slider value (ms) → dikonversi ke detik untuk display
+   - Update CSS variable --star-speed
+   - Simpan ke localStorage
+==================================*/
+
+// Fungsi debounce untuk performa lebih baik
+// Menghindari terlalu banyak update saat slider digeser
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Fungsi untuk update kecepatan partikel
+function updateStarSpeed() {
+  if (!starSpeedSlider || !speedDisplay || !starField) return; // Guard clause
+  
+  const value = starSpeedSlider.value; // Nilai dalam milidetik (ms)
+  const seconds = (value / 1000).toFixed(1); // Konversi ke detik (1 desimal)
+  
+  // Update display text (misal: "5.0s")
+  speedDisplay.textContent = `${seconds}s`;
+  
+  // Update CSS variable untuk mengontrol animasi
+  // Variable --star-speed digunakan di CSS untuk animation duration
+  starField.style.setProperty('--star-speed', `${value}ms`);
+  
+  // Simpan ke localStorage agar kecepatan tersimpan saat refresh
+  // Key: 'starSpeed', Value: nilai dalam ms
+  localStorage.setItem('starSpeed', value);
+}
+
+// Event listener untuk slider dengan debounce
+// Debounce 50ms: update hanya setelah user berhenti geser slider 50ms
+if (starSpeedSlider) {
+  starSpeedSlider.addEventListener('input', debounce(updateStarSpeed, 50));
+}
+
+/* ================================
+   LOAD SAVED SPEED
+   
+   FUNGSI: Memuat kecepatan tersimpan dari localStorage
+   Dijalankan saat page load
+==================================*/
+
+// Load saved speed dari localStorage saat page load
+window.addEventListener('DOMContentLoaded', () => {
+  if (!starSpeedSlider || !starField) return; // Guard clause
+  
+  // Ambil kecepatan tersimpan dari localStorage
+  const savedSpeed = localStorage.getItem('starSpeed');
+  
+  if (savedSpeed) {
+    // Jika ada kecepatan tersimpan, set slider & update animasi
+    starSpeedSlider.value = savedSpeed;
+    updateStarSpeed();
+  } else {
+    // Jika belum ada, gunakan nilai default (5000ms = 5 detik)
+    updateStarSpeed();
+  }
+});
+
+/* ================================
+   TIPS CUSTOMIZATION:
+   
+   - Ubah range slider di HTML:
+     min="500"   → Kecepatan minimal (paling cepat)
+     max="10000" → Kecepatan maksimal (paling lambat)
+     value="5000" → Kecepatan default
+   
+   - Ubah opacity bintang di CSS:
+     opacity: 0.5 → 0.3 (lebih transparan) atau 0.8 (lebih solid)
+   
+   - Ubah warna bintang di CSS:
+     Ganti semua #cccccc, #d4d4d4, dll di box-shadow
+   
+   - Ubah ukuran bintang di CSS:
+     height: 4px; width: 4px; (bisa diperbesar/diperkecil)
+==================================*/

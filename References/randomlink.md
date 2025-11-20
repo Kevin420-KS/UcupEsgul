@@ -19,3 +19,7 @@ h. https://blog.hubspot.com/website/drop-down-animation (dropdown css animation)
 i. https://prismic.io/blog/css-hover-effects (morph css animation)
 
 j. https://freefrontend.com/css-cards/ (card css animation)
+
+k. https://freefrontend.com/css-illustrations/ (random model css)
+
+l. https://freefrontend.com/css-social-media-icons/ (social media css animation)

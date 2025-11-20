@@ -11,6 +11,14 @@
 
 <body>
 
+  <!-- ===== STARFIELD BACKGROUND ===== -->
+  <!-- Partikel bintang yang bergerak - TIDAK AKAN MENUTUPI KONTEN -->
+  <div class="star-field">
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+  </div>
+
   <!-- ===== NAVBAR ===== -->
   <header>
     <nav>
@@ -18,9 +26,44 @@
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
+        <!-- ===== MENU BARU: SPEED CONTROL ===== -->
+        <li><a href="#" id="speedControlBtn">Speed Control</a></li>
       </ul>
     </nav>
   </header>
+
+  <!-- ===== SPEED CONTROL MODAL ===== -->
+  <div class="speed-control-modal" id="speedModal">
+    <div class="speed-control-content">
+      <button class="close-btn" id="speedModalClose">&times;</button>
+      <h2>⚡ Particle Speed Control</h2>
+      
+      <div class="slider-container">
+        <div class="slider-labels">
+          <span>🎉 Party (Fast)</span>
+          <span>😌 Chill (Slow)</span>
+        </div>
+        
+        <!-- <<=== SLIDER UNTUK KONTROL KECEPATAN -->
+        <!-- min="500" = Paling cepat (0.5 detik) -->
+        <!-- max="10000" = Paling lambat (10 detik) -->
+        <!-- value="5000" = Default (5 detik) -->
+        <input 
+          type="range" 
+          min="500" 
+          max="10000" 
+          value="5000" 
+          step="100"
+          class="star-speed-slider" 
+          id="starSpeedSlider"
+        />
+        
+        <div class="speed-value">
+          Current Speed: <strong id="speedDisplay">5.0s</strong>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== HOME SECTION ===== -->
   <!-- SECTION INI BERISI ANIMASI KARAKTER UCUP.PNG DAN INFO TEXT -->
