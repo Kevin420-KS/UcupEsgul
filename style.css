@@ -274,7 +274,7 @@ nav a:hover {
 }
 
 /* ========================================================= */
-/* ===== MODAL (GLASSMORPHISM BOX "EXPLORE") ===== */
+/* ===== MODAL (GLASSMORPHISM BOX "EXPLORE") - COLORED CARDS ===== */
 /* ========================================================= */
 /* BAGIAN INI MENGATUR UKURAN MODAL/KOTAK YANG MUNCUL SAAT ORB DIKLIK */
 
@@ -295,133 +295,381 @@ nav a:hover {
   pointer-events: auto;
 }
 
+/* ========================================================= */
 /* ===== UKURAN KOTAK GLASSMORPHISM (MODAL) ===== */
+/* ========================================================= */
 .about-modal-inner {
   /* ===== UKURAN MODAL ===== */
   width: min(920px, 95%); /* <<=== UBAH LEBAR MODAL DI SINI (max 920px) */
   max-width: 1000px; /* <<=== BATAS MAKSIMAL LEBAR MODAL */
   
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-  border-radius: 18px;
+  /* ===== WARNA BACKGROUND MODAL ===== */
+  /* UBAH rgba() untuk mengubah warna background modal */
+  background: linear-gradient(
+    135deg, 
+    rgba(10, 25, 60, 0.95) 0%,      /* <<=== Warna awal: biru gelap (opacity 0.95) */
+    rgba(15, 35, 80, 0.92) 50%,     /* <<=== Warna tengah: biru sedang (opacity 0.92) */
+    rgba(20, 40, 90, 0.95) 100%     /* <<=== Warna akhir: biru tua (opacity 0.95) */
+  );
+  
+  border-radius: 18px; /* <<=== KELENGKUNGAN SUDUT MODAL */
   
   /* ===== PADDING DALAM MODAL ===== */
   padding: 20px; /* <<=== JARAK KONTEN DARI TEPI MODAL */
   
   position: relative;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 80px rgba(80,40,200,0.06);
-  border: 1px solid rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px) saturate(1.2);
+  
+  /* ===== SHADOW & GLOW EFFECT MODAL ===== */
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.8),           /* Shadow hitam */
+    0 0 120px rgba(0, 150, 255, 0.15),        /* <<=== Glow biru (ubah warna di sini) */
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);   /* Highlight atas */
+  
+  /* ===== WARNA BORDER MODAL ===== */
+  border: 2px solid rgba(100, 180, 255, 0.3); /* <<=== UBAH WARNA & KETEBALAN BORDER */
+  
+  /* ===== BLUR EFFECT ===== */
+  backdrop-filter: blur(25px) saturate(1.5); /* <<=== UBAH ANGKA blur() UNTUK INTENSITAS BLUR */
+  
   overflow: hidden;
 }
 
+/* Grid overlay pattern (opsional, bisa dihapus jika tidak diinginkan) */
 .about-modal-inner::before {
   content: "";
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(0deg, rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 24px 24px;
-  opacity: 0.06;
+    linear-gradient(0deg, rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 24px 24px; /* <<=== UKURAN GRID PATTERN */
+  opacity: 0.1; /* <<=== OPACITY GRID */
   pointer-events: none;
   mix-blend-mode: overlay;
 }
 
+/* Glow effect di luar modal */
 .about-modal-inner::after {
   content: "";
   position: absolute;
   inset: -2px;
-  background: linear-gradient(90deg, rgba(80,40,200,0.08), rgba(0,200,255,0.06));
-  filter: blur(12px);
-  opacity: 0.5;
+  /* ===== WARNA GLOW LUAR MODAL ===== */
+  background: linear-gradient(
+    90deg, 
+    rgba(0, 150, 255, 0.15),   /* <<=== Warna glow kiri: biru terang */
+    rgba(100, 80, 255, 0.12)   /* <<=== Warna glow kanan: ungu */
+  );
+  filter: blur(15px); /* <<=== INTENSITAS BLUR GLOW */
+  opacity: 0.6; /* <<=== OPACITY GLOW */
   pointer-events: none;
+  z-index: -1;
 }
 
+/* ===== TOMBOL CLOSE (X) ===== */
 .modal-close {
   position: absolute;
   right: 14px;
   top: 8px;
   background: transparent;
   border: none;
-  color: #ffd700;
-  font-size: 28px;
+  color: #ffd700; /* <<=== WARNA TOMBOL X */
+  font-size: 28px; /* <<=== UKURAN TOMBOL X */
   cursor: pointer;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
+.modal-close:hover {
+  color: #fff; /* <<=== WARNA TOMBOL X SAAT HOVER */
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* ===== JUDUL "EXPLORE" ===== */
 .modal-title {
   text-align: center;
   margin: 6px 0 14px 0;
-  color: #fff;
+  color: #ffffff; /* <<=== WARNA TEXT JUDUL */
   font-size: 22px; /* <<=== UKURAN FONT JUDUL "EXPLORE" */
   letter-spacing: 0.6px;
+  text-shadow: 0 2px 10px rgba(0, 150, 255, 0.3); /* <<=== SHADOW TEXT JUDUL */
 }
 
+/* ========================================================= */
 /* ===== GRID UNTUK 3 CARD (ROBLOX, ML, GITHUB) ===== */
+/* ========================================================= */
 .modal-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* <<=== 3 KOLOM (ubah jadi repeat(2, 1fr) untuk 2 kolom) */
   gap: 14px; /* <<=== JARAK ANTAR CARD */
   padding: 6px;
 }
 
-/* ===== UKURAN SETIAP CARD (KOTAK ROBLOX, ML, GITHUB) ===== */
+/* ========================================================= */
+/* ===== BASE STYLE UNTUK SEMUA CARD ===== */
+/* ========================================================= */
 .modal-grid details {
-  background: rgba(0,0,0,0.22);
-  
-  /* ===== PADDING DALAM CARD ===== */
-  padding: 14px; /* <<=== JARAK KONTEN DARI TEPI CARD */
-  
-  border-radius: 12px;
-  
-  /* ===== TINGGI MINIMAL CARD ===== */
+  padding: 14px; /* <<=== PADDING DALAM CARD */
+  border-radius: 12px; /* <<=== KELENGKUNGAN SUDUT CARD */
   min-height: 160px; /* <<=== TINGGI MINIMAL CARD */
-  
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: #eaeaea;
-  border: 1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+  color: #f5f5f5; /* <<=== WARNA TEXT DEFAULT */
+  
+  /* Shadow dasar untuk semua card */
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  
+  backdrop-filter: blur(12px) saturate(1.3); /* <<=== BLUR EFFECT CARD */
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
+
+/* ========================================================= */
+/* ===== 1️⃣ ROBLOX CARD - ABU-ABU TUA (DARK GRAY) ===== */
+/* ========================================================= */
+.modal-grid details[data-game="roblox"] {
+  /* ===== WARNA BACKGROUND ROBLOX CARD ===== */
+  /* UBAH rgba() untuk mengubah warna abu-abu */
+  background: linear-gradient(
+    135deg,
+    rgba(40, 42, 48, 0.75) 0%,    /* <<=== Warna awal: abu-abu gelap (R:40, G:42, B:48, opacity:0.75) */
+    rgba(52, 54, 60, 0.7) 100%    /* <<=== Warna akhir: abu-abu lebih terang */
+  );
+  
+  /* ===== WARNA BORDER ROBLOX CARD ===== */
+  border: 1.5px solid rgba(150, 150, 150, 0.35); /* <<=== Ketebalan & warna border abu-abu */
+}
+
+/* Hover effect untuk Roblox */
+.modal-grid details[data-game="roblox"]:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 47, 53, 0.85) 0%,    /* <<=== Background saat hover: lebih terang */
+    rgba(57, 59, 65, 0.8) 100%
+  );
+  border-color: rgba(180, 180, 180, 0.5); /* <<=== Border lebih terang saat hover */
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(150, 150, 150, 0.25); /* <<=== Glow abu-abu saat hover */
+  transform: translateY(-2px); /* <<=== Naik sedikit saat hover */
+}
+
+/* Glow effect abu-abu untuk Roblox */
+.modal-grid details[data-game="roblox"]::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(
+    circle at center,
+    rgba(150, 150, 150, 0.15),  /* <<=== Warna glow: abu-abu */
+    transparent 70%
+  );
+  filter: blur(10px); /* <<=== Intensitas blur glow */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.modal-grid details[data-game="roblox"]:hover::after {
+  opacity: 1; /* <<=== Glow muncul saat hover */
+}
+
+/* ========================================================= */
+/* ===== 2️⃣ MOBILE LEGENDS CARD - HIJAU TUA (DARK GREEN) ===== */
+/* ========================================================= */
+.modal-grid details[data-game="ml"] {
+  /* ===== WARNA BACKGROUND MOBILE LEGENDS CARD ===== */
+  /* UBAH rgba() untuk mengubah warna hijau */
+  background: linear-gradient(
+    135deg,
+    rgba(15, 60, 40, 0.75) 0%,    /* <<=== Warna awal: hijau gelap (R:15, G:60, B:40, opacity:0.75) */
+    rgba(20, 75, 50, 0.7) 100%    /* <<=== Warna akhir: hijau lebih terang */
+  );
+  
+  /* ===== WARNA BORDER MOBILE LEGENDS CARD ===== */
+  border: 1.5px solid rgba(80, 200, 120, 0.35); /* <<=== Ketebalan & warna border hijau neon */
+}
+
+/* Hover effect untuk Mobile Legends */
+.modal-grid details[data-game="ml"]:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 65, 45, 0.85) 0%,    /* <<=== Background saat hover: lebih terang */
+    rgba(25, 80, 55, 0.8) 100%
+  );
+  border-color: rgba(100, 220, 140, 0.5); /* <<=== Border lebih terang saat hover */
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.7),
+    0 0 25px rgba(80, 200, 120, 0.3); /* <<=== Glow hijau saat hover */
+  transform: translateY(-2px); /* <<=== Naik sedikit saat hover */
+}
+
+/* Glow effect hijau untuk Mobile Legends */
+.modal-grid details[data-game="ml"]::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(
+    circle at center,
+    rgba(80, 200, 120, 0.2),  /* <<=== Warna glow: hijau neon */
+    transparent 70%
+  );
+  filter: blur(10px); /* <<=== Intensitas blur glow */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.modal-grid details[data-game="ml"]:hover::after {
+  opacity: 1; /* <<=== Glow muncul saat hover */
+}
+
+/* ========================================================= */
+/* ===== 3️⃣ GITHUB CARD - ABU-ABU MUDA/PUTIH (LIGHT GRAY/WHITE) ===== */
+/* ========================================================= */
+.modal-grid details[data-game="github"] {
+  /* ===== WARNA BACKGROUND GITHUB CARD ===== */
+  /* UBAH rgba() untuk mengubah warna abu-abu muda/putih */
+  background: linear-gradient(
+    135deg,
+    rgba(200, 205, 210, 0.35) 0%,   /* <<=== Warna awal: abu-abu muda (R:200, G:205, B:210, opacity:0.35) */
+    rgba(220, 225, 230, 0.3) 100%   /* <<=== Warna akhir: lebih terang mendekati putih */
+  );
+  
+  /* ===== WARNA BORDER GITHUB CARD ===== */
+  border: 1.5px solid rgba(240, 245, 250, 0.4); /* <<=== Ketebalan & warna border putih kebiruan */
+  
+  /* ===== WARNA TEXT GITHUB (KHUSUS KARENA BACKGROUND TERANG) ===== */
+  color: #1a1a1a; /* <<=== Text color gelap untuk kontras dengan background terang */
+}
+
+/* Title text untuk GitHub (biar tetap readable) */
+.modal-grid details[data-game="github"] .game-title {
+  color: #000000 !important; /* <<=== UBAH JADI HITAM */
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Paragraph text untuk GitHub */
+.modal-grid details[data-game="github"] p {
+  color: #2d2d2d !important; /* <<=== Warna paragraph: gelap untuk kontras */
+}
+
+/* Hover effect untuk GitHub */
+.modal-grid details[data-game="github"]:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(210, 215, 220, 0.45) 0%,   /* <<=== Background saat hover: lebih solid */
+    rgba(230, 235, 240, 0.4) 100%
+  );
+  border-color: rgba(250, 255, 255, 0.6); /* <<=== Border lebih terang saat hover */
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(240, 245, 250, 0.4); /* <<=== Glow putih saat hover */
+  transform: translateY(-2px); /* <<=== Naik sedikit saat hover */
+}
+
+/* Glow effect putih untuk GitHub */
+.modal-grid details[data-game="github"]::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.3),  /* <<=== Warna glow: putih */
+    transparent 70%
+  );
+  filter: blur(12px); /* <<=== Intensitas blur glow */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.modal-grid details[data-game="github"]:hover::after {
+  opacity: 1; /* <<=== Glow muncul saat hover */
+}
+
+/* ========================================================= */
+/* ===== STYLING UNTUK SUMMARY & CONTENT ===== */
+/* ========================================================= */
 
 .modal-grid summary {
   cursor: pointer;
   font-weight: 700;
-  color: #7be3ff;
-  font-size: 16px;
+  font-size: 16px; /* <<=== UKURAN FONT SUMMARY */
   list-style: none;
   user-select: none;
 }
 
-.modal-grid p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.45;
-  color: #dcdcdc;
+/* ===== WARNA TEXT SUMMARY UNTUK SETIAP CARD ===== */
+.modal-grid details[data-game="roblox"] summary {
+  color: #d0d0d0; /* <<=== Warna text summary Roblox: abu-abu terang */
 }
 
+.modal-grid details[data-game="ml"] summary {
+  color: #5dffaa; /* <<=== Warna text summary Mobile Legends: hijau neon */
+}
+
+.modal-grid details[data-game="github"] summary {
+  color: #0969da; /* <<=== Warna text summary GitHub: biru GitHub */
+}
+
+.modal-grid p {
+  margin: 0;
+  font-size: 13px; /* <<=== UKURAN FONT PARAGRAPH */
+  line-height: 1.45;
+}
+
+/* Default paragraph colors */
+.modal-grid details[data-game="roblox"] p,
+.modal-grid details[data-game="ml"] p {
+  color: #e8e8e8; /* <<=== Warna paragraph untuk Roblox & ML: putih keabuan */
+}
+
+/* ===== TOMBOL "Free Accessories Tutorial" / "Tips & Trick" / "Lihat Proyek" ===== */
 .modal-grid .about-btn {
   margin-top: auto;
   align-self: center;
-  background: linear-gradient(90deg, rgba(80,40,200,1), rgba(0,200,255,1));
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 10px;
+  
+  /* ===== WARNA BACKGROUND TOMBOL ===== */
+  background: linear-gradient(
+    90deg, 
+    rgba(60, 100, 255, 1),    /* <<=== Warna kiri: biru */
+    rgba(0, 180, 255, 1)      /* <<=== Warna kanan: cyan */
+  );
+  
+  color: #fff; /* <<=== WARNA TEXT TOMBOL */
+  padding: 8px 12px; /* <<=== PADDING TOMBOL */
+  border-radius: 10px; /* <<=== KELENGKUNGAN SUDUT TOMBOL */
   text-decoration: none;
   font-weight: 700;
-  box-shadow: 0 6px 18px rgba(80,40,200,0.18);
+  font-size: 13px; /* <<=== UKURAN FONT TOMBOL */
+  box-shadow: 0 6px 18px rgba(0, 150, 255, 0.35); /* <<=== SHADOW TOMBOL */
+  transition: all 0.3s ease;
 }
 
+.modal-grid .about-btn:hover {
+  transform: translateY(-2px); /* <<=== Naik saat hover */
+  box-shadow: 0 8px 25px rgba(0, 150, 255, 0.5); /* <<=== Shadow lebih besar saat hover */
+}
+
+/* ========================================================= */
+/* ===== RESPONSIVE - TABLET ===== */
+/* ========================================================= */
 @media (max-width: 920px) {
   .modal-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* <<=== 2 KOLOM DI TABLET */
   }
 }
 
+/* ========================================================= */
+/* ===== RESPONSIVE - MOBILE ===== */
+/* ========================================================= */
 @media (max-width: 600px) {
   .modal-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* <<=== 1 KOLOM DI MOBILE */
   }
 
   /* ===== RESPONSIVE: UKURAN ORB DI MOBILE ===== */
@@ -437,7 +685,7 @@ nav a:hover {
   }
 
   .about-modal-inner {
-    padding: 14px;
+    padding: 14px; /* <<=== PADDING MODAL DI MOBILE */
   }
 
   /* ===== RESPONSIVE: UKURAN UCUP.PNG DI MOBILE ===== */
@@ -446,7 +694,7 @@ nav a:hover {
   }
 
   .home-section.show-animation.slide-active .character-slide {
-    transform: translateX(-20px);
+    transform: translateX(-20px); /* <<=== GESER KARAKTER DI MOBILE */
   }
 }
 
@@ -519,7 +767,7 @@ nav a:hover {
 }
 
 .game-title {
-  font-size: 16px;
+  font-size: 16px; /* <<=== UKURAN FONT TITLE GAME */
   font-weight: 700;
   color: #7be3ff;
   text-align: center;
@@ -528,7 +776,7 @@ nav a:hover {
 }
 
 .game-summary:hover .game-title {
-  color: #a0f0ff;
+  color: #a0f0ff; /* <<=== WARNA TITLE SAAT HOVER */
 }
 
 .game-content {
@@ -538,14 +786,16 @@ nav a:hover {
   margin-top: 10px;
 }
 
+/* ========================================================= */
 /* ===== MODE FOCUS: KETIKA CARD DIKLIK/DIBUKA ===== */
+/* ========================================================= */
 .modal-grid.has-active-card {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   gap: 0;
   padding: 20px;
-  min-height: 400px;
+  min-height: 400px; /* <<=== TINGGI MINIMAL SAAT CARD DIBUKA */
 }
 
 /* Card yang TIDAK aktif: langsung hilang tanpa transisi */
@@ -563,7 +813,7 @@ nav a:hover {
 .modal-grid.has-active-card .game-item.active-card {
   opacity: 1 !important;
   pointer-events: auto !important;
-  transform: scale(1.05);
+  transform: scale(1.05); /* <<=== PEMBESARAN CARD SAAT DIBUKA */
   filter: none;
   z-index: 50;
   
@@ -571,10 +821,52 @@ nav a:hover {
   max-width: 600px; /* <<=== LEBAR MAKSIMAL CARD SAAT DIBUKA */
   width: 100%;
   min-height: 350px; /* <<=== TINGGI MINIMAL CARD SAAT DIBUKA */
-  
-  background: rgba(0,0,0,0.35) !important;
-  border: 2px solid rgba(123,227,255,0.3);
-  box-shadow: 0 0 30px rgba(123,227,255,0.2), 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* ========================================================= */
+/* ===== ENHANCED STYLES SAAT CARD DIBUKA (MODE FOCUS) ===== */
+/* ========================================================= */
+
+/* 1️⃣ ROBLOX CARD - SAAT DIBUKA */
+.modal-grid.has-active-card .game-item.active-card[data-game="roblox"] {
+  /* ===== WARNA ROBLOX CARD SAAT DIBUKA ===== */
+  background: linear-gradient(
+    135deg,
+    rgba(45, 47, 53, 0.9) 0%,     /* <<=== Background lebih solid saat dibuka */
+    rgba(57, 59, 65, 0.85) 100%
+  ) !important;
+  border-color: rgba(200, 200, 200, 0.5); /* <<=== Border lebih terang */
+  box-shadow: 
+    0 0 40px rgba(150, 150, 150, 0.3),  /* <<=== Glow abu-abu */
+    0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* 2️⃣ MOBILE LEGENDS CARD - SAAT DIBUKA */
+.modal-grid.has-active-card .game-item.active-card[data-game="ml"] {
+  /* ===== WARNA ML CARD SAAT DIBUKA ===== */
+  background: linear-gradient(
+    135deg,
+    rgba(20, 65, 45, 0.9) 0%,     /* <<=== Background lebih solid saat dibuka */
+    rgba(25, 80, 55, 0.85) 100%
+  ) !important;
+  border-color: rgba(120, 240, 160, 0.5); /* <<=== Border lebih terang */
+  box-shadow: 
+    0 0 40px rgba(80, 200, 120, 0.4),   /* <<=== Glow hijau */
+    0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* 3️⃣ GITHUB CARD - SAAT DIBUKA */
+.modal-grid.has-active-card .game-item.active-card[data-game="github"] {
+  /* ===== WARNA GITHUB CARD SAAT DIBUKA ===== */
+  background: linear-gradient(
+    135deg,
+    rgba(220, 225, 230, 0.5) 0%,  /* <<=== Background lebih solid saat dibuka */
+    rgba(240, 245, 250, 0.45) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.7); /* <<=== Border lebih terang */
+  box-shadow: 
+    0 0 50px rgba(255, 255, 255, 0.5),  /* <<=== Glow putih */
+    0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* ===== UKURAN LOGO SAAT CARD DIBUKA (MODE FOCUS) ===== */
@@ -582,37 +874,38 @@ nav a:hover {
   width: 100px; /* <<=== UKURAN LOGO SAAT CARD DIBUKA */
   height: 100px;
   transform: scale(1.1);
-  filter: drop-shadow(0 0 12px rgba(123,227,255,0.6));
+  filter: drop-shadow(0 0 12px rgba(123, 227, 255, 0.6));
 }
 
+/* ===== UKURAN TITLE SAAT CARD DIBUKA ===== */
 .modal-grid.has-active-card .game-item.active-card .game-title {
-  font-size: 22px !important;
-  color: #7be3ff;
+  font-size: 22px !important; /* <<=== UKURAN FONT TITLE SAAT DIBUKA */
   font-weight: 800;
-  text-shadow: 0 0 10px rgba(123,227,255,0.5);
 }
 
+/* ===== UKURAN PARAGRAPH SAAT CARD DIBUKA ===== */
 .modal-grid.has-active-card .game-item.active-card p {
-  font-size: 15px !important;
+  font-size: 15px !important; /* <<=== UKURAN FONT PARAGRAPH SAAT DIBUKA */
   line-height: 1.6 !important;
-  color: #f0f0f0 !important;
   margin: 12px 0 !important;
   text-align: justify;
 }
 
+/* ===== UKURAN TOMBOL SAAT CARD DIBUKA ===== */
 .modal-grid.has-active-card .game-item.active-card .about-btn {
-  font-size: 15px !important;
-  padding: 12px 24px !important;
+  font-size: 15px !important; /* <<=== UKURAN FONT TOMBOL SAAT DIBUKA */
+  padding: 12px 24px !important; /* <<=== PADDING TOMBOL SAAT DIBUKA */
   margin-top: 20px !important;
-  box-shadow: 0 8px 24px rgba(80,40,200,0.3);
+  box-shadow: 0 8px 24px rgba(80, 40, 200, 0.3);
   transform: scale(1.05);
 }
 
 .modal-grid.has-active-card .game-item.active-card .about-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 10px 30px rgba(0,200,255,0.4);
+  box-shadow: 0 10px 30px rgba(0, 200, 255, 0.4);
 }
 
+/* ===== DETAILS ELEMENT ===== */
 details summary {
   cursor: pointer;
   user-select: none;
@@ -627,12 +920,18 @@ details summary::-webkit-details-marker {
   display: none;
 }
 
+/* ========================================================= */
+/* ===== RESPONSIVE - TABLET (UNTUK MODE FOCUS) ===== */
+/* ========================================================= */
 @media (max-width: 920px) {
   .modal-grid.has-active-card .game-item.active-card {
-    max-width: 90%;
+    max-width: 90%; /* <<=== LEBAR CARD DIBUKA DI TABLET */
   }
 }
 
+/* ========================================================= */
+/* ===== RESPONSIVE - MOBILE (UNTUK MODE FOCUS) ===== */
+/* ========================================================= */
 @media (max-width: 600px) {
   /* ===== RESPONSIVE: UKURAN LOGO DI MOBILE ===== */
   .game-summary img {
@@ -641,25 +940,25 @@ details summary::-webkit-details-marker {
   }
 
   .game-title {
-    font-size: 14px;
+    font-size: 14px; /* <<=== UKURAN FONT TITLE DI MOBILE */
   }
 
   .modal-grid.has-active-card .game-item.active-card {
-    max-width: 95%;
-    min-height: 300px;
+    max-width: 95%; /* <<=== LEBAR CARD DIBUKA DI MOBILE */
+    min-height: 300px; /* <<=== TINGGI CARD DIBUKA DI MOBILE */
   }
   
   .modal-grid.has-active-card .game-item.active-card .game-summary img {
-    width: 80px;
+    width: 80px; /* <<=== UKURAN LOGO SAAT DIBUKA DI MOBILE */
     height: 80px;
   }
   
   .modal-grid.has-active-card .game-item.active-card .game-title {
-    font-size: 20px !important;
+    font-size: 20px !important; /* <<=== UKURAN TITLE SAAT DIBUKA DI MOBILE */
   }
   
   .modal-grid.has-active-card .game-item.active-card p {
-    font-size: 14px !important;
+    font-size: 14px !important; /* <<=== UKURAN PARAGRAPH SAAT DIBUKA DI MOBILE */
   }
 }
 
@@ -675,43 +974,44 @@ details summary::-webkit-details-marker {
 }
 
 #contact h2 {
-  color: #ffd700;
-  font-size: 32px;
+  color: #ffd700; /* <<=== WARNA JUDUL "Hubungi Saya" */
+  font-size: 32px; /* <<=== UKURAN FONT JUDUL */
   margin-bottom: 20px;
 }
 
 #contact p {
-  font-size: 16px;
+  font-size: 16px; /* <<=== UKURAN FONT PARAGRAPH */
   line-height: 1.6;
   margin: 10px 0;
 }
 
+/* ===== SOCIAL LINKS (Instagram, GitHub, dll) ===== */
 .social-links {
   list-style: none;
   padding: 0;
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 30px; /* <<=== JARAK ANTAR LINK */
   flex-wrap: wrap;
   margin-top: 30px;
 }
 
 .social-links li a {
-  color: #fff;
+  color: #fff; /* <<=== WARNA TEXT LINK */
   text-decoration: none;
   font-weight: bold;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  padding: 12px 24px; /* <<=== PADDING LINK */
+  background: rgba(255, 255, 255, 0.1); /* <<=== BACKGROUND LINK */
+  border-radius: 10px; /* <<=== KELENGKUNGAN SUDUT LINK */
   transition: all 0.3s ease;
   display: block;
 }
 
 .social-links li a:hover {
-  background: rgba(255, 215, 0, 0.3);
-  color: #ffd700;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+  background: rgba(255, 215, 0, 0.3); /* <<=== BACKGROUND SAAT HOVER */
+  color: #ffd700; /* <<=== WARNA TEXT SAAT HOVER */
+  transform: translateY(-3px); /* <<=== NAIK SAAT HOVER */
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3); /* <<=== SHADOW SAAT HOVER */
 }
 
 /* ========================================================= */
@@ -719,14 +1019,14 @@ details summary::-webkit-details-marker {
 /* ========================================================= */
 
 footer {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6); /* <<=== WARNA BACKGROUND FOOTER */
   padding: 20px;
   text-align: center;
-  color: #fff;
+  color: #fff; /* <<=== WARNA TEXT FOOTER */
   backdrop-filter: blur(8px);
 }
 
 footer p {
   margin: 0;
-  font-size: 14px;
+  font-size: 14px; /* <<=== UKURAN FONT FOOTER */
 }

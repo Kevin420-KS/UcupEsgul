@@ -8,11 +8,11 @@ window.addEventListener("DOMContentLoaded", () => {
      
      FUNGSI: Mengatur animasi di HOME section (#home)
      - Karakter UCUP.png turun dari atas
-     - Tunggu 5 DETIK
-     - Karakter geser ke KIRI & kotak "CODE NAME" muncul dari bawah
+     - Kotak "CODE NAME" muncul dari bawah
+     - KEDUANYA MUNCUL BERSAMAAN (SIMULTANEOUS)
      
      CARA KERJA:
-     1. Pertama kali load/refresh → animasi penuh
+     1. Pertama kali load/refresh → animasi penuh (keduanya bersamaan)
      2. Kembali ke home dari section lain → langsung tampil (tanpa animasi ulang)
   ==================================*/
   
@@ -32,15 +32,9 @@ window.addEventListener("DOMContentLoaded", () => {
       
       // Delay kecil supaya reset terlihat
       setTimeout(() => {
-        // Step 1: Karakter turun dari atas
-        homeSection.classList.add("show-animation");
-        
-        // Step 2: Tunggu 5 DETIK, baru geser & munculkan info
-        // UBAH ANGKA 5000 (dalam milidetik) UNTUK MENGUBAH WAKTU TUNGGU
-        // 5000 = 5 detik, 3000 = 3 detik, dst.
-        setTimeout(() => {
-          homeSection.classList.add("slide-active");
-        }, 5000); // <<=== TIMING ANIMASI (dalam ms, 5000 = 5 detik)
+        // KEDUA ANIMASI DIJALANKAN BERSAMAAN
+        // Karakter turun dari atas + Info muncul dari bawah
+        homeSection.classList.add("show-animation", "slide-active");
         
       }, 50);
     } else {
