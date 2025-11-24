@@ -1304,14 +1304,14 @@ body.blur-background .about-orb-container {
   transition: filter 0.3s ease;
 }
 
-/* JANGAN blur navbar - HARUS JELAS */
+/* JANGAN blur navbar*/
 body.blur-background header,
 body.blur-background nav,
 body.blur-background nav * {
   filter: none !important;
 }
 
-/* JANGAN blur modal dan semua isinya - HARUS JELAS */
+/* JANGAN blur modal dan semua isinya*/
 body.blur-background .about-modal,
 body.blur-background .about-modal *,
 body.blur-background .about-modal-inner,
@@ -1325,7 +1325,7 @@ body.blur-background .modal-title {
   filter: none !important;
 }
 
-/* JANGAN blur speed control modal - HARUS JELAS */
+/* JANGAN blur speed control modal*/
 body.blur-background .speed-control-modal,
 body.blur-background .speed-control-modal *,
 body.blur-background .speed-control-content,
