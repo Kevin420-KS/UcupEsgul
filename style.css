@@ -263,34 +263,224 @@ body {
   padding: 0;
 }
 
-/* ===== NAVBAR ===== */
+/* ========================================================= */
+/* ===== ANIMATED NAVBAR (BUTTON-GROUP STYLE) ===== */
+/* ========================================================= */
+
 header {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(8px);
-}
-
-nav ul {
   display: flex;
   justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 30px;
+  padding: 20px 0;
+  background: transparent;
 }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
+.button-group {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  min-width: 600px;
+  height: 60px;
+  background-color: #000;
+  border-radius: 7px;
+  padding: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-nav a:hover {
-  color: #ffd700;
+.button-group > div {
+  cursor: pointer;
+  flex: 1;
+  background-image: linear-gradient(to top, #242424 0%, #303030 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: inset 0 20px 4px -21px rgba(255, 255, 255, 0.4), 0 19px 13px 0 rgba(0, 0, 0, 0.3);
+  color: #888;
+  position: relative;
+  z-index: 2;
+}
+
+/* Glow effect sebelum active */
+.button-group > div:before {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 40px;
+  transition: all 0.1s ease;
+  background-image: radial-gradient(circle 30px at center, #ebf7ff 0%, #b3e1ff 47%, #b3e1ff 100%);
+  position: absolute;
+  filter: blur(15px);
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Side glow effect */
+.button-group > div:after {
+  content: "";
+  display: block;
+  height: 70px;
+  width: 1px;
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.2s ease;
+  filter: blur(0px);
+  box-shadow: -75px 0 0px 0px rgba(179, 225, 255, 0.3), 74px 0 0px 0px rgba(179, 225, 255, 0.35);
+  pointer-events: none;
+}
+
+/* Active state */
+.button-group > div.active {
+  background-image: linear-gradient(to top, #151515 0%, #1d1d1d 100%);
+  box-shadow: inset 0 16px 14px -21px transparent, 0 0px 13px 0 rgba(0, 0, 0, 0.3), inset 0 0 7px 2px rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  color: #b3e1ff;
+  text-shadow: 0 0 10px rgba(179, 225, 255, 0.5);
+}
+
+.button-group > div.active:before {
+  width: 50px;
+  height: 50px;
+  opacity: 0.8;
+}
+
+.button-group > div.active:after {
+  opacity: 0;
+}
+
+/* Hover effect */
+.button-group > div:hover:not(.active) {
+  color: #aaa;
+  background-image: linear-gradient(to top, #2a2a2a 0%, #353535 100%);
+}
+
+/* First button rounded */
+.button-group div:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.button-group div:first-of-type:after {
+  box-shadow: -85px 0 18px 1px transparent, 83px 0 12px 1px #b3e1ff;
+}
+
+/* Last button rounded */
+.button-group div:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+
+.button-group div:last-of-type:after {
+  box-shadow: -85px 0 18px 1px #b3e1ff, 83px 0 12px 1px transparent;
+}
+
+/* ========================================================= */
+/* ===== FIX: SPEED CONTROL BUTTON VISUAL FEEDBACK ===== */
+/* ========================================================= */
+
+/* Speed Control button - hover effect yang lebih jelas */
+.button-group #speedControlBtn:hover {
+  color: #ddd !important;
+  background-image: linear-gradient(to top, #2f2f2f 0%, #3a3a3a 100%) !important;
+}
+
+/* Speed Control button - active/click effect */
+.button-group #speedControlBtn:active {
+  transform: scale(0.97);
+  background-image: linear-gradient(to top, #1a1a1a 0%, #252525 100%) !important;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Speed Control button - tambah icon */
+.button-group #speedControlBtn::before {
+  content: "" !important; /* ✅ Hapus konten (tidak ada icon ⚡) */
+  opacity: 0 !important; /* ✅ Glow tidak terlihat saat idle */
+  width: 40px;
+  height: 40px;
+  transition: all 0.1s ease;
+  background-image: radial-gradient(circle 30px at center, #ebf7ff 0%, #b3e1ff 47%, #b3e1ff 100%);
+  position: absolute;
+  filter: blur(15px);
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Speed Control button - glow effect saat hover */
+.button-group #speedControlBtn:hover::after {
+  opacity: 0.3;
+  box-shadow: -75px 0 0px 0px rgba(179, 225, 255, 0.2), 74px 0 0px 0px rgba(179, 225, 255, 0.2);
+}
+
+/* ✅ PERBAIKAN UTAMA: Active state untuk Speed Control saat modal terbuka */
+.button-group #speedControlBtn.active-temp {
+  background-image: linear-gradient(to top, #151515 0%, #1d1d1d 100%) !important;
+  box-shadow: inset 0 16px 14px -21px transparent, 0 0px 13px 0 rgba(0, 0, 0, 0.3), inset 0 0 7px 2px rgba(0, 0, 0, 0.4) !important;
+  z-index: 0;
+  color: #b3e1ff !important;
+  text-shadow: 0 0 10px rgba(179, 225, 255, 0.5) !important;
+}
+
+/* Glow effect untuk active-temp state */
+.button-group #speedControlBtn.active-temp:before {
+  width: 50px;
+  height: 50px;
+  opacity: 0.8;
+}
+
+.button-group #speedControlBtn.active-temp:after {
+  opacity: 0;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+  .button-group {
+    min-width: 90%;
+    height: 50px;
+    font-size: 11px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .button-group {
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .button-group > div {
+    flex: 1 1 45%;
+    min-height: 45px;
+  }
+
+  .button-group div:first-of-type {
+    border-radius: 4px 0 0 0;
+  }
+
+  .button-group div:nth-of-type(2) {
+    border-radius: 0 4px 0 0;
+  }
+
+  .button-group div:nth-of-type(3) {
+    border-radius: 0 0 0 4px;
+  }
+
+  .button-group div:last-of-type {
+    border-radius: 0 0 4px 0;
+  }
 }
 
 /* ========================================================= */

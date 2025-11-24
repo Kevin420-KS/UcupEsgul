@@ -1,4 +1,89 @@
 /* ================================
+   ANIMATED NAVBAR FUNCTIONALITY
+==================================*/
+
+// Get all navbar buttons
+const navButtons = document.querySelectorAll('.button-group > div');
+
+navButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    // Jika button yang diklik adalah Speed Control, jangan ubah active state
+    if (this.id === 'speedControlBtn') {
+      toggleSpeedModal(true);
+      return;
+    }
+    
+    // Set flag bahwa kita sedang scroll otomatis
+    isScrollingProgrammatically = true;
+    
+    // Remove active class from all buttons
+    navButtons.forEach(btn => {
+      if (btn.id !== 'speedControlBtn') {
+        btn.classList.remove('active');
+      }
+    });
+    
+    // Add active class to clicked button IMMEDIATELY
+    this.classList.add('active');
+    
+    // Smooth scroll to target section
+    const target = this.getAttribute('data-target');
+    if (target) {
+      const section = document.getElementById(target);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        
+        // Setelah smooth scroll selesai (estimasi 800ms), izinkan scroll listener bekerja lagi
+        setTimeout(() => {
+          isScrollingProgrammatically = false;
+        }, 800);
+      }
+    }
+  });
+});
+
+/* ================================
+   ACTIVE MENU ON SCROLL
+==================================*/
+
+// Variable untuk mencegah conflict saat smooth scrolling
+let isScrollingProgrammatically = false;
+let scrollTimeout;
+
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  // Jangan update navbar saat sedang smooth scroll otomatis
+  if (isScrollingProgrammatically) return;
+  
+  // Clear timeout sebelumnya
+  clearTimeout(scrollTimeout);
+  
+  // Tunggu sampai scrolling selesai
+  scrollTimeout = setTimeout(() => {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navButtons.forEach(button => {
+      if (button.id !== 'speedControlBtn') {
+        button.classList.remove('active');
+        if (button.getAttribute('data-target') === current) {
+          button.classList.add('active');
+        }
+      }
+    });
+  }, 100); // Tunggu 100ms setelah scroll berhenti
+});
+
+/* ================================
    DOM READY → ANIMASI SCROLL & ORB
 ==================================*/
 window.addEventListener("DOMContentLoaded", () => {
@@ -369,19 +454,30 @@ const starSpeedSlider = document.getElementById('starSpeedSlider');
 const speedDisplay = document.getElementById('speedDisplay');
 const starField = document.querySelector('.star-field');
 
-// Fungsi untuk toggle modal (buka/tutup)
+// ✅ FUNGSI UNTUK TOGGLE MODAL (VERSI DIPERBAIKI)
 function toggleSpeedModal(show) {
   if (!speedModal) return;
   
+  const speedBtn = document.getElementById('speedControlBtn');
+  
   if (show) {
-    // BUKA MODAL (TIDAK BLUR BACKGROUND)
+    // BUKA MODAL
     speedModal.classList.add('show');
     speedModal.setAttribute('aria-hidden', 'false');
-    // Tidak perlu hide body scroll
+    
+    // ✅ Tambahkan active state ke button
+    if (speedBtn) {
+      speedBtn.classList.add('active-temp');
+    }
   } else {
     // TUTUP MODAL
     speedModal.classList.remove('show');
     speedModal.setAttribute('aria-hidden', 'true');
+    
+    // ✅ Remove active state dari button
+    if (speedBtn) {
+      speedBtn.classList.remove('active-temp');
+    }
   }
 }
 
@@ -487,4 +583,3 @@ window.addEventListener('DOMContentLoaded', () => {
     updateStarSpeed();
   }
 });
-
