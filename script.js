@@ -95,6 +95,38 @@ let scrollTimeout;
 
 const sections = document.querySelectorAll('section[id]');
 
+// ✅ PERBAIKAN: Fungsi untuk mendapatkan section yang sedang terlihat
+function getCurrentSection() {
+  const scrollPos = window.pageYOffset + 150; // Offset untuk deteksi lebih baik
+  
+  // ✅ Cek apakah di paling atas (untuk home section)
+  if (window.pageYOffset < 100) {
+    return 'home';
+  }
+  
+  // ✅ Cek apakah di paling bawah (untuk contact section)
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+  
+  if (window.pageYOffset + windowHeight >= documentHeight - 50) {
+    return 'contact'; // Force contact jika hampir di paling bawah
+  }
+  
+  // Cari section yang sedang terlihat
+  let currentSection = '';
+  
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    
+    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+      currentSection = section.getAttribute('id');
+    }
+  });
+  
+  return currentSection;
+}
+
 window.addEventListener('scroll', () => {
   // Jangan update navbar saat sedang smooth scroll otomatis
   if (isScrollingProgrammatically) return;
@@ -104,23 +136,7 @@ window.addEventListener('scroll', () => {
   
   // Tunggu sampai scrolling selesai
   scrollTimeout = setTimeout(() => {
-    let current = '';
-    
-    // ✅ PERBAIKAN: Deteksi home section saat di paling atas
-    if (window.pageYOffset < 100) {
-      // Jika scroll posisi di paling atas (kurang dari 100px), set current = 'home'
-      current = 'home';
-    } else {
-      // Jika tidak, deteksi section seperti biasa
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.pageYOffset >= sectionTop - 200) {
-          current = section.getAttribute('id');
-        }
-      });
-    }
+    const current = getCurrentSection();
     
     navButtons.forEach(button => {
       if (!button.id || button.id !== 'speedControlBtn') {
@@ -157,8 +173,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const homeSection = document.querySelector(".home-section");
   const homeHash = "#home";
   
-  // Key untuk menyimpan status animasi sudah pernah dijalankan
-  const ANIMATION_KEY = "ucup_home_animation_played";
+  // ✅ PERBAIKAN: Gunakan flag di memory, bukan sessionStorage
+  // Ini memastikan setiap refresh (termasuk hard refresh) akan reset animasi
+  let hasPlayedAnimation = false;
   
   // Fungsi untuk trigger animasi home
   function triggerHomeAnimation(forceReset = false) {
@@ -181,13 +198,12 @@ window.addEventListener("DOMContentLoaded", () => {
       homeSection.classList.add("show-animation", "slide-active");
     }
     
-    // Simpan status bahwa animasi sudah pernah dijalankan
-    sessionStorage.setItem(ANIMATION_KEY, "true");
+    // ✅ Set flag di memory (bukan sessionStorage)
+    hasPlayedAnimation = true;
   }
   
-  // Cek apakah ini kunjungan pertama kali (atau refresh halaman)
-  const hasPlayedAnimation = sessionStorage.getItem(ANIMATION_KEY);
-  
+  // ✅ PERBAIKAN: Selalu trigger animasi dengan reset saat pertama load
+  // Karena hasPlayedAnimation default false, animasi akan selalu jalan di awal
   if (!hasPlayedAnimation) {
     // Pertama kali load atau setelah refresh - trigger animasi dengan reset
     triggerHomeAnimation(true);
@@ -222,16 +238,16 @@ window.addEventListener("DOMContentLoaded", () => {
      Jika terdeteksi scroll ke home, update hash URL
   ==================================*/
   let lastScrollY = window.scrollY;
-  let scrollTimeout;
+  let scrollTimeout2;
   
   window.addEventListener("scroll", () => {
     const currentScrollY = window.scrollY;
     
     // Clear timeout sebelumnya
-    clearTimeout(scrollTimeout);
+    clearTimeout(scrollTimeout2);
     
     // Set timeout baru untuk deteksi scroll selesai
-    scrollTimeout = setTimeout(() => {
+    scrollTimeout2 = setTimeout(() => {
       // Cek apakah home section terlihat di viewport
       if (homeSection) {
         const rect = homeSection.getBoundingClientRect();
