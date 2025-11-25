@@ -106,14 +106,21 @@ window.addEventListener('scroll', () => {
   scrollTimeout = setTimeout(() => {
     let current = '';
     
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      
-      if (window.pageYOffset >= sectionTop - 200) {
-        current = section.getAttribute('id');
-      }
-    });
+    // ✅ PERBAIKAN: Deteksi home section saat di paling atas
+    if (window.pageYOffset < 100) {
+      // Jika scroll posisi di paling atas (kurang dari 100px), set current = 'home'
+      current = 'home';
+    } else {
+      // Jika tidak, deteksi section seperti biasa
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+    }
     
     navButtons.forEach(button => {
       if (!button.id || button.id !== 'speedControlBtn') {
