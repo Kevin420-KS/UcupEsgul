@@ -3,14 +3,57 @@
 ==================================*/
 
 // Get all navbar buttons
-const navButtons = document.querySelectorAll('.button-group > div');
+const navButtons = document.querySelectorAll('.button-group > div, .button-group > .about-menu-wrapper');
+// Variable untuk track double click pada About
+let aboutClickCount = 0;
+let aboutClickTimer = null;
 
 navButtons.forEach(button => {
-  button.addEventListener('click', function() {
+  button.addEventListener('click', function(e) {
     // Jika button yang diklik adalah Speed Control, jangan ubah active state
     if (this.id === 'speedControlBtn') {
       toggleSpeedModal(true);
       return;
+    }
+    
+    // Handle About menu dengan dropdown
+    if (this.classList.contains('about-menu-wrapper')) {
+      // LOGIC BARU: Klik About = scroll ke section
+      // Dropdown HANYA muncul saat HOVER (handled by CSS)
+      
+      // Tutup dropdown jika terbuka (tapi HAPUS inline style agar CSS hover bisa bekerja lagi)
+      const dropdown = this.querySelector('.dropdown-menu');
+      if (dropdown) {
+        // JANGAN gunakan style.opacity, GUNAKAN CLASS sebagai gantinya
+        dropdown.style.removeProperty('opacity');
+        dropdown.style.removeProperty('visibility');
+        dropdown.style.removeProperty('pointer-events');
+      }
+      
+      // Set flag bahwa kita sedang scroll otomatis
+      isScrollingProgrammatically = true;
+      
+      // Remove active class from all buttons
+      navButtons.forEach(btn => {
+        if (!btn.id || btn.id !== 'speedControlBtn') {
+          btn.classList.remove('active');
+        }
+      });
+      
+      // Add active class to clicked button
+      this.classList.add('active');
+      
+      // Smooth scroll ke section about
+      const section = document.getElementById('about');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        
+        setTimeout(() => {
+          isScrollingProgrammatically = false;
+        }, 800);
+      }
+      
+      return; // Stop di sini untuk about menu
     }
     
     // Set flag bahwa kita sedang scroll otomatis
@@ -18,7 +61,7 @@ navButtons.forEach(button => {
     
     // Remove active class from all buttons
     navButtons.forEach(btn => {
-      if (btn.id !== 'speedControlBtn') {
+      if (!btn.id || btn.id !== 'speedControlBtn') {
         btn.classList.remove('active');
       }
     });
@@ -73,11 +116,14 @@ window.addEventListener('scroll', () => {
     });
     
     navButtons.forEach(button => {
-      if (button.id !== 'speedControlBtn') {
+      if (!button.id || button.id !== 'speedControlBtn') {
         button.classList.remove('active');
-        if (button.getAttribute('data-target') === current) {
-          button.classList.add('active');
-        }
+      }
+      if (button.classList && button.classList.contains('about-menu-wrapper')) {
+        button.classList.remove('active');
+      }
+      if (button.getAttribute('data-target') === current) {
+        button.classList.add('active');
       }
     });
   }, 100); // Tunggu 100ms setelah scroll berhenti

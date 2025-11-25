@@ -25,7 +25,26 @@
   <header>
     <div class="button-group">
       <div data-target="home" class="active">Home</div>
-      <div data-target="about">About</div>
+      
+      <!-- ABOUT MENU WITH DROPDOWN -->
+<div class="about-menu-wrapper" data-target="about">
+  About
+  <div class="dropdown-menu" id="aboutDropdown">
+    <a href="MoreAbout/roblox_information.html" class="dropdown-item">
+      <img src="Images/RB.png" alt="Roblox">
+      <span>Roblox</span>
+    </a>
+    <a href="MoreAbout/ml_information.html" class="dropdown-item">
+      <img src="Images/ML.png" alt="Mobile Legend">
+      <span>Mobile Legends</span>
+    </a>
+    <a href="MoreAbout/github_information.html" class="dropdown-item">
+      <img src="Images/GH.png" alt="GitHub">
+      <span>GitHub</span>
+    </a>
+  </div>
+</div>
+      
       <div data-target="contact">Contact</div>
       <div id="speedControlBtn">Speed Control</div>
     </div>
