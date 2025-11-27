@@ -4,9 +4,6 @@
 
 // Get all navbar buttons
 const navButtons = document.querySelectorAll('.button-group > div, .button-group > .about-menu-wrapper');
-// Variable untuk track double click pada About
-let aboutClickCount = 0;
-let aboutClickTimer = null;
 
 navButtons.forEach(button => {
   button.addEventListener('click', function(e) {
@@ -18,65 +15,49 @@ navButtons.forEach(button => {
     
     // Handle About menu dengan dropdown
     if (this.classList.contains('about-menu-wrapper')) {
-      // LOGIC BARU: Klik About = scroll ke section
-      // Dropdown HANYA muncul saat HOVER (handled by CSS)
-      
-      // Tutup dropdown jika terbuka (tapi HAPUS inline style agar CSS hover bisa bekerja lagi)
       const dropdown = this.querySelector('.dropdown-menu');
       if (dropdown) {
-        // JANGAN gunakan style.opacity, GUNAKAN CLASS sebagai gantinya
         dropdown.style.removeProperty('opacity');
         dropdown.style.removeProperty('visibility');
         dropdown.style.removeProperty('pointer-events');
       }
       
-      // Set flag bahwa kita sedang scroll otomatis
       isScrollingProgrammatically = true;
       
-      // Remove active class from all buttons
       navButtons.forEach(btn => {
         if (!btn.id || btn.id !== 'speedControlBtn') {
           btn.classList.remove('active');
         }
       });
       
-      // Add active class to clicked button
       this.classList.add('active');
       
-      // Smooth scroll ke section about
       const section = document.getElementById('about');
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
-        
         setTimeout(() => {
           isScrollingProgrammatically = false;
         }, 800);
       }
       
-      return; // Stop di sini untuk about menu
+      return;
     }
     
-    // Set flag bahwa kita sedang scroll otomatis
     isScrollingProgrammatically = true;
     
-    // Remove active class from all buttons
     navButtons.forEach(btn => {
       if (!btn.id || btn.id !== 'speedControlBtn') {
         btn.classList.remove('active');
       }
     });
     
-    // Add active class to clicked button IMMEDIATELY
     this.classList.add('active');
     
-    // Smooth scroll to target section
     const target = this.getAttribute('data-target');
     if (target) {
       const section = document.getElementById(target);
       if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
-        
-        // Setelah smooth scroll selesai (estimasi 800ms), izinkan scroll listener bekerja lagi
         setTimeout(() => {
           isScrollingProgrammatically = false;
         }, 800);
@@ -86,33 +67,28 @@ navButtons.forEach(button => {
 });
 
 /* ================================
-   ACTIVE MENU ON SCROLL
+   ✅ FIXED: UNIFIED SCROLL HANDLER
+   Menggabungkan semua scroll detection jadi satu
 ==================================*/
 
-// Variable untuk mencegah conflict saat smooth scrolling
 let isScrollingProgrammatically = false;
 let scrollTimeout;
-
 const sections = document.querySelectorAll('section[id]');
 
-// ✅ PERBAIKAN: Fungsi untuk mendapatkan section yang sedang terlihat
 function getCurrentSection() {
-  const scrollPos = window.pageYOffset + 150; // Offset untuk deteksi lebih baik
+  const scrollPos = window.pageYOffset + 150;
   
-  // ✅ Cek apakah di paling atas (untuk home section)
   if (window.pageYOffset < 100) {
     return 'home';
   }
   
-  // ✅ Cek apakah di paling bawah (untuk contact section)
   const windowHeight = window.innerHeight;
   const documentHeight = document.documentElement.scrollHeight;
   
   if (window.pageYOffset + windowHeight >= documentHeight - 50) {
-    return 'contact'; // Force contact jika hampir di paling bawah
+    return 'contact';
   }
   
-  // Cari section yang sedang terlihat
   let currentSection = '';
   
   sections.forEach(section => {
@@ -127,17 +103,16 @@ function getCurrentSection() {
   return currentSection;
 }
 
+// ✅ SATU EVENT LISTENER UNTUK SEMUA SCROLL DETECTION
 window.addEventListener('scroll', () => {
-  // Jangan update navbar saat sedang smooth scroll otomatis
   if (isScrollingProgrammatically) return;
   
-  // Clear timeout sebelumnya
   clearTimeout(scrollTimeout);
   
-  // Tunggu sampai scrolling selesai
   scrollTimeout = setTimeout(() => {
     const current = getCurrentSection();
     
+    // Update navbar active state
     navButtons.forEach(button => {
       if (!button.id || button.id !== 'speedControlBtn') {
         button.classList.remove('active');
@@ -149,7 +124,13 @@ window.addEventListener('scroll', () => {
         button.classList.add('active');
       }
     });
-  }, 100); // Tunggu 100ms setelah scroll berhenti
+    
+    // Update URL hash jika perlu
+    const newHash = current ? `#${current}` : '#home';
+    if (window.location.hash !== newHash) {
+      history.replaceState(null, null, newHash);
+    }
+  }, 100);
 });
 
 /* ================================
@@ -159,127 +140,40 @@ window.addEventListener("DOMContentLoaded", () => {
 
   /* ================================
      HOME SECTION SLIDE ANIMATION
-     
-     FUNGSI: Mengatur animasi di HOME section (#home)
-     - Karakter UCUP.png turun dari atas
-     - Kotak "CODE NAME" muncul dari bawah
-     - KEDUANYA MUNCUL BERSAMAAN (SIMULTANEOUS)
-     
-     CARA KERJA:
-     1. Pertama kali load/refresh → animasi penuh (keduanya bersamaan)
-     2. Kembali ke home dari section lain → langsung tampil (tanpa animasi ulang)
   ==================================*/
   
   const homeSection = document.querySelector(".home-section");
-  const homeHash = "#home";
-  
-  // ✅ PERBAIKAN: Gunakan flag di memory, bukan sessionStorage
-  // Ini memastikan setiap refresh (termasuk hard refresh) akan reset animasi
   let hasPlayedAnimation = false;
   
-  // Fungsi untuk trigger animasi home
   function triggerHomeAnimation(forceReset = false) {
     if (!homeSection) return;
     
-    // Jika forceReset true (first load), lakukan reset penuh + animasi
     if (forceReset) {
       homeSection.classList.remove("show-animation", "slide-active");
       
-      // Delay kecil supaya reset terlihat
       setTimeout(() => {
-        // KEDUA ANIMASI DIJALANKAN BERSAMAAN
-        // Karakter turun dari atas + Info muncul dari bawah
         homeSection.classList.add("show-animation", "slide-active");
-        
       }, 50);
     } else {
-      // Jika returning (bukan first load), langsung tampilkan state final tanpa animasi ulang
-      // Ini mencegah text hilang sementara
       homeSection.classList.add("show-animation", "slide-active");
     }
     
-    // ✅ Set flag di memory (bukan sessionStorage)
     hasPlayedAnimation = true;
   }
   
-  // ✅ PERBAIKAN: Selalu trigger animasi dengan reset saat pertama load
-  // Karena hasPlayedAnimation default false, animasi akan selalu jalan di awal
   if (!hasPlayedAnimation) {
-    // Pertama kali load atau setelah refresh - trigger animasi dengan reset
     triggerHomeAnimation(true);
   } else {
-    // Sudah pernah trigger - langsung tampilkan dalam state final
     homeSection.classList.add("show-animation", "slide-active");
   }
-  
-  // Monitor perubahan URL hash untuk deteksi navigasi
-  let currentHash = window.location.hash || homeHash;
-  
-  // Fungsi untuk cek apakah user kembali ke home
-  function checkHomeReturn() {
-    const newHash = window.location.hash || homeHash;
-    
-    // Jika hash berubah dari non-home ke home
-    if (currentHash !== homeHash && newHash === homeHash) {
-      // Langsung tampilkan state final (tanpa reset yang bikin text hilang)
-      triggerHomeAnimation(false);
-    }
-    
-    currentHash = newHash;
-  }
-  
-  // Listen perubahan hash (saat klik menu navbar)
-  window.addEventListener("hashchange", checkHomeReturn);
-  
-  /* ================================
-     SCROLL DETECTION
-     
-     FUNGSI: Mendeteksi ketika user scroll manual ke section home
-     Jika terdeteksi scroll ke home, update hash URL
-  ==================================*/
-  let lastScrollY = window.scrollY;
-  let scrollTimeout2;
-  
-  window.addEventListener("scroll", () => {
-    const currentScrollY = window.scrollY;
-    
-    // Clear timeout sebelumnya
-    clearTimeout(scrollTimeout2);
-    
-    // Set timeout baru untuk deteksi scroll selesai
-    scrollTimeout2 = setTimeout(() => {
-      // Cek apakah home section terlihat di viewport
-      if (homeSection) {
-        const rect = homeSection.getBoundingClientRect();
-        const isHomeVisible = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2;
-        
-        // Jika home visible dan user scroll ke atas (dari section lain)
-        if (isHomeVisible && currentScrollY < lastScrollY) {
-          const newHash = window.location.hash || homeHash;
-          
-          // Jika sebelumnya bukan di home
-          if (currentHash !== homeHash) {
-            window.location.hash = homeHash;
-            checkHomeReturn();
-          }
-        }
-      }
-    }, 100); // Tunggu 100ms setelah scroll berhenti
-    
-    lastScrollY = currentScrollY;
-  });
-
 
   /* ================================
      FADE + BLUR SCROLL ANIMATION
-     
-     FUNGSI: Animasi fade-in saat element masuk ke viewport
-     Digunakan untuk section home, about, dan contact
   ==================================*/
   const fadeElements = document.querySelectorAll(".fade-element");
 
   fadeElements.forEach((el, i) => {
-    el.style.animationDelay = i * 0.15 + "s"; // delay naik bertahap
+    el.style.animationDelay = i * 0.15 + "s";
   });
 
   const observer = new IntersectionObserver(
@@ -296,90 +190,108 @@ window.addEventListener("DOMContentLoaded", () => {
     observer.observe(el);
   });
 
-
   /* ================================
-     ORB CLICK → MODAL GLASSMORPHISM
-     
-     FUNGSI: Mengatur interaksi ORB (bulatan biru) di ABOUT section
-     - Klik ORB → muncul modal glassmorphism dengan 3 card
-     - Klik X atau ESC atau klik di luar modal → tutup modal
-     - Saat modal terbuka, background akan blur
+     ✅ FIXED: MODAL MANAGEMENT
+     Mencegah multiple modals terbuka bersamaan
   ==================================*/
+  
   const orb = document.getElementById("aboutOrb");
   const orbLogo = document.getElementById("orbLogo");
-  const modal = document.getElementById("aboutModal");
+  const aboutModal = document.getElementById("aboutModal");
   const modalClose = document.getElementById("modalClose");
   const aboutSection = document.getElementById("about");
-  const modalInner = modal ? modal.querySelector(".about-modal-inner") : null;
+  const modalInner = aboutModal ? aboutModal.querySelector(".about-modal-inner") : null;
+  const speedModal = document.getElementById("speedModal");
 
-  // Fungsi untuk toggle modal (buka/tutup)
-  const toggleModal = (show) => {
-    if (!modal) return;
-    const willShow = typeof show === "boolean" ? show : !modal.classList.contains("show");
+  // ✅ FUNGSI UNTUK TUTUP SEMUA MODAL
+  function closeAllModals() {
+    // Tutup About Modal
+    if (aboutModal) {
+      aboutModal.classList.remove("show");
+      aboutModal.setAttribute("aria-hidden", "true");
+    }
+    if (aboutSection) {
+      aboutSection.classList.remove("showing-about-modal");
+    }
+    if (orb) {
+      orb.setAttribute("aria-pressed", "false");
+    }
+    
+    // Tutup Speed Modal
+    if (speedModal) {
+      speedModal.classList.remove("show");
+      speedModal.setAttribute("aria-hidden", "true");
+    }
+    const speedBtn = document.getElementById('speedControlBtn');
+    if (speedBtn) {
+      speedBtn.classList.remove('active-temp');
+    }
+    
+    // Reset body state
+    document.body.style.overflow = "";
+    document.body.classList.remove("blur-background");
+  }
+
+  // ✅ TOGGLE ABOUT MODAL (DENGAN CHECK MODAL LAIN)
+  const toggleAboutModal = (show) => {
+    if (!aboutModal) return;
+    const willShow = typeof show === "boolean" ? show : !aboutModal.classList.contains("show");
 
     if (willShow) {
-      // BUKA MODAL
-      modal.classList.add("show");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden"; // prevent background scroll
-      document.body.classList.add("blur-background"); // ✅ TAMBAH INI
+      closeAllModals(); // Tutup modal lain dulu
+      
+      aboutModal.classList.add("show");
+      aboutModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("blur-background");
       aboutSection.classList.add("showing-about-modal");
       orb.setAttribute("aria-pressed", "true");
       if (modalInner) modalInner.focus && modalInner.focus();
     } else {
-      // TUTUP MODAL
-      modal.classList.remove("show");
-      modal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = ""; // restore scroll
-      document.body.classList.remove("blur-background"); // ✅ TAMBAH INI
-      aboutSection.classList.remove("showing-about-modal");
-      orb.setAttribute("aria-pressed", "false");
-      orb.focus();
+      closeAllModals();
     }
   };
 
-  // Event: Klik ORB → buka modal
+  // Event: Klik ORB
   if (orb) {
-    orb.addEventListener("click", () => toggleModal(true));
+    orb.addEventListener("click", () => toggleAboutModal(true));
     orb.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        toggleModal(true);
+        toggleAboutModal(true);
       }
     });
   }
 
-  // Event: Klik tombol X → tutup modal
+  // Event: Klik tombol X
   if (modalClose) {
-    modalClose.addEventListener("click", () => toggleModal(false));
+    modalClose.addEventListener("click", () => toggleAboutModal(false));
   }
 
-  // Event: Tekan ESC → tutup modal
+  // Event: Tekan ESC
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal && modal.classList.contains("show")) {
-      toggleModal(false);
+    if (e.key === "Escape") {
+      if (aboutModal && aboutModal.classList.contains("show")) {
+        toggleAboutModal(false);
+      }
+      if (speedModal && speedModal.classList.contains("show")) {
+        toggleSpeedModal(false);
+      }
     }
   });
 
-  // Event: Klik di luar modal → tutup modal
-  if (modal) {
-    modal.addEventListener("click", (e) => {
+  // Event: Klik di luar modal
+  if (aboutModal) {
+    aboutModal.addEventListener("click", (e) => {
       if (!modalInner) return;
       if (!modalInner.contains(e.target)) {
-        toggleModal(false);
+        toggleAboutModal(false);
       }
     });
   }
 
   /* ================================
      AUTO ROTATE LOGO DI ORB
-     
-     FUNGSI: Logo di dalam ORB akan berganti otomatis setiap 3 detik
-     Urutan: RB.png → ML.png → GH.png → RB.png (loop)
-     
-     CARA UBAH TIMING:
-     Ganti angka 3000 (dalam milidetik) di setInterval
-     3000 = 3 detik, 5000 = 5 detik, dst.
   ==================================*/
   const orbLogos = ["Images/RB.png", "Images/ML.png", "Images/GH.png"];
   let orbIndex = 0;
@@ -388,81 +300,161 @@ window.addEventListener("DOMContentLoaded", () => {
     setInterval(() => {
       orbIndex = (orbIndex + 1) % orbLogos.length;
       orbLogo.src = orbLogos[orbIndex];
-    }, 3000); // <<=== TIMING AUTO ROTATE (dalam ms, 3000 = 3 detik)
+    }, 3000);
   }
 
   /* ================================
-     POPUP CLOSE HANDLERS (EXTRA)
-     
-     FUNGSI: Mengatur popup tambahan (jika ada)
-     Untuk menutup popup saat klik X atau klik di luar popup
-  ==================================*/
-  const popupClose = document.getElementById("popupClose");
-  const gamePopup = document.getElementById("gamePopup");
-
-  if (popupClose && gamePopup) {
-    popupClose.addEventListener("click", () => {
-      gamePopup.style.display = "none";
-      gamePopup.setAttribute("aria-hidden", "true");
-    });
-
-    gamePopup.addEventListener("click", (e) => {
-      if (e.target.id === "gamePopup") {
-        gamePopup.style.display = "none";
-        gamePopup.setAttribute("aria-hidden", "true");
-      }
-    });
-  }
-
-  /* ================================
-     CARD FOCUS MODE - INTERACTIVE DETAILS
-     
-     FUNGSI: Mengatur efek zoom card saat card diklik/dibuka
-     - Saat card dibuka (details open) → card membesar, card lain mengecil & blur
-     - Saat card ditutup → kembali normal (3 card sejajar)
-     
-     DIGUNAKAN UNTUK: 3 card di modal (Roblox, Mobile Legend, GitHub)
+     CARD FOCUS MODE
   ==================================*/
   const modalGrid = document.querySelector(".modal-grid");
   const gameItems = document.querySelectorAll(".game-item");
 
-  // Function untuk handle toggle details (buka/tutup card)
   function handleDetailsToggle() {
-    // Cek apakah ada card yang terbuka
     const openCard = document.querySelector(".game-item[open]");
     
     if (openCard) {
-      // Ada card yang terbuka - aktifkan focus mode
       modalGrid.classList.add("has-active-card");
-      
-      // Remove active-card dari semua card
       gameItems.forEach(item => item.classList.remove("active-card"));
-      
-      // Tambahkan active-card ke card yang terbuka
       openCard.classList.add("active-card");
-      
     } else {
-      // Tidak ada card yang terbuka - kembali ke normal
       modalGrid.classList.remove("has-active-card");
       gameItems.forEach(item => item.classList.remove("active-card"));
     }
   }
 
-  // Attach event listener ke semua details element
   if (modalGrid && gameItems.length > 0) {
     gameItems.forEach((item) => {
       item.addEventListener("toggle", handleDetailsToggle);
     });
   }
 
-}); // <<=== AKHIR DOMContentLoaded
-
+}); // End DOMContentLoaded
 
 /* ================================
-   DATA POPUP ABOUT (ROBLOX / ML / GITHUB)
-   
-   FUNGSI: Data untuk popup tambahan (jika digunakan)
-   Berisi informasi title, text, logo, dan link untuk setiap game
+   ✅ FIXED: SPEED CONTROL MODAL
+   Dengan modal management yang lebih baik
+==================================*/
+
+const speedControlBtn = document.getElementById('speedControlBtn');
+const speedModal = document.getElementById('speedModal');
+const speedModalClose = document.getElementById('speedModalClose');
+const starSpeedSlider = document.getElementById('starSpeedSlider');
+const speedDisplay = document.getElementById('speedDisplay');
+const starField = document.querySelector('.star-field');
+
+// ✅ FUNGSI UNTUK TUTUP ABOUT MODAL (JIKA ADA)
+function closeAboutModalIfOpen() {
+  const aboutModal = document.getElementById("aboutModal");
+  const aboutSection = document.getElementById("about");
+  const orb = document.getElementById("aboutOrb");
+  
+  if (aboutModal && aboutModal.classList.contains("show")) {
+    aboutModal.classList.remove("show");
+    aboutModal.setAttribute("aria-hidden", "true");
+    if (aboutSection) aboutSection.classList.remove("showing-about-modal");
+    if (orb) orb.setAttribute("aria-pressed", "false");
+  }
+}
+
+function toggleSpeedModal(show) {
+  if (!speedModal) return;
+  
+  const speedBtn = document.getElementById('speedControlBtn');
+  
+  if (show) {
+    closeAboutModalIfOpen(); // Tutup about modal dulu
+    
+    speedModal.classList.add('show');
+    speedModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = "hidden";
+    document.body.classList.add("blur-background");
+    
+    if (speedBtn) {
+      speedBtn.classList.add('active-temp');
+    }
+  } else {
+    speedModal.classList.remove('show');
+    speedModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = "";
+    document.body.classList.remove("blur-background");
+    
+    if (speedBtn) {
+      speedBtn.classList.remove('active-temp');
+    }
+  }
+}
+
+// Event: Klik menu "Speed Control"
+if (speedControlBtn) {
+  speedControlBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleSpeedModal(true);
+  });
+}
+
+// Event: Klik tombol close (X)
+if (speedModalClose) {
+  speedModalClose.addEventListener('click', () => {
+    toggleSpeedModal(false);
+  });
+}
+
+// Event: Klik di luar modal
+if (speedModal) {
+  speedModal.addEventListener('click', (e) => {
+    if (e.target === speedModal) {
+      toggleSpeedModal(false);
+    }
+  });
+}
+
+/* ================================
+   SLIDER CONTROL
+==================================*/
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+function updateStarSpeed() {
+  if (!starSpeedSlider || !speedDisplay || !starField) return;
+  
+  const value = starSpeedSlider.value;
+  const seconds = (value / 1000).toFixed(1);
+  
+  speedDisplay.textContent = `${seconds}s`;
+  starField.style.setProperty('--star-speed', `${value}ms`);
+  localStorage.setItem('starSpeed', value);
+}
+
+if (starSpeedSlider) {
+  starSpeedSlider.addEventListener('input', debounce(updateStarSpeed, 50));
+}
+
+// Load saved speed
+window.addEventListener('DOMContentLoaded', () => {
+  if (!starSpeedSlider || !starField) return;
+  
+  const savedSpeed = localStorage.getItem('starSpeed');
+  
+  if (savedSpeed) {
+    starSpeedSlider.value = savedSpeed;
+    updateStarSpeed();
+  } else {
+    updateStarSpeed();
+  }
+});
+
+/* ================================
+   POPUP DATA (OPTIONAL)
 ==================================*/
 const popupData = {
   roblox: {
@@ -485,7 +477,6 @@ const popupData = {
   }
 };
 
-// Fungsi untuk membuka popup (jika dipanggil dari HTML)
 function openAboutPopup(type) {
   const data = popupData[type];
   if (!data) return;
@@ -505,150 +496,3 @@ function openAboutPopup(type) {
     gamePopup.setAttribute("aria-hidden", "false");
   }
 }
-
-/* ================================
-   STARFIELD SPEED CONTROL
-   
-   FUNGSI: Mengontrol kecepatan partikel bintang melalui slider
-   - Modal muncul saat klik menu "Speed Control" di navbar
-   - Slider range: 500ms (cepat) - 10000ms (lambat)
-   - Kecepatan tersimpan di localStorage
-==================================*/
-
-// ===== SPEED CONTROL MODAL =====
-const speedControlBtn = document.getElementById('speedControlBtn');
-const speedModal = document.getElementById('speedModal');
-const speedModalClose = document.getElementById('speedModalClose');
-const starSpeedSlider = document.getElementById('starSpeedSlider');
-const speedDisplay = document.getElementById('speedDisplay');
-const starField = document.querySelector('.star-field');
-
-// ✅ FUNGSI UNTUK TOGGLE MODAL (VERSI DIPERBAIKI)
-function toggleSpeedModal(show) {
-  if (!speedModal) return;
-  
-  const speedBtn = document.getElementById('speedControlBtn');
-  
-  if (show) {
-    // BUKA MODAL
-    speedModal.classList.add('show');
-    speedModal.setAttribute('aria-hidden', 'false');
-    
-    // ✅ Tambahkan active state ke button
-    if (speedBtn) {
-      speedBtn.classList.add('active-temp');
-    }
-  } else {
-    // TUTUP MODAL
-    speedModal.classList.remove('show');
-    speedModal.setAttribute('aria-hidden', 'true');
-    
-    // ✅ Remove active state dari button
-    if (speedBtn) {
-      speedBtn.classList.remove('active-temp');
-    }
-  }
-}
-
-// Event: Klik menu "Speed Control" di navbar
-if (speedControlBtn) {
-  speedControlBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent default link behavior
-    toggleSpeedModal(true);
-  });
-}
-
-// Event: Klik tombol close (X)
-if (speedModalClose) {
-  speedModalClose.addEventListener('click', () => {
-    toggleSpeedModal(false);
-  });
-}
-
-// Event: Klik di luar modal (pada overlay) → tutup modal
-if (speedModal) {
-  speedModal.addEventListener('click', (e) => {
-    if (e.target === speedModal) {
-      toggleSpeedModal(false);
-    }
-  });
-}
-
-// Event: Tekan tombol ESC → tutup modal
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && speedModal && speedModal.classList.contains('show')) {
-    toggleSpeedModal(false);
-  }
-});
-
-/* ================================
-   SLIDER CONTROL
-   
-   FUNGSI: Mengubah kecepatan animasi partikel bintang
-   - Slider value (ms) → dikonversi ke detik untuk display
-   - Update CSS variable --star-speed
-   - Simpan ke localStorage
-==================================*/
-
-// Fungsi debounce untuk performa lebih baik
-// Menghindari terlalu banyak update saat slider digeser
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
-
-// Fungsi untuk update kecepatan partikel
-function updateStarSpeed() {
-  if (!starSpeedSlider || !speedDisplay || !starField) return; // Guard clause
-  
-  const value = starSpeedSlider.value; // Nilai dalam milidetik (ms)
-  const seconds = (value / 1000).toFixed(1); // Konversi ke detik (1 desimal)
-  
-  // Update display text (misal: "5.0s")
-  speedDisplay.textContent = `${seconds}s`;
-  
-  // Update CSS variable untuk mengontrol animasi
-  // Variable --star-speed digunakan di CSS untuk animation duration
-  starField.style.setProperty('--star-speed', `${value}ms`);
-  
-  // Simpan ke localStorage agar kecepatan tersimpan saat refresh
-  // Key: 'starSpeed', Value: nilai dalam ms
-  localStorage.setItem('starSpeed', value);
-}
-
-// Event listener untuk slider dengan debounce
-// Debounce 50ms: update hanya setelah user berhenti geser slider 50ms
-if (starSpeedSlider) {
-  starSpeedSlider.addEventListener('input', debounce(updateStarSpeed, 50));
-}
-
-/* ================================
-   LOAD SAVED SPEED
-   
-   FUNGSI: Memuat kecepatan tersimpan dari localStorage
-   Dijalankan saat page load
-==================================*/
-
-// Load saved speed dari localStorage saat page load
-window.addEventListener('DOMContentLoaded', () => {
-  if (!starSpeedSlider || !starField) return; // Guard clause
-  
-  // Ambil kecepatan tersimpan dari localStorage
-  const savedSpeed = localStorage.getItem('starSpeed');
-  
-  if (savedSpeed) {
-    // Jika ada kecepatan tersimpan, set slider & update animasi
-    starSpeedSlider.value = savedSpeed;
-    updateStarSpeed();
-  } else {
-    // Jika belum ada, gunakan nilai default (5000ms = 5 detik)
-    updateStarSpeed();
-  }
-});
