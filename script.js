@@ -367,7 +367,11 @@ function toggleSpeedModal(show) {
     speedModal.classList.add('show');
     speedModal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = "hidden";
-    document.body.classList.add("blur-background");
+    
+    // ✅ GUNAKAN CLASS KHUSUS UNTUK SPEED MODAL
+    document.body.classList.add("speed-modal-open");
+    // ❌ JANGAN pakai blur-background
+    // document.body.classList.remove("blur-background"); 
     
     if (speedBtn) {
       speedBtn.classList.add('active-temp');
@@ -376,7 +380,9 @@ function toggleSpeedModal(show) {
     speedModal.classList.remove('show');
     speedModal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = "";
-    document.body.classList.remove("blur-background");
+    
+    // ✅ HAPUS CLASS KHUSUS SPEED MODAL
+    document.body.classList.remove("speed-modal-open");
     
     if (speedBtn) {
       speedBtn.classList.remove('active-temp');

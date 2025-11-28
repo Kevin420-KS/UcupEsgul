@@ -1503,7 +1503,7 @@ details summary::-webkit-details-marker {
 
 /* ========================================================= */
 /* ===== CONTACT SECTION WITH ORBIT SOCIAL MEDIA ===== */
-/* ===== ✅ FINAL FIX - MENGGUNAKAN PARENT HOVER ===== */
+/* ===== ✅ FULLY FIXED - ALL ISSUES RESOLVED ===== */
 /* ========================================================= */
 
 #contact {
@@ -1602,6 +1602,8 @@ details summary::-webkit-details-marker {
   align-items: center;
   gap: 12px;
   overflow: visible !important;
+  pointer-events: auto !important; /* ✅ FIX: Bisa diklik */
+  z-index: 100 !important; /* ✅ FIX: Z-index bertingkat */
 }
 
 /* ========================================================= */
@@ -1623,12 +1625,14 @@ details summary::-webkit-details-marker {
   text-decoration: none;
   position: relative;
   z-index: 2;
+  pointer-events: auto !important; /* ✅ FIX: Pastikan icon bisa diklik */
 }
 
 .social-icon i {
   font-size: 28px;
   transition: all 0.3s ease;
   z-index: 2;
+  pointer-events: none; /* ✅ FIX: Icon tidak block click */
 }
 
 /* ========================================================= */
@@ -1669,6 +1673,7 @@ details summary::-webkit-details-marker {
   margin-top: -30px;
 }
 
+/* ✅ FIXED: POSITIONING YOUTUBE & TIKTOK */
 #orbit-3 .social-item:nth-child(1) {
   top: -30px;
   left: 50%;
@@ -1677,14 +1682,14 @@ details summary::-webkit-details-marker {
 
 #orbit-3 .social-item:nth-child(2) {
   bottom: -30px;
-  left: 50%;
-  margin-left: -120px;
+  left: 25%;  /* ✅ YouTube di kiri bawah */
+  margin-left: 0; /* ✅ Hapus margin-left yang salah */
 }
 
 #orbit-3 .social-item:nth-child(3) {
   bottom: -30px;
-  left: 50%;
-  margin-left: 60px;
+  right: 25%; /* ✅ TikTok di kanan bawah */
+  margin-left: 0; /* ✅ Hapus margin-left yang salah */
 }
 
 /* ========================================================= */
@@ -1720,7 +1725,7 @@ details summary::-webkit-details-marker {
 /* ===== ✅ POSITIONING BERDASARKAN PARENT (ORBIT + CHILD) ===== */
 /* ========================================================= */
 
-/* ORBIT 1 - GITHUB (TOP CENTER) - LABEL BAWAH */
+/* ORBIT 1 - GITHUB (TOP CENTER) - LABEL BAWAH, ARROW ATAS */
 #orbit-1 .social-item .social-label {
   top: calc(100% + 15px);
   left: 50%;
@@ -1736,7 +1741,7 @@ details summary::-webkit-details-marker {
   border-bottom: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 2 - CHILD 1 - LINKEDIN (LEFT) - LABEL KANAN */
+/* ORBIT 2 - CHILD 1 - LINKEDIN (LEFT) - LABEL KANAN, ARROW KIRI */
 #orbit-2 .social-item:nth-child(1) .social-label {
   top: 50%;
   left: calc(100% + 15px);
@@ -1752,7 +1757,7 @@ details summary::-webkit-details-marker {
   border-right: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 2 - CHILD 2 - SPOTIFY (RIGHT) - LABEL KIRI */
+/* ORBIT 2 - CHILD 2 - SPOTIFY (RIGHT) - LABEL KIRI, ARROW KANAN */
 #orbit-2 .social-item:nth-child(2) .social-label {
   top: 50%;
   right: calc(100% + 15px);
@@ -1768,7 +1773,7 @@ details summary::-webkit-details-marker {
   border-left: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 3 - CHILD 1 - INSTAGRAM (TOP) - LABEL BAWAH */
+/* ORBIT 3 - CHILD 1 - INSTAGRAM (TOP) - LABEL BAWAH, ARROW ATAS */
 #orbit-3 .social-item:nth-child(1) .social-label {
   top: calc(100% + 15px);
   left: 50%;
@@ -1784,71 +1789,72 @@ details summary::-webkit-details-marker {
   border-bottom: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 3 - CHILD 2 - YOUTUBE (BOTTOM-LEFT) - LABEL ATAS */
+/* ✅ FIXED - ORBIT 3 - CHILD 2 - YOUTUBE (BOTTOM-LEFT) - LABEL ATAS, ARROW BAWAH */
 #orbit-3 .social-item:nth-child(2) .social-label {
-  bottom: calc(100% + 15px);
+  bottom: calc(100% + 15px);  /* ✅ Label di ATAS icon */
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
 }
 
 #orbit-3 .social-item:nth-child(2) .social-label::before {
-  top: 100%;
+  top: 100%;  /* ✅ Arrow di BAWAH label */
   left: 50%;
   transform: translateX(-50%);
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid rgba(0, 0, 0, 0.95);
+  border-top: 8px solid rgba(0, 0, 0, 0.95);  /* ✅ Arrow menunjuk ke BAWAH */
 }
 
-/* ORBIT 3 - CHILD 3 - TIKTOK (BOTTOM-RIGHT) - LABEL ATAS */
+/* ✅ FIXED - ORBIT 3 - CHILD 3 - TIKTOK (BOTTOM-RIGHT) - LABEL ATAS, ARROW BAWAH */
 #orbit-3 .social-item:nth-child(3) .social-label {
-  bottom: calc(100% + 15px);
+  bottom: calc(100% + 15px);  /* ✅ Label di ATAS icon */
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
 }
 
 #orbit-3 .social-item:nth-child(3) .social-label::before {
-  top: 100%;
+  top: 100%;  /* ✅ Arrow di BAWAH label */
   left: 50%;
   transform: translateX(-50%);
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid rgba(0, 0, 0, 0.95);
+  border-top: 8px solid rgba(0, 0, 0, 0.95);  /* ✅ Arrow menunjuk ke BAWAH */
 }
 
 /* ========================================================= */
-/* ===== ✅ SHOW LABEL ON HOVER (ADJACENT SIBLING FIX) ===== */
+/* ===== ✅ SHOW LABEL ON HOVER - FULLY FIXED ===== */
 /* ========================================================= */
 
-/* Universal rule: Icon hover memunculkan label sibling */
-.social-icon:hover + .social-label {
+/* ✅ Universal rule - HIGHEST PRIORITY */
+.orbit-container .social-item:hover .social-label {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
+  z-index: 99999 !important;
 }
 
-/* Transform per platform */
-#github-icon:hover + .social-label {
+/* ✅ Per-platform transform - SEMUA PLATFORM */
+.orbit-container #orbit-1 .social-item:hover .social-label {
   transform: translateX(-50%) translateY(0) !important;
 }
 
-#linkedin-icon:hover + .social-label {
+.orbit-container #orbit-2 .social-item:nth-child(1):hover .social-label {
   transform: translateY(-50%) translateX(0) !important;
 }
 
-#spotify-icon:hover + .social-label {
+.orbit-container #orbit-2 .social-item:nth-child(2):hover .social-label {
   transform: translateY(-50%) translateX(0) !important;
 }
 
-#instagram-icon:hover + .social-label {
+.orbit-container #orbit-3 .social-item:nth-child(1):hover .social-label {
   transform: translateX(-50%) translateY(0) !important;
 }
 
-#youtube-icon:hover + .social-label {
+.orbit-container #orbit-3 .social-item:nth-child(2):hover .social-label {
   transform: translateX(-50%) translateY(0) !important;
 }
 
-#tiktok-icon:hover + .social-label {
+.orbit-container #orbit-3 .social-item:nth-child(3):hover .social-label {
   transform: translateX(-50%) translateY(0) !important;
 }
 
@@ -1943,60 +1949,60 @@ details summary::-webkit-details-marker {
 }
 
 /* ========================================================= */
-/* ===== LABEL COLORS PER PLATFORM (ADJACENT SIBLING) ===== */
+/* ===== LABEL COLORS PER PLATFORM ===== */
 /* ========================================================= */
 
 /* GitHub */
-#github-icon:hover + .social-label {
+.orbit-container .social-item:has(#github-icon:hover) .social-label {
   background: linear-gradient(135deg, #24292e, #444d56) !important;
   color: #ffffff !important;
 }
-#github-icon:hover + .social-label::before {
+.orbit-container .social-item:has(#github-icon:hover) .social-label::before {
   border-bottom-color: #24292e !important;
 }
 
 /* LinkedIn */
-#linkedin-icon:hover + .social-label {
+.orbit-container .social-item:has(#linkedin-icon:hover) .social-label {
   background: #0A66C2 !important;
   color: #ffffff !important;
 }
-#linkedin-icon:hover + .social-label::before {
+.orbit-container .social-item:has(#linkedin-icon:hover) .social-label::before {
   border-right-color: #0A66C2 !important;
 }
 
 /* Spotify */
-#spotify-icon:hover + .social-label {
+.orbit-container .social-item:has(#spotify-icon:hover) .social-label {
   background: #1DB954 !important;
   color: #ffffff !important;
 }
-#spotify-icon:hover + .social-label::before {
+.orbit-container .social-item:has(#spotify-icon:hover) .social-label::before {
   border-left-color: #1DB954 !important;
 }
 
 /* Instagram */
-#instagram-icon:hover + .social-label {
+.orbit-container .social-item:has(#instagram-icon:hover) .social-label {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
   color: #ffffff !important;
 }
-#instagram-icon:hover + .social-label::before {
+.orbit-container .social-item:has(#instagram-icon:hover) .social-label::before {
   border-bottom-color: #f09433 !important;
 }
 
 /* YouTube */
-#youtube-icon:hover + .social-label {
+.orbit-container .social-item:has(#youtube-icon:hover) .social-label {
   background: #FF0000 !important;
   color: #ffffff !important;
 }
-#youtube-icon:hover + .social-label::before {
+.orbit-container .social-item:has(#youtube-icon:hover) .social-label::before {
   border-top-color: #FF0000 !important;
 }
 
 /* TikTok */
-#tiktok-icon:hover + .social-label {
+.orbit-container .social-item:has(#tiktok-icon:hover) .social-label {
   background: linear-gradient(135deg, #000000, #1a1a1a) !important;
   color: #69C9D0 !important;
 }
-#tiktok-icon:hover + .social-label::before {
+.orbit-container .social-item:has(#tiktok-icon:hover) .social-label::before {
   border-top-color: #000000 !important;
 }
 
@@ -2093,18 +2099,19 @@ details summary::-webkit-details-marker {
     margin-top: -27.5px;
   }
 
+  /* ✅ FIXED: RESPONSIVE POSITIONING YOUTUBE & TIKTOK */
   #orbit-3 .social-item:nth-child(1) {
     margin-left: -27.5px;
   }
 
   #orbit-3 .social-item:nth-child(2) {
     bottom: -27.5px;
-    left: 50px;
+    left: 20%; /* ✅ YouTube di kiri bawah */
   }
 
   #orbit-3 .social-item:nth-child(3) {
     bottom: -27.5px;
-    right: 50px;
+    right: 20%; /* ✅ TikTok di kanan bawah */
   }
 }
 
@@ -2168,18 +2175,19 @@ details summary::-webkit-details-marker {
     animation: counter-rotate-icon-orbit3 45s linear infinite;
   }
 
+  /* ✅ FIXED: MOBILE POSITIONING YOUTUBE & TIKTOK */
   #orbit-3 .social-item:nth-child(1) {
     margin-left: -22.5px;
   }
 
   #orbit-3 .social-item:nth-child(2) {
     bottom: -22.5px;
-    left: 30px;
+    left: 15%; /* ✅ YouTube di kiri bawah */
   }
 
   #orbit-3 .social-item:nth-child(3) {
     bottom: -22.5px;
-    right: 30px;
+    right: 15%; /* ✅ TikTok di kanan bawah */
   }
 
   #contact {
@@ -2218,11 +2226,11 @@ footer p {
 }
 
 /* ========================================================= */
-/* ===== BLUR EFFECT KHUSUS UNTUK ABOUT MODAL ===== */
-/* ===== BLUR HANYA BACKGROUND, MODAL & NAVBAR TETAP JELAS ===== */
+/* ===== DUAL BLUR EFFECT ===== */
+/* ===== BLUR UNTUK ABOUT MODAL vs SPEED MODAL ===== */
 /* ========================================================= */
 
-/* Blur hanya untuk section-section utama dan kontennya */
+/* ===== BLUR UNTUK ABOUT MODAL (seperti sebelumnya) ===== */
 body.blur-background .home-section > *:not(.about-modal),
 body.blur-background .about-orb-section > *:not(.about-modal),
 body.blur-background #contact > *,
@@ -2231,7 +2239,7 @@ body.blur-background footer > * {
   transition: filter 0.3s ease;
 }
 
-/* Blur starfield background */
+/* Blur starfield background - HANYA UNTUK ABOUT MODAL */
 body.blur-background .star-field {
   filter: blur(6px);
   transition: filter 0.3s ease;
@@ -2243,14 +2251,34 @@ body.blur-background .about-orb-container {
   transition: filter 0.3s ease;
 }
 
+/* ===== BLUR UNTUK SPEED MODAL (BARU) ===== */
+/* Starfield TIDAK di-blur untuk speed modal */
+body.speed-modal-open .star-field {
+  filter: none !important; /* ✅ BINTANG TETAP JELAS */
+}
+
+/* Konten utama tetap blur untuk speed modal */
+body.speed-modal-open .home-section > *:not(.speed-control-modal),
+body.speed-modal-open .about-orb-section > *:not(.speed-control-modal), 
+body.speed-modal-open #contact > *,
+body.speed-modal-open footer > * {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
+}
+
+/* ===== SHARED RULES (untuk kedua modal) ===== */
+
 /* JANGAN blur navbar*/
 body.blur-background header,
 body.blur-background nav,
-body.blur-background nav * {
+body.blur-background nav *,
+body.speed-modal-open header,
+body.speed-modal-open nav, 
+body.speed-modal-open nav * {
   filter: none !important;
 }
 
-/* JANGAN blur modal dan semua isinya*/
+/* JANGAN blur about modal dan isinya*/
 body.blur-background .about-modal,
 body.blur-background .about-modal *,
 body.blur-background .about-modal-inner,
@@ -2268,6 +2296,10 @@ body.blur-background .modal-title {
 body.blur-background .speed-control-modal,
 body.blur-background .speed-control-modal *,
 body.blur-background .speed-control-content,
-body.blur-background .speed-control-content * {
+body.blur-background .speed-control-content *,
+body.speed-modal-open .speed-control-modal,
+body.speed-modal-open .speed-control-modal *,
+body.speed-modal-open .speed-control-content, 
+body.speed-modal-open .speed-control-content * {
   filter: none !important;
 }
