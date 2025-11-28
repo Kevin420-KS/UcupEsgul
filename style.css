@@ -1538,6 +1538,7 @@ details summary::-webkit-details-marker {
   height: 600px;
   margin: 50px auto 0;
   overflow: visible !important;
+  pointer-events: none; /* Container tidak memblokir event */
 }
 
 /* Center point */
@@ -1560,6 +1561,7 @@ details summary::-webkit-details-marker {
   letter-spacing: 1px;
   z-index: 10;
   box-shadow: 0 0 30px rgba(100,180,255,0.4);
+  pointer-events: none; /* Center point tidak memblokir event */
 }
 
 /* ========================================================= */
@@ -1572,6 +1574,7 @@ details summary::-webkit-details-marker {
   border: 2px dashed rgba(100, 180, 255, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  pointer-events: none; /* Orbit path tidak memblokir event */
 }
 
 #orbit-1 {
@@ -1603,7 +1606,7 @@ details summary::-webkit-details-marker {
   gap: 12px;
   overflow: visible !important;
   pointer-events: auto !important; /* ✅ FIX: Bisa diklik */
-  z-index: 100 !important; /* ✅ FIX: Z-index bertingkat */
+  z-index: 1000 !important; /* ✅ FIX: Z-index tinggi */
 }
 
 /* ========================================================= */
@@ -1613,7 +1616,7 @@ details summary::-webkit-details-marker {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -1622,16 +1625,16 @@ details summary::-webkit-details-marker {
   backdrop-filter: blur(10px);
   border: 2px solid transparent;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  text-decoration: none;
+  text-decoration: none !important;
   position: relative;
-  z-index: 2;
+  z-index: 1001 !important;
   pointer-events: auto !important; /* ✅ FIX: Pastikan icon bisa diklik */
 }
 
 .social-icon i {
   font-size: 28px;
   transition: all 0.3s ease;
-  z-index: 2;
+  z-index: 1001;
   pointer-events: none; /* ✅ FIX: Icon tidak block click */
 }
 
@@ -1655,12 +1658,14 @@ details summary::-webkit-details-marker {
 /* ===== POSITIONING ON ORBITS ===== */
 /* ========================================================= */
 
+/* Orbit 1 - GitHub (TOP) */
 #orbit-1 .social-item {
   top: -30px;
   left: 50%;
   margin-left: -30px;
 }
 
+/* Orbit 2 - LinkedIn (LEFT) dan Spotify (RIGHT) */
 #orbit-2 .social-item:nth-child(1) {
   top: 50%;
   left: -30px;
@@ -1673,7 +1678,7 @@ details summary::-webkit-details-marker {
   margin-top: -30px;
 }
 
-/* ✅ FIXED: POSITIONING YOUTUBE & TIKTOK */
+/* Orbit 3 - Instagram (TOP), YouTube (BOTTOM-LEFT), TikTok (BOTTOM-RIGHT) */
 #orbit-3 .social-item:nth-child(1) {
   top: -30px;
   left: 50%;
@@ -1683,13 +1688,13 @@ details summary::-webkit-details-marker {
 #orbit-3 .social-item:nth-child(2) {
   bottom: -30px;
   left: 25%;  /* ✅ YouTube di kiri bawah */
-  margin-left: 0; /* ✅ Hapus margin-left yang salah */
+  margin-left: 0;
 }
 
 #orbit-3 .social-item:nth-child(3) {
   bottom: -30px;
   right: 25%; /* ✅ TikTok di kanan bawah */
-  margin-left: 0; /* ✅ Hapus margin-left yang salah */
+  margin-left: 0;
 }
 
 /* ========================================================= */
@@ -1711,7 +1716,7 @@ details summary::-webkit-details-marker {
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  z-index: 9999 !important;
+  z-index: 1002 !important; /* ✅ Label di atas icon */
 }
 
 .social-label::before {
@@ -1789,36 +1794,36 @@ details summary::-webkit-details-marker {
   border-bottom: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ✅ FIXED - ORBIT 3 - CHILD 2 - YOUTUBE (BOTTOM-LEFT) - LABEL ATAS, ARROW BAWAH */
+/* ORBIT 3 - CHILD 2 - YOUTUBE (BOTTOM-LEFT) - LABEL ATAS, ARROW BAWAH */
 #orbit-3 .social-item:nth-child(2) .social-label {
-  bottom: calc(100% + 15px);  /* ✅ Label di ATAS icon */
+  bottom: calc(100% + 15px);
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
 }
 
 #orbit-3 .social-item:nth-child(2) .social-label::before {
-  top: 100%;  /* ✅ Arrow di BAWAH label */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid rgba(0, 0, 0, 0.95);  /* ✅ Arrow menunjuk ke BAWAH */
+  border-top: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ✅ FIXED - ORBIT 3 - CHILD 3 - TIKTOK (BOTTOM-RIGHT) - LABEL ATAS, ARROW BAWAH */
+/* ORBIT 3 - CHILD 3 - TIKTOK (BOTTOM-RIGHT) - LABEL ATAS, ARROW BAWAH */
 #orbit-3 .social-item:nth-child(3) .social-label {
-  bottom: calc(100% + 15px);  /* ✅ Label di ATAS icon */
+  bottom: calc(100% + 15px);
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
 }
 
 #orbit-3 .social-item:nth-child(3) .social-label::before {
-  top: 100%;  /* ✅ Arrow di BAWAH label */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid rgba(0, 0, 0, 0.95);  /* ✅ Arrow menunjuk ke BAWAH */
+  border-top: 8px solid rgba(0, 0, 0, 0.95);
 }
 
 /* ========================================================= */
@@ -1830,7 +1835,7 @@ details summary::-webkit-details-marker {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
-  z-index: 99999 !important;
+  z-index: 1003 !important;
 }
 
 /* ✅ Per-platform transform - SEMUA PLATFORM */
@@ -1871,12 +1876,13 @@ details summary::-webkit-details-marker {
 }
 
 .social-icon:hover {
-  transform: scale(1.2);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  transform: scale(1.2) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+  z-index: 1004 !important;
 }
 
 .social-icon:hover i {
-  transform: scale(1.15);
+  transform: scale(1.15) !important;
 }
 
 /* ========================================================= */
@@ -1888,9 +1894,9 @@ details summary::-webkit-details-marker {
   border-color: rgba(255, 255, 255, 0.6);
 }
 #github-icon:hover {
-  background: linear-gradient(135deg, #24292e, #444d56);
-  border-color: #ffffff;
-  box-shadow: 0 15px 50px rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, #24292e, #444d56) !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 15px 50px rgba(255, 255, 255, 0.4) !important;
 }
 
 #linkedin-icon {
@@ -1898,10 +1904,10 @@ details summary::-webkit-details-marker {
   border-color: rgba(10, 102, 194, 0.7);
 }
 #linkedin-icon:hover {
-  background: #0A66C2;
-  color: #ffffff;
-  border-color: #0A66C2;
-  box-shadow: 0 15px 50px rgba(10, 102, 194, 0.6);
+  background: #0A66C2 !important;
+  color: #ffffff !important;
+  border-color: #0A66C2 !important;
+  box-shadow: 0 15px 50px rgba(10, 102, 194, 0.6) !important;
 }
 
 #spotify-icon {
@@ -1909,10 +1915,10 @@ details summary::-webkit-details-marker {
   border-color: rgba(29, 185, 84, 0.6);
 }
 #spotify-icon:hover {
-  background: #1DB954;
-  color: #ffffff;
-  border-color: #1DB954;
-  box-shadow: 0 15px 50px rgba(29, 185, 84, 0.6);
+  background: #1DB954 !important;
+  color: #ffffff !important;
+  border-color: #1DB954 !important;
+  box-shadow: 0 15px 50px rgba(29, 185, 84, 0.6) !important;
 }
 
 #instagram-icon {
@@ -1920,10 +1926,10 @@ details summary::-webkit-details-marker {
   border-color: rgba(225, 48, 108, 0.6);
 }
 #instagram-icon:hover {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  color: #ffffff;
-  border-color: #E1306C;
-  box-shadow: 0 15px 50px rgba(225, 48, 108, 0.6);
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+  color: #ffffff !important;
+  border-color: #E1306C !important;
+  box-shadow: 0 15px 50px rgba(225, 48, 108, 0.6) !important;
 }
 
 #youtube-icon {
@@ -1931,10 +1937,10 @@ details summary::-webkit-details-marker {
   border-color: rgba(255, 0, 0, 0.6);
 }
 #youtube-icon:hover {
-  background: #FF0000;
-  color: #ffffff;
-  border-color: #FF0000;
-  box-shadow: 0 15px 50px rgba(255, 0, 0, 0.6);
+  background: #FF0000 !important;
+  color: #ffffff !important;
+  border-color: #FF0000 !important;
+  box-shadow: 0 15px 50px rgba(255, 0, 0, 0.6) !important;
 }
 
 #tiktok-icon {
@@ -1942,10 +1948,10 @@ details summary::-webkit-details-marker {
   border-color: rgba(0, 0, 0, 0.8);
 }
 #tiktok-icon:hover {
-  background: linear-gradient(135deg, #000000, #1a1a1a);
-  color: #69C9D0;
-  border-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 15px 50px rgba(105, 201, 208, 0.6);
+  background: linear-gradient(135deg, #000000, #1a1a1a) !important;
+  color: #69C9D0 !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 15px 50px rgba(105, 201, 208, 0.6) !important;
 }
 
 /* ========================================================= */
@@ -2099,19 +2105,18 @@ details summary::-webkit-details-marker {
     margin-top: -27.5px;
   }
 
-  /* ✅ FIXED: RESPONSIVE POSITIONING YOUTUBE & TIKTOK */
   #orbit-3 .social-item:nth-child(1) {
     margin-left: -27.5px;
   }
 
   #orbit-3 .social-item:nth-child(2) {
     bottom: -27.5px;
-    left: 20%; /* ✅ YouTube di kiri bawah */
+    left: 20%;
   }
 
   #orbit-3 .social-item:nth-child(3) {
     bottom: -27.5px;
-    right: 20%; /* ✅ TikTok di kanan bawah */
+    right: 20%;
   }
 }
 
@@ -2175,19 +2180,18 @@ details summary::-webkit-details-marker {
     animation: counter-rotate-icon-orbit3 45s linear infinite;
   }
 
-  /* ✅ FIXED: MOBILE POSITIONING YOUTUBE & TIKTOK */
   #orbit-3 .social-item:nth-child(1) {
     margin-left: -22.5px;
   }
 
   #orbit-3 .social-item:nth-child(2) {
     bottom: -22.5px;
-    left: 15%; /* ✅ YouTube di kiri bawah */
+    left: 15%;
   }
 
   #orbit-3 .social-item:nth-child(3) {
     bottom: -22.5px;
-    right: 15%; /* ✅ TikTok di kanan bawah */
+    right: 15%;
   }
 
   #contact {
