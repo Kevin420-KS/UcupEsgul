@@ -23,3 +23,7 @@ j. https://freefrontend.com/css-cards/ (card css animation)
 k. https://freefrontend.com/css-illustrations/ (random model css)
 
 l. https://freefrontend.com/css-social-media-icons/ (social media css animation)
+
+m. https://codepen.io/wefiy/pen/WPpEwo (matrix text css animation)
+
+n. https://css-loaders.com/factory/ (loading css animation)
