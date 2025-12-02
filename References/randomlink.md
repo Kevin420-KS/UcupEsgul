@@ -27,3 +27,5 @@ l. https://freefrontend.com/css-social-media-icons/ (social media css animation)
 m. https://codepen.io/wefiy/pen/WPpEwo (matrix text css animation)
 
 n. https://css-loaders.com/factory/ (loading css animation)
+
+o. https://codepen.io/ryanindustries8/pen/BbQJpG (digital sci-fi css sign)

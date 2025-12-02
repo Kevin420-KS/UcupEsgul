@@ -197,67 +197,108 @@
 
   </section>
 
-<!-- ===== CONTACT SECTION WITH ORBIT SOCIAL MEDIA ===== -->
-<!-- ✅ UPDATED: Hyperlinks telah diperbarui sesuai permintaan -->
+  <!-- ========================================================= -->
+<!-- ===== CONTACT SECTION - MULTI STAGE (UPDATED) ===== -->
+<!-- ========================================================= -->
 <section id="contact" class="fade-element blur-out">
-  <h2>Hubungi Saya</h2>
-  <p>Jika kalian ingin mengetahui aktivitas saya sehari-hari,</p>
-  <p>kalian bisa menghubungi/mengetahuinya melalui:</p>
   
-  <div class="orbit-container">
-    <!-- Center Point -->
-    <div class="orbit-center">
-      Follow Me
-    </div>
-
-    <!-- ✅ ORBIT 1 - Inner (GitHub only) - UPDATED LINK -->
-    <div class="orbit-path" id="orbit-1">
-      <div class="social-item">
-        <a href="https://github.com/Kevin420-KS" class="social-icon" id="github-icon" aria-label="GitHub" target="_blank">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <span class="social-label">GitHub</span>
-      </div>
-    </div>
-
-    <!-- ✅ ORBIT 2 - Middle (LinkedIn, Spotify) - SPOTIFY LINK UPDATED -->
-    <div class="orbit-path" id="orbit-2">
-      <div class="social-item">
-        <a href="https://www.linkedin.com/in/kevin-setiawan-889b1a323/" class="social-icon" id="linkedin-icon" aria-label="LinkedIn" target="_blank">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-        <span class="social-label">LinkedIn</span>
-      </div>
-      <div class="social-item">
-        <a href="https://open.spotify.com/playlist/6j9auWzHjFTOchxzfELX2w?si=87d485f9ef83487c&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn5zSGR-UZPU-XW9S1AO6cr_z9sUgxyaVjUAglsciUjCqonbPJ1XIRu9sNYT8_aem_yGR8UTILlcMtCgZ5gGphhg&brid=Spd89_IieDc-Q2ZXVKJQvw" class="social-icon" id="spotify-icon" aria-label="Spotify" target="_blank">
-          <i class="fa-brands fa-spotify"></i>
-        </a>
-        <span class="social-label">Spotify</span>
-      </div>
-    </div>
-
-    <!-- ✅ ORBIT 3 - Outer (Instagram, YouTube, TikTok) - ALL LINKS UPDATED -->
-    <div class="orbit-path" id="orbit-3">
-      <div class="social-item">
-        <a href="https://www.instagram.com/no_logic_thinker/" class="social-icon" id="instagram-icon" aria-label="Instagram" target="_blank">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <span class="social-label">Instagram</span>
-      </div>
-      <div class="social-item">
-        <a href="https://www.youtube.com/@Ucup3sgul" class="social-icon" id="youtube-icon" aria-label="YouTube" target="_blank">
-          <i class="fa-brands fa-youtube"></i>
-        </a>
-        <span class="social-label">YouTube</span>
-      </div>
-      <div class="social-item">
-        <a href="https://www.tiktok.com/@ucupesgul_roblox" class="social-icon" id="tiktok-icon" aria-label="TikTok" target="_blank">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-        <span class="social-label">TikTok</span>
+  <!-- ========== STAGE 1: CHARACTER + PHONE (INITIAL) ========== -->
+  <div class="contact-stage contact-stage-1 active">
+    <div class="contact-initial-container">
+      <!-- Character UCUP3.png -->
+      <img src="Images/UCUP3.png" alt="Ucup Character" class="contact-character">
+      
+      <!-- Phone with Press Me button INSIDE -->
+      <div class="phone-wrapper">
+        <img src="Images/PHONE.png" alt="Phone" class="phone-image">
+        <div class="phone-screen">
+          <button class="press-me-btn" id="pressMeBtn">PRESS ME!!!</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- ========== STAGE 2: LOADING (SCI-FI + MATRIX) ========== -->
+  <div class="contact-stage contact-stage-2">
+    <!-- Matrix Background Canvas -->
+    <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+    
+    <!-- ✅ PERBAIKAN: Glassmorphism Wrapper -->
+    <div class="scifi-loading-wrapper">
+      <!-- Sci-Fi Sign Box -->
+      <div class="scifi-loading-box">
+        <div class="scifi-top-cover"></div>
+        
+        <div class="scifi-content">
+          <h2 class="scifi-title">LOADING....</h2>
+          <p class="scifi-subtitle">Mohon tunggu sebentar.</p>
+        </div>
+        
+        <div class="scifi-edges-1">
+          <div class="scifi-edges-2">
+            <div class="scifi-slider"></div>
+            <div class="scifi-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== STAGE 3: ORBIT SOCIAL MEDIA (FINAL) ========== -->
+  <div class="contact-stage contact-stage-3">
+    <div class="orbit-container">
+      <!-- ❌ TIDAK ADA "Follow Me" center point lagi -->
+      
+      <!-- Orbit 1 - GitHub -->
+      <div class="orbit-path" id="orbit-1">
+        <div class="social-item">
+          <a href="https://github.com/Kevin420-KS" class="social-icon" id="github-icon" aria-label="GitHub" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <span class="social-label">GitHub</span>
+        </div>
+      </div>
+
+      <!-- Orbit 2 - LinkedIn, Spotify -->
+      <div class="orbit-path" id="orbit-2">
+        <div class="social-item">
+          <a href="https://www.linkedin.com/in/kevin-setiawan-889b1a323/" class="social-icon" id="linkedin-icon" aria-label="LinkedIn" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <span class="social-label">LinkedIn</span>
+        </div>
+        <div class="social-item">
+          <a href="https://open.spotify.com/playlist/6j9auWzHjFTOchxzfELX2w?si=87d485f9ef83487c&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn5zSGR-UZPU-XW9S1AO6cr_z9sUgxyaVjUAglsciUjCqonbPJ1XIRu9sNYT8_aem_yGR8UTILlcMtCgZ5gGphhg&brid=Spd89_IieDc-Q2ZXVKJQvw" class="social-icon" id="spotify-icon" aria-label="Spotify" target="_blank">
+            <i class="fa-brands fa-spotify"></i>
+          </a>
+          <span class="social-label">Spotify</span>
+        </div>
+      </div>
+
+      <!-- Orbit 3 - Instagram, YouTube, TikTok -->
+      <div class="orbit-path" id="orbit-3">
+        <div class="social-item">
+          <a href="https://www.instagram.com/no_logic_thinker/" class="social-icon" id="instagram-icon" aria-label="Instagram" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <span class="social-label">Instagram</span>
+        </div>
+        <div class="social-item">
+          <a href="https://www.youtube.com/@Ucup3sgul" class="social-icon" id="youtube-icon" aria-label="YouTube" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+          <span class="social-label">YouTube</span>
+        </div>
+        <div class="social-item">
+          <a href="https://www.tiktok.com/@ucupesgul_roblox" class="social-icon" id="tiktok-icon" aria-label="TikTok" target="_blank">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <span class="social-label">TikTok</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
   <!-- ===== FOOTER ===== -->

@@ -502,3 +502,92 @@ function openAboutPopup(type) {
     gamePopup.setAttribute("aria-hidden", "false");
   }
 }
+
+/* ================================
+   CONTACT SECTION - MULTI STAGE
+==================================*/
+
+const pressMeBtn = document.getElementById('pressMeBtn');
+const contactStages = {
+  stage1: document.querySelector('.contact-stage-1'),
+  stage2: document.querySelector('.contact-stage-2'),
+  stage3: document.querySelector('.contact-stage-3')
+};
+
+// Matrix Rain Effect
+function initMatrixRain() {
+  const canvas = document.getElementById('matrixCanvas');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // Characters untuk matrix rain + "UCUP ESGUL"
+  const matrixChars = "UCUPESGUL0123456789@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const matrix = matrixChars.split("");
+  
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+  
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = "#7B68EE"; // ✅ Warna BIRU UNGU (MediumSlateBlue)
+    ctx.font = fontSize + "px monospace";
+    
+    for (let i = 0; i < drops.length; i++) {
+      const text = matrix[Math.floor(Math.random() * matrix.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+  
+  const matrixInterval = setInterval(draw, 35);
+  
+  // Stop after 5 seconds
+  setTimeout(() => {
+    clearInterval(matrixInterval);
+  }, 5000);
+}
+
+// Switch stages
+function switchToStage(stageNumber) {
+  Object.values(contactStages).forEach(stage => {
+    if (stage) stage.classList.remove('active');
+  });
+  
+  const targetStage = contactStages[`stage${stageNumber}`];
+  if (targetStage) {
+    targetStage.classList.add('active');
+  }
+}
+
+// Press Me Button Handler
+if (pressMeBtn) {
+  pressMeBtn.addEventListener('click', () => {
+    // Stage 1 → Stage 2 (Loading)
+    switchToStage(2);
+    initMatrixRain();
+    
+    // Stage 2 → Stage 3 (Orbit) after 5 seconds
+    setTimeout(() => {
+      switchToStage(3);
+    }, 5000);
+  });
+}
+
+// Responsive canvas resize
+window.addEventListener('resize', () => {
+  const canvas = document.getElementById('matrixCanvas');
+  if (canvas) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+});

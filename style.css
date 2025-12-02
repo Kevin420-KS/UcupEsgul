@@ -1502,66 +1502,335 @@ details summary::-webkit-details-marker {
 }
 
 /* ========================================================= */
-/* ===== CONTACT SECTION WITH ORBIT SOCIAL MEDIA ===== */
-/* ===== ✅ FULLY FIXED - ALL ISSUES RESOLVED ===== */
+/* ===== CONTACT SECTION - MULTI STAGE SYSTEM ===== */
 /* ========================================================= */
 
 #contact {
-  max-width: 900px;
-  margin: 80px auto 60px;
-  padding: 60px 20px 100px;
-  text-align: center;
-  scroll-margin-top: 80px;
-  min-height: auto;
-}
-
-#contact h2 {
-  color: #ffd700;
-  font-size: 32px;
-  margin-bottom: 20px;
-  text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
-}
-
-#contact p {
-  font-size: 16px;
-  line-height: 1.6;
-  margin: 10px 0;
-  color: #f0f0f0;
-}
-
-/* ========================================================= */
-/* ===== ORBIT CONTAINER ===== */
-/* ========================================================= */
-.orbit-container {
   position: relative;
-  width: 600px;
-  height: 600px;
-  margin: 50px auto 0;
-  overflow: visible !important;
-  pointer-events: none; /* Container tidak memblokir event */
-}
-
-/* Center point */
-.orbit-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle at 40% 40%, rgba(100,180,255,0.4), rgba(40,20,100,0.6));
-  border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.3);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
-  font-weight: 700;
+  overflow: hidden;
+}
+
+/* Base stage styling */
+.contact-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  pointer-events: none;
+}
+
+.contact-stage.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ========================================================= */
+/* ===== STAGE 1: CHARACTER + PHONE (INITIAL) - FIXED ===== */
+/* ========================================================= */
+
+.contact-initial-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
+
+.contact-character {
+  width: 450px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  animation: floatCharacter 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes floatCharacter {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* ✅ PERBAIKAN: Phone wrapper & positioning */
+.phone-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.phone-image {
+  width: 55Opx; /* ✅ UKURAN LEBIH BESAR */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(100, 180, 255, 0.5));
+  display: block;
+}
+
+/* ✅ PERBAIKAN: Screen area untuk button (di dalam phone) */
+.phone-screen {
+  position: absolute;
+  top: 22%; /* ✅ POSISI VERTIKAL BUTTON DI DALAM PHONE */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%; /* ✅ LEBAR AREA SCREEN */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* Screen tidak block click */
+}
+
+/* ✅ PERBAIKAN: Press Me Button */
+.press-me-btn {
+  background: linear-gradient(135deg, rgba(120, 200, 255, 0.95), rgba(80, 140, 220, 0.95));
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 16px 32px;
+  font-size: 24px; /* ✅ UKURAN FONT LEBIH BESAR */
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  cursor: pointer;
+  pointer-events: auto; /* ✅ BUTTON BISA DIKLIK */
+  box-shadow: 
+    0 8px 30px rgba(100, 180, 255, 0.6),
+    inset 0 2px 10px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  animation: pulseGlow 2s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { 
+    box-shadow: 0 8px 30px rgba(100, 180, 255, 0.6),
+                inset 0 2px 10px rgba(255, 255, 255, 0.4);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 12px 45px rgba(100, 180, 255, 0.9),
+                inset 0 2px 15px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+  }
+}
+
+.press-me-btn:hover {
+  background: linear-gradient(135deg, rgba(140, 220, 255, 1), rgba(100, 160, 240, 1));
+  transform: scale(1.08);
+  box-shadow: 0 15px 50px rgba(100, 180, 255, 1),
+              inset 0 2px 20px rgba(255, 255, 255, 0.7);
+}
+
+.press-me-btn:active {
+  transform: scale(0.95);
+}
+
+/* ========================================================= */
+/* ===== STAGE 2: LOADING (SCI-FI + MATRIX) - FIXED ===== */
+/* ========================================================= */
+
+.contact-stage-2 {
+  background: transparent; /* ✅ TRANSPARAN, tidak hitam penuh */
+}
+
+/* ✅ PERBAIKAN: Glassmorphism Container untuk keseluruhan */
+.contact-stage-2::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85); /* ✅ BLUR BACKGROUND */
+  backdrop-filter: blur(12px);
+  z-index: 0;
+}
+
+/* Matrix Canvas */
+.matrix-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5; /* ✅ LEBIH TRANSPARAN */
+  z-index: 1;
+}
+
+/* ✅ PERBAIKAN: Glassmorphism Box untuk Sci-Fi Sign */
+.scifi-loading-wrapper {
+  position: relative;
   z-index: 10;
-  box-shadow: 0 0 30px rgba(100,180,255,0.4);
-  pointer-events: none; /* Center point tidak memblokir event */
+  background: linear-gradient(
+    135deg,
+    rgba(15, 35, 80, 0.85),
+    rgba(25, 50, 100, 0.85)
+  ); /* ✅ WARNA BIRU GELAP TRANSPARAN */
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(100, 180, 255, 0.4);
+  border-radius: 24px;
+  padding: 60px 80px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.8),
+    0 0 100px rgba(100, 180, 255, 0.3);
+}
+
+/* Sci-Fi Loading Box */
+.scifi-loading-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.scifi-top-cover {
+  width: 340px;
+  height: 38px;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
+  background: linear-gradient(rgb(126,145,158), rgb(167,192,209));
+  box-shadow: 0 0 10px 3px rgba(77,77,77,0.6), 0 0 18px 4px rgb(177,201,220) inset;
+  border-top: 2px solid rgb(143,164,178);
+  margin-bottom: -40px;
+  z-index: 20;
+}
+
+.scifi-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  z-index: 30;
+  margin-bottom: -145px;
+}
+
+/* ✅ PERBAIKAN: Warna kuning untuk "LOADING...." agar kontras */
+.scifi-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 48px;
+  color: #FFD700; /* ✅ WARNA KUNING EMAS */
+  text-shadow: 
+    0px 0px 12px rgba(255, 215, 0, 0.8),
+    0px 0px 24px rgba(255, 215, 0, 0.5);
+  opacity: 1;
+  margin: 10px 0;
+  text-transform: uppercase;
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+/* ✅ PERBAIKAN: Warna putih untuk subtitle agar terlihat */
+.scifi-subtitle {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  color: #FFFFFF; /* ✅ WARNA PUTIH */
+  text-shadow: 
+    0px 0px 8px rgba(255, 255, 255, 0.8),
+    0px 0px 16px rgba(177, 201, 220, 0.6);
+  opacity: 0.95;
+  margin: 8px 0;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { 
+    opacity: 1; 
+    text-shadow: 
+      0px 0px 12px rgba(255, 215, 0, 0.8),
+      0px 0px 24px rgba(255, 215, 0, 0.5);
+  }
+  50% { 
+    opacity: 0.7; 
+    text-shadow: 
+      0px 0px 20px rgba(255, 215, 0, 1),
+      0px 0px 40px rgba(255, 215, 0, 0.7);
+  }
+}
+
+.scifi-edges-1 {
+  background: rgb(0,0,0);
+  width: 520px;
+  border-top: 16px solid rgba(204,232,254,0.85);
+  border-radius: 24px;
+  transform: perspective(300px) rotateX(-22deg);
+  border-left: 20px solid rgba(204,232,254,0.85);
+  border-right: 20px solid rgba(204,232,254,0.85);
+  border-bottom: 24px solid rgba(204,232,254,0.85);
+  box-shadow: 0 0 15px 4px rgb(77,77,77);
+}
+
+.scifi-edges-2 {
+  height: 115px;
+  box-shadow: 0 0 12px 3px rgb(204,232,254), 0 0 8px 3px rgb(177,232,254) inset;
+  margin: 2px;
+  border-top: 12px solid rgba(204,232,254,0.85);
+  border-left: 15px solid rgba(204,232,254,0.85);
+  border-right: 15px solid rgba(204,232,254,0.85);
+  border-bottom: 16px solid rgba(204,232,254,0.85);
+  position: relative;
+}
+
+.scifi-slider {
+  height: calc(100% - 26px);
+  width: 9px;
+  filter: blur(1.5px);
+  background: rgba(177,220,254,0.6);
+  position: absolute;
+  animation: sliderMove 4s linear infinite;
+}
+
+@keyframes sliderMove {
+  0% { left: 0; }
+  100% { left: 95%; }
+}
+
+.scifi-line {
+  background-image: repeating-linear-gradient(
+    rgba(177,220,254,0.95), 
+    rgba(177,220,254,0.95) 2px, 
+    rgb(204,232,254) 2px, 
+    rgb(204,232,254) 4px
+  );
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 12px rgb(204,232,254);
+  filter: blur(1px);
+}
+
+/* ========================================================= */
+/* ===== STAGE 3: ORBIT (dengan glassmorphism box) ===== */
+/* ========================================================= */
+
+/* ✅ PERBAIKAN: Tambahkan glassmorphism container untuk orbit */
+.contact-stage-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-stage-3 .orbit-container {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 35, 80, 0.75),
+    rgba(25, 50, 100, 0.75)
+  ); /* ✅ GLASSMORPHISM BACKGROUND */
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(100, 180, 255, 0.3);
+  border-radius: 24px;
+  padding: 80px;
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 0 100px rgba(100, 180, 255, 0.2);
+}
+
+.contact-stage-3 .orbit-center {
+  display: none !important; /* ✅ Hide center point "Follow Me" */
 }
 
 /* ========================================================= */
@@ -1574,7 +1843,7 @@ details summary::-webkit-details-marker {
   border: 2px dashed rgba(100, 180, 255, 0.3);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  pointer-events: none; /* Orbit path tidak memblokir event */
+  pointer-events: none;
 }
 
 #orbit-1 {
@@ -1605,8 +1874,8 @@ details summary::-webkit-details-marker {
   align-items: center;
   gap: 12px;
   overflow: visible !important;
-  pointer-events: auto !important; /* ✅ FIX: Bisa diklik */
-  z-index: 1000 !important; /* ✅ FIX: Z-index tinggi */
+  pointer-events: auto !important;
+  z-index: 1000 !important;
 }
 
 /* ========================================================= */
@@ -1628,14 +1897,14 @@ details summary::-webkit-details-marker {
   text-decoration: none !important;
   position: relative;
   z-index: 1001 !important;
-  pointer-events: auto !important; /* ✅ FIX: Pastikan icon bisa diklik */
+  pointer-events: auto !important;
 }
 
 .social-icon i {
   font-size: 28px;
   transition: all 0.3s ease;
   z-index: 1001;
-  pointer-events: none; /* ✅ FIX: Icon tidak block click */
+  pointer-events: none;
 }
 
 /* ========================================================= */
@@ -1658,14 +1927,12 @@ details summary::-webkit-details-marker {
 /* ===== POSITIONING ON ORBITS ===== */
 /* ========================================================= */
 
-/* Orbit 1 - GitHub (TOP) */
 #orbit-1 .social-item {
   top: -30px;
   left: 50%;
   margin-left: -30px;
 }
 
-/* Orbit 2 - LinkedIn (LEFT) dan Spotify (RIGHT) */
 #orbit-2 .social-item:nth-child(1) {
   top: 50%;
   left: -30px;
@@ -1678,7 +1945,6 @@ details summary::-webkit-details-marker {
   margin-top: -30px;
 }
 
-/* Orbit 3 - Instagram (TOP), YouTube (BOTTOM-LEFT), TikTok (BOTTOM-RIGHT) */
 #orbit-3 .social-item:nth-child(1) {
   top: -30px;
   left: 50%;
@@ -1687,18 +1953,18 @@ details summary::-webkit-details-marker {
 
 #orbit-3 .social-item:nth-child(2) {
   bottom: -30px;
-  left: 25%;  /* ✅ YouTube di kiri bawah */
+  left: 25%;
   margin-left: 0;
 }
 
 #orbit-3 .social-item:nth-child(3) {
   bottom: -30px;
-  right: 25%; /* ✅ TikTok di kanan bawah */
+  right: 25%;
   margin-left: 0;
 }
 
 /* ========================================================= */
-/* ===== ✅ SMART LABEL - BASE STYLE ===== */
+/* ===== SMART LABEL - BASE STYLE ===== */
 /* ========================================================= */
 .social-label {
   position: absolute;
@@ -1716,7 +1982,7 @@ details summary::-webkit-details-marker {
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  z-index: 1002 !important; /* ✅ Label di atas icon */
+  z-index: 1002 !important;
 }
 
 .social-label::before {
@@ -1726,11 +1992,7 @@ details summary::-webkit-details-marker {
   height: 0;
 }
 
-/* ========================================================= */
-/* ===== ✅ POSITIONING BERDASARKAN PARENT (ORBIT + CHILD) ===== */
-/* ========================================================= */
-
-/* ORBIT 1 - GITHUB (TOP CENTER) - LABEL BAWAH, ARROW ATAS */
+/* Label positioning berdasarkan orbit */
 #orbit-1 .social-item .social-label {
   top: calc(100% + 15px);
   left: 50%;
@@ -1746,7 +2008,6 @@ details summary::-webkit-details-marker {
   border-bottom: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 2 - CHILD 1 - LINKEDIN (LEFT) - LABEL KANAN, ARROW KIRI */
 #orbit-2 .social-item:nth-child(1) .social-label {
   top: 50%;
   left: calc(100% + 15px);
@@ -1762,7 +2023,6 @@ details summary::-webkit-details-marker {
   border-right: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 2 - CHILD 2 - SPOTIFY (RIGHT) - LABEL KIRI, ARROW KANAN */
 #orbit-2 .social-item:nth-child(2) .social-label {
   top: 50%;
   right: calc(100% + 15px);
@@ -1778,7 +2038,6 @@ details summary::-webkit-details-marker {
   border-left: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 3 - CHILD 1 - INSTAGRAM (TOP) - LABEL BAWAH, ARROW ATAS */
 #orbit-3 .social-item:nth-child(1) .social-label {
   top: calc(100% + 15px);
   left: 50%;
@@ -1794,7 +2053,6 @@ details summary::-webkit-details-marker {
   border-bottom: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 3 - CHILD 2 - YOUTUBE (BOTTOM-LEFT) - LABEL ATAS, ARROW BAWAH */
 #orbit-3 .social-item:nth-child(2) .social-label {
   bottom: calc(100% + 15px);
   left: 50%;
@@ -1810,7 +2068,6 @@ details summary::-webkit-details-marker {
   border-top: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ORBIT 3 - CHILD 3 - TIKTOK (BOTTOM-RIGHT) - LABEL ATAS, ARROW BAWAH */
 #orbit-3 .social-item:nth-child(3) .social-label {
   bottom: calc(100% + 15px);
   left: 50%;
@@ -1826,11 +2083,7 @@ details summary::-webkit-details-marker {
   border-top: 8px solid rgba(0, 0, 0, 0.95);
 }
 
-/* ========================================================= */
-/* ===== ✅ SHOW LABEL ON HOVER - FULLY FIXED ===== */
-/* ========================================================= */
-
-/* ✅ Universal rule - HIGHEST PRIORITY */
+/* Show labels on hover */
 .orbit-container .social-item:hover .social-label {
   opacity: 1 !important;
   visibility: visible !important;
@@ -1838,7 +2091,6 @@ details summary::-webkit-details-marker {
   z-index: 1003 !important;
 }
 
-/* ✅ Per-platform transform - SEMUA PLATFORM */
 .orbit-container #orbit-1 .social-item:hover .social-label {
   transform: translateX(-50%) translateY(0) !important;
 }
@@ -1863,10 +2115,7 @@ details summary::-webkit-details-marker {
   transform: translateX(-50%) translateY(0) !important;
 }
 
-/* ========================================================= */
-/* ===== HOVER EFFECTS - PAUSE ALL ORBITS ===== */
-/* ========================================================= */
-
+/* Hover effects */
 .orbit-container:has(.social-icon:hover) .orbit-path {
   animation-play-state: paused !important;
 }
@@ -1885,10 +2134,7 @@ details summary::-webkit-details-marker {
   transform: scale(1.15) !important;
 }
 
-/* ========================================================= */
-/* ===== PLATFORM SPECIFIC COLORS ===== */
-/* ========================================================= */
-
+/* Platform colors */
 #github-icon {
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.6);
@@ -1954,68 +2200,56 @@ details summary::-webkit-details-marker {
   box-shadow: 0 15px 50px rgba(105, 201, 208, 0.6) !important;
 }
 
-/* ========================================================= */
-/* ===== LABEL COLORS PER PLATFORM ===== */
-/* ========================================================= */
-
-/* GitHub */
-.orbit-container .social-item:has(#github-icon:hover) .social-label {
+/* Label colors */
+.orbit-container .social-item:has(#github-icon) .social-label {
   background: linear-gradient(135deg, #24292e, #444d56) !important;
   color: #ffffff !important;
 }
-.orbit-container .social-item:has(#github-icon:hover) .social-label::before {
+.orbit-container .social-item:has(#github-icon) .social-label::before {
   border-bottom-color: #24292e !important;
 }
 
-/* LinkedIn */
-.orbit-container .social-item:has(#linkedin-icon:hover) .social-label {
+.orbit-container .social-item:has(#linkedin-icon) .social-label {
   background: #0A66C2 !important;
   color: #ffffff !important;
 }
-.orbit-container .social-item:has(#linkedin-icon:hover) .social-label::before {
+.orbit-container .social-item:has(#linkedin-icon) .social-label::before {
   border-right-color: #0A66C2 !important;
 }
 
-/* Spotify */
-.orbit-container .social-item:has(#spotify-icon:hover) .social-label {
+.orbit-container .social-item:has(#spotify-icon) .social-label {
   background: #1DB954 !important;
   color: #ffffff !important;
 }
-.orbit-container .social-item:has(#spotify-icon:hover) .social-label::before {
+.orbit-container .social-item:has(#spotify-icon) .social-label::before {
   border-left-color: #1DB954 !important;
 }
 
-/* Instagram */
-.orbit-container .social-item:has(#instagram-icon:hover) .social-label {
+.orbit-container .social-item:has(#instagram-icon) .social-label {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
   color: #ffffff !important;
 }
-.orbit-container .social-item:has(#instagram-icon:hover) .social-label::before {
+.orbit-container .social-item:has(#instagram-icon) .social-label::before {
   border-bottom-color: #f09433 !important;
 }
 
-/* YouTube */
-.orbit-container .social-item:has(#youtube-icon:hover) .social-label {
+.orbit-container .social-item:has(#youtube-icon) .social-label {
   background: #FF0000 !important;
   color: #ffffff !important;
 }
-.orbit-container .social-item:has(#youtube-icon:hover) .social-label::before {
+.orbit-container .social-item:has(#youtube-icon) .social-label::before {
   border-top-color: #FF0000 !important;
 }
 
-/* TikTok */
-.orbit-container .social-item:has(#tiktok-icon:hover) .social-label {
+.orbit-container .social-item:has(#tiktok-icon) .social-label {
   background: linear-gradient(135deg, #000000, #1a1a1a) !important;
   color: #69C9D0 !important;
 }
-.orbit-container .social-item:has(#tiktok-icon:hover) .social-label::before {
+.orbit-container .social-item:has(#tiktok-icon) .social-label::before {
   border-top-color: #000000 !important;
 }
 
-/* ========================================================= */
-/* ===== ANIMATIONS ===== */
-/* ========================================================= */
-
+/* Animations */
 @keyframes rotate-orbit {
   from {
     transform: translate(-50%, -50%) rotate(0deg);
@@ -2052,163 +2286,103 @@ details summary::-webkit-details-marker {
   }
 }
 
-/* ========================================================= */
-/* ===== RESPONSIVE - TABLET ===== */
-/* ========================================================= */
+/* Responsive tablet */
 @media (max-width: 1024px) {
-  .orbit-container {
-    width: 450px;
-    height: 450px;
-  }
+  #orbit-1 { width: 150px; height: 150px; }
+  #orbit-2 { width: 260px; height: 260px; }
+  #orbit-3 { width: 380px; height: 380px; }
+  .social-icon { width: 55px; height: 55px; }
+  .social-icon i { font-size: 24px; }
+}
 
-  #orbit-1 {
-    width: 150px;
-    height: 150px;
-  }
-
-  #orbit-2 {
-    width: 260px;
-    height: 260px;
-  }
-
-  #orbit-3 {
-    width: 380px;
-    height: 380px;
-  }
-
-  .social-icon {
-    width: 55px;
-    height: 55px;
-  }
-
-  .social-icon i {
-    font-size: 24px;
-  }
-
-  .orbit-center {
-    width: 80px;
-    height: 80px;
-    font-size: 12px;
-  }
-
-  .social-label {
-    font-size: 12px;
-    padding: 6px 12px;
-  }
-
-  #orbit-1 .social-item {
-    margin-left: -27.5px;
-  }
-
-  #orbit-2 .social-item:nth-child(1),
-  #orbit-2 .social-item:nth-child(2) {
-    margin-top: -27.5px;
-  }
-
-  #orbit-3 .social-item:nth-child(1) {
-    margin-left: -27.5px;
-  }
-
-  #orbit-3 .social-item:nth-child(2) {
-    bottom: -27.5px;
-    left: 20%;
-  }
-
-  #orbit-3 .social-item:nth-child(3) {
-    bottom: -27.5px;
-    right: 20%;
-  }
+/* Responsive mobile */
+@media (max-width: 767px) {
+  #orbit-1 { width: 100px; height: 100px; animation: rotate-orbit 25s linear infinite; }
+  #orbit-2 { width: 180px; height: 180px; animation: rotate-orbit 35s linear infinite; }
+  #orbit-3 { width: 260px; height: 260px; animation: rotate-orbit 45s linear infinite; }
+  .social-icon { width: 45px; height: 45px; }
+  .social-icon i { font-size: 20px; }
+  #orbit-1 .social-item { animation: counter-rotate-icon-orbit1 25s linear infinite; }
+  #orbit-2 .social-item { animation: counter-rotate-icon-orbit2 35s linear infinite; }
+  #orbit-3 .social-item { animation: counter-rotate-icon-orbit3 45s linear infinite; }
 }
 
 /* ========================================================= */
-/* ===== RESPONSIVE - MOBILE ===== */
+/* ===== RESPONSIVE ===== */
 /* ========================================================= */
-@media (max-width: 767px) {
-  .orbit-container {
-    width: 320px;
-    height: 320px;
-  }
 
-  #orbit-1 {
-    width: 100px;
-    height: 100px;
-    animation: rotate-orbit 25s linear infinite;
+@media (max-width: 768px) {
+  .contact-character {
+    width: 300px;
   }
-
-  #orbit-2 {
-    width: 180px;
-    height: 180px;
-    animation: rotate-orbit 35s linear infinite;
+  
+  .phone-image {
+    width: 280px;
   }
-
-  #orbit-3 {
-    width: 260px;
-    height: 260px;
-    animation: rotate-orbit 45s linear infinite;
+  
+  .press-me-btn {
+    font-size: 18px;
+    padding: 12px 24px;
   }
-
-  .social-icon {
-    width: 45px;
-    height: 45px;
+  
+  .scifi-loading-wrapper {
+    padding: 40px 50px;
   }
-
-  .social-icon i {
-    font-size: 20px;
+  
+  .scifi-top-cover {
+    width: 280px;
   }
-
-  .orbit-center {
-    width: 60px;
-    height: 60px;
-    font-size: 10px;
+  
+  .scifi-edges-1 {
+    width: 420px;
   }
-
-  #orbit-1 .social-item {
-    animation: counter-rotate-icon-orbit1 25s linear infinite;
-    margin-left: -22.5px;
+  
+  .scifi-title {
+    font-size: 36px;
   }
-
-  #orbit-2 .social-item {
-    animation: counter-rotate-icon-orbit2 35s linear infinite;
+  
+  .contact-stage-3 .orbit-container {
+    padding: 50px;
   }
+}
 
-  #orbit-2 .social-item:nth-child(1),
-  #orbit-2 .social-item:nth-child(2) {
-    margin-top: -22.5px;
+@media (max-width: 480px) {
+  .contact-initial-container {
+    flex-direction: column;
+    gap: 30px;
   }
-
-  #orbit-3 .social-item {
-    animation: counter-rotate-icon-orbit3 45s linear infinite;
+  
+  .contact-character {
+    width: 250px;
   }
-
-  #orbit-3 .social-item:nth-child(1) {
-    margin-left: -22.5px;
+  
+  .phone-image {
+    width: 240px;
   }
-
-  #orbit-3 .social-item:nth-child(2) {
-    bottom: -22.5px;
-    left: 15%;
+  
+  .press-me-btn {
+    font-size: 16px;
+    padding: 10px 20px;
   }
-
-  #orbit-3 .social-item:nth-child(3) {
-    bottom: -22.5px;
-    right: 15%;
+  
+  .scifi-loading-wrapper {
+    padding: 30px 40px;
   }
-
-  #contact {
-    padding: 40px 20px 100px;
+  
+  .scifi-top-cover {
+    width: 240px;
   }
-
-  #contact h2 {
-    font-size: 26px;
+  
+  .scifi-edges-1 {
+    width: 350px;
   }
-
-  #contact p {
-    font-size: 14px;
+  
+  .scifi-title {
+    font-size: 28px;
   }
-
-  .social-label {
-    font-size: 11px;
-    padding: 5px 10px;
+  
+  .contact-stage-3 .orbit-container {
+    padding: 40px;
   }
 }
 
@@ -2307,3 +2481,4 @@ body.speed-modal-open .speed-control-content,
 body.speed-modal-open .speed-control-content * {
   filter: none !important;
 }
+
