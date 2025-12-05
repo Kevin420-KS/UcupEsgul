@@ -1,7 +1,6 @@
 /* ========================================================= */
 /* ===== STARFIELD BACKGROUND (GALAXY PARTICLES) ===== */
 /* ========================================================= */
-/* TAMBAHKAN BAGIAN INI DI PALING ATAS FILE style.css KAMU */
 /* Partikel bintang yang bergerak - di belakang semua elemen */
 
 .star-field {
@@ -12,12 +11,12 @@
   height: 100%;
   perspective: 600px;
   -webkit-perspective: 600px;
-  z-index: 0; /* <<=== DI ATAS BG.png TAPI DI BAWAH SEMUA KONTEN */
-  pointer-events: none; /* <<=== TIDAK MENGHALANGI KLIK */
+  z-index: 0; /* Di atas BG.png tapi di bawah semua konten */
+  pointer-events: none; /* Tidak menghalangi klik */
 }
 
+/* Ukuran dan warna bintang */
 .star-field .layer {
-  /* <<=== WARNA BINTANG: Ubah semua #cccccc, #d4d4d4, dll untuk ganti warna bintang */
   box-shadow: -411px -476px #cccccc, 777px -407px #d4d4d4, -387px -477px #fcfcfc, -91px -235px #d4d4d4, 491px -460px #f7f7f7, 892px -128px #f7f7f7, 758px -277px #ededed, 596px 378px #cccccc, 647px 423px whitesmoke, 183px 389px #c7c7c7,
     524px -237px #f0f0f0, 679px -535px #e3e3e3, 158px 399px #ededed, 157px 249px #ededed, 81px -450px #ebebeb, 719px -360px #c2c2c2, -499px 473px #e8e8e8, -158px -349px #d4d4d4, 870px -134px #cfcfcf, 446px 404px #c2c2c2,
     440px 490px #d4d4d4, 414px 507px #e6e6e6, -12px 246px #fcfcfc, -384px 369px #e3e3e3, 641px -413px #fcfcfc, 822px 516px #dbdbdb, 449px 132px #c2c2c2, 727px 146px #f7f7f7, -315px -488px #e6e6e6, 952px -70px #e3e3e3,
@@ -32,13 +31,12 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 4px; /* <<=== UKURAN BINTANG (tinggi) */
-  width: 4px; /* <<=== UKURAN BINTANG (lebar) */
+  height: 4px; /* Ukuran tinggi bintang */
+  width: 4px; /* Ukuran lebar bintang */
   border-radius: 2px;
 }
 
-/* <<=== ANIMASI KECEPATAN PARTIKEL - DIKONTROL OLEH SLIDER */
-/* Variable --star-speed akan diubah oleh JavaScript dari slider */
+/* Animasi kecepatan partikel - dikontrol oleh slider */
 .star-field .layer:nth-child(1) {
   animation: sf-fly-by-1 var(--star-speed, 5s) linear infinite;
 }
@@ -52,7 +50,7 @@
 @keyframes sf-fly-by-1 {
   from {
     transform: translateZ(-600px);
-    opacity: 0.5; /* <<=== OPACITY BINTANG LAYER 1 (0.1 = sangat transparan, 1.0 = solid) */
+    opacity: 0.5; /* Opacity bintang layer 1 */
   }
   to {
     transform: translateZ(0);
@@ -62,7 +60,7 @@
 @keyframes sf-fly-by-2 {
   from {
     transform: translateZ(-1200px);
-    opacity: 0.5; /* <<=== OPACITY BINTANG LAYER 2 */
+    opacity: 0.5; /* Opacity bintang layer 2 */
   }
   to {
     transform: translateZ(-600px);
@@ -72,7 +70,7 @@
 @keyframes sf-fly-by-3 {
   from {
     transform: translateZ(-1800px);
-    opacity: 0.5; /* <<=== OPACITY BINTANG LAYER 3 */
+    opacity: 0.5; /* Opacity bintang layer 3 */
   }
   to {
     transform: translateZ(-1200px);
@@ -95,10 +93,9 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
-  background: rgba(0, 0, 0, 0); /* ✅ TRANSPARAN */
-  backdrop-filter: none; /* ✅ TIDAK ADA BLUR */
+  background: rgba(0, 0, 0, 0); /* Transparan */
+  backdrop-filter: none; /* Tidak ada blur */
 }
-
 
 .speed-control-modal.show {
   opacity: 1;
@@ -106,16 +103,15 @@
 }
 
 .speed-control-content {
-  /* ===== WARNA BACKGROUND MODAL SPEED CONTROL ===== */
   background: linear-gradient(
     135deg,
-    rgba(10, 25, 60, 0.95),   /* <<=== Warna awal: biru gelap */
-    rgba(20, 40, 90, 0.95)    /* <<=== Warna akhir: biru tua */
+    rgba(10, 25, 60, 0.95),   /* Warna awal: biru gelap */
+    rgba(20, 40, 90, 0.95)    /* Warna akhir: biru tua */
   );
-  border: 2px solid rgba(100, 180, 255, 0.3); /* <<=== WARNA BORDER MODAL */
-  border-radius: 18px; /* <<=== KELENGKUNGAN SUDUT MODAL */
-  padding: 40px; /* <<=== PADDING MODAL */
-  width: min(500px, 90%); /* <<=== LEBAR MODAL */
+  border: 2px solid rgba(100, 180, 255, 0.3); /* Warna border modal */
+  border-radius: 18px; /* Kelengkungan sudut modal */
+  padding: 40px; /* Padding modal */
+  width: min(500px, 90%); /* Lebar modal */
   text-align: center;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(25px);
@@ -123,8 +119,8 @@
 }
 
 .speed-control-content h2 {
-  color: #ffffff; /* <<=== WARNA JUDUL MODAL */
-  font-size: 28px; /* <<=== UKURAN FONT JUDUL */
+  color: #ffffff; /* Warna judul modal */
+  font-size: 28px; /* Ukuran font judul */
   margin-bottom: 30px;
   text-shadow: 0 2px 10px rgba(0, 150, 255, 0.3);
 }
@@ -135,14 +131,14 @@
   top: 8px;
   background: transparent;
   border: none;
-  color: #ffd700; /* <<=== WARNA TOMBOL CLOSE (X) */
-  font-size: 28px; /* <<=== UKURAN TOMBOL CLOSE */
+  color: #ffd700; /* Warna tombol close (X) */
+  font-size: 28px; /* Ukuran tombol close */
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .speed-control-content .close-btn:hover {
-  color: #fff; /* <<=== WARNA TOMBOL CLOSE SAAT HOVER */
+  color: #fff; /* Warna tombol close saat hover */
   transform: scale(1.1) rotate(90deg);
 }
 
@@ -163,18 +159,17 @@
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.1em;
-  color: #5dd9ff; /* <<=== WARNA TEXT "PARTY" & "CHILL" */
-  font-size: 14px; /* <<=== UKURAN FONT LABEL */
+  color: #5dd9ff; /* Warna text "PARTY" & "CHILL" */
+  font-size: 14px; /* Ukuran font label */
 }
 
-/* ===== CUSTOM RANGE SLIDER ===== */
+/* Custom range slider */
 input[type="range"].star-speed-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 8px; /* <<=== TINGGI SLIDER TRACK */
-  /* ===== WARNA SLIDER TRACK ===== */
-  background: linear-gradient(90deg, rgba(60, 100, 255, 1), rgba(0, 180, 255, 1));
+  height: 8px; /* Tinggi slider track */
+  background: linear-gradient(90deg, rgba(60, 100, 255, 1), rgba(0, 180, 255, 1)); /* Warna slider track */
   border-radius: 12px;
   outline: none;
   cursor: pointer;
@@ -183,10 +178,10 @@ input[type="range"].star-speed-slider {
 input[type="range"].star-speed-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 24px; /* <<=== LEBAR THUMB SLIDER */
-  height: 24px; /* <<=== TINGGI THUMB SLIDER */
-  background: #ffffff; /* <<=== WARNA THUMB SLIDER */
-  border: 3px solid rgba(0, 180, 255, 1); /* <<=== BORDER THUMB */
+  width: 24px; /* Lebar thumb slider */
+  height: 24px; /* Tinggi thumb slider */
+  background: #ffffff; /* Warna thumb slider */
+  border: 3px solid rgba(0, 180, 255, 1); /* Border thumb */
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0, 180, 255, 0.5);
@@ -194,7 +189,7 @@ input[type="range"].star-speed-slider::-webkit-slider-thumb {
 }
 
 input[type="range"].star-speed-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2); /* <<=== PEMBESARAN THUMB SAAT HOVER */
+  transform: scale(1.2); /* Pembesaran thumb saat hover */
   box-shadow: 0 0 20px rgba(0, 180, 255, 0.8);
 }
 
@@ -215,11 +210,11 @@ input[type="range"].star-speed-slider::-moz-range-thumb:hover {
 }
 
 .speed-value {
-  color: #ffffff; /* <<=== WARNA TEXT "Current Speed" */
-  font-size: 16px; /* <<=== UKURAN FONT */
+  color: #ffffff; /* Warna text "Current Speed" */
+  font-size: 16px; /* Ukuran font */
   margin-top: 15px;
   padding: 10px;
-  background: rgba(0, 0, 0, 0.3); /* <<=== BACKGROUND DISPLAY SPEED */
+  background: rgba(0, 0, 0, 0.3); /* Background display speed */
   border-radius: 8px;
 }
 
@@ -230,7 +225,7 @@ input[type="range"].star-speed-slider::-moz-range-thumb:hover {
 
 header {
   position: relative;
-  z-index: 100; /* <<=== NAVBAR DI ATAS PARTIKEL */
+  z-index: 100; /* Navbar di atas partikel */
 }
 
 .home-section,
@@ -238,14 +233,13 @@ header {
 #contact,
 footer {
   position: relative;
-  z-index: 10; /* <<=== KONTEN DI ATAS PARTIKEL */
+  z-index: 10; /* Konten di atas partikel */
 }
 
 /* ========================================================= */
-/* SETELAH BAGIAN INI, LANJUTKAN DENGAN CSS ASLI KAMU */
+/* ===== RESET & BACKGROUND ===== */
 /* ========================================================= */
 
-/* ===== RESET & BACKGROUND ===== */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -385,10 +379,6 @@ header {
   box-shadow: -85px 0 18px 1px #b3e1ff, 83px 0 12px 1px transparent;
 }
 
-/* ========================================================= */
-/* ===== FIX: SPEED CONTROL BUTTON VISUAL FEEDBACK ===== */
-/* ========================================================= */
-
 /* Speed Control button - hover effect yang lebih jelas */
 .button-group #speedControlBtn:hover {
   color: #ddd !important;
@@ -404,8 +394,8 @@ header {
 
 /* Speed Control button - tambah icon */
 .button-group #speedControlBtn::before {
-  content: "" !important; /* ✅ Hapus konten (tidak ada icon ⚡) */
-  opacity: 0 !important; /* ✅ Glow tidak terlihat saat idle */
+  content: "" !important; /* Hapus konten (tidak ada icon) */
+  opacity: 0 !important; /* Glow tidak terlihat saat idle */
   width: 40px;
   height: 40px;
   transition: all 0.1s ease;
@@ -425,7 +415,7 @@ header {
   box-shadow: -75px 0 0px 0px rgba(179, 225, 255, 0.2), 74px 0 0px 0px rgba(179, 225, 255, 0.2);
 }
 
-/* ✅ PERBAIKAN UTAMA: Active state untuk Speed Control saat modal terbuka */
+/* Active state untuk Speed Control saat modal terbuka */
 .button-group #speedControlBtn.active-temp {
   background-image: linear-gradient(to top, #151515 0%, #1d1d1d 100%) !important;
   box-shadow: inset 0 16px 14px -21px transparent, 0 0px 13px 0 rgba(0, 0, 0, 0.3), inset 0 0 7px 2px rgba(0, 0, 0, 0.4) !important;
@@ -588,6 +578,7 @@ header {
 /* ========================================================= */
 /* ===== HOME SECTION WITH SLIDE ANIMATION ===== */
 /* ========================================================= */
+
 .home-section {
   display: flex;
   justify-content: center;
@@ -602,7 +593,7 @@ header {
   scroll-margin-top: 150px;
 }
 
-/* ===== INFO SLIDE (di KIRI) - muncul dari bawah ===== */
+/* Info Slide (di KIRI) - muncul dari bawah */
 .intro-slide {
   flex: 1 1 480px;
   display: flex;
@@ -646,7 +637,7 @@ header {
 /* ========================================================= */
 /* ===== CHARACTER SLIDE (di KANAN) - UCUP.PNG ===== */
 /* ========================================================= */
-/* BAGIAN INI MENGATUR UKURAN DAN POSISI GAMBAR UCUP.PNG DI HOME SECTION */
+/* Mengatur ukuran dan posisi gambar UCUP.PNG di Home Section */
 
 .character-slide {
   flex: 1 1 300px;
@@ -668,17 +659,16 @@ header {
 
 /* State kedua: karakter geser ke KIRI (mendekat ke info) */
 .home-section.show-animation.slide-active .character-slide {
-  transform: translateX(-50px); /* <<=== GESER HORIZONTAL (+ = kanan, - = kiri) */
+  transform: translateX(-50px); /* Geser horizontal (- = kiri) */
 }
 
 .character-slide .character img {
-  /* ===== UKURAN GAMBAR UCUP.PNG ===== */
-  width: 450px; /* <<=== UBAH UKURAN KARAKTER UCUP.PNG DI SINI */
+  width: 450px; /* Ukuran karakter UCUP.PNG */
   max-width: 150%;
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-  animation: float 5s ease-in-out infinite;
+  animation: float 5s ease-in-out infinite; /* Animasi mengambang */
 }
 
 /* ========================================================= */
@@ -697,7 +687,7 @@ header {
 /* ========================================================= */
 /* ===== ORB + CHARACTER (UCUP1.PNG) ===== */
 /* ========================================================= */
-/* BAGIAN INI MENGATUR UKURAN DAN POSISI GAMBAR UCUP1.PNG + ORB */
+/* Mengatur ukuran dan posisi gambar UCUP1.PNG + Orb */
 
 .about-orb-section {
   position: relative;
@@ -717,30 +707,24 @@ header {
   z-index: 10;
 }
 
-/* ===== UKURAN DAN POSISI GAMBAR UCUP1.PNG ===== */
+/* Ukuran dan posisi gambar UCUP1.PNG */
 .about-orb-character {
-  /* ===== UKURAN KARAKTER UCUP1.PNG ===== */
-  width: 700px; /* <<=== UBAH UKURAN KARAKTER UCUP1.PNG DI SINI */
+  width: 700px; /* Ukuran karakter UCUP1.PNG */
   max-width: 100%; 
   height: auto;
   z-index: 10;
-  animation: float 5s ease-in-out infinite;
-  transform: translateY(-25px); /* <<=== POSISI VERTIKAL KARAKTER (+ = bawah, - = atas) */
+  animation: float 5s ease-in-out infinite; /* Animasi mengambang */
+  transform: translateY(-25px); /* Posisi vertikal karakter (- = atas) */
   transition: transform 0.35s ease, filter 0.35s ease;
 }
 
-/* ===== UKURAN DAN POSISI ORB (BULATAN BIRU) ===== */
+/* Ukuran dan posisi Orb (bulatan biru) */
 .about-orb {
   position: absolute;
-  
-  /* ===== POSISI ORB ===== */
-  top: 30%; /* <<=== POSISI VERTIKAL ORB (0% = paling atas, 100% = paling bawah) */
-  left: 80%; /* <<=== POSISI HORIZONTAL ORB (0% = paling kiri, 100% = paling kanan) */
-  
-  /* ===== UKURAN ORB ===== */
-  width: 160px; /* <<=== UKURAN LEBAR ORB */
-  height: 160px; /* <<=== UKURAN TINGGI ORB */
-  
+  top: 30%; /* Posisi vertikal Orb (0% = paling atas, 100% = paling bawah) */
+  left: 80%; /* Posisi horizontal Orb (0% = paling kiri, 100% = paling kanan) */
+  width: 160px; /* Ukuran lebar Orb */
+  height: 160px; /* Ukuran tinggi Orb */
   border-radius: 50%;
   background: radial-gradient(circle at 40% 40%, rgba(0,200,255,0.95) 0%, rgba(80,40,200,0.6) 65%, rgba(0,20,40,0.4) 100%);
   display: flex;
@@ -751,18 +735,16 @@ header {
   z-index: 30;
   transform: translate(-50%, -50%);
   transition: transform 0.25s ease, filter 0.25s ease;
-  
-  /* ===== EFEK FLOATING (MENGAMBANG) ===== */
-  animation: orbFloat 5s ease-in-out infinite; /* <<=== ANIMASI FLOATING UNTUK ORB */
+  animation: orbFloat 5s ease-in-out infinite; /* Animasi floating untuk Orb */
 }
 
 .about-orb * {
   pointer-events: none;
 }
 
-/* ===== UKURAN LOGO DI DALAM ORB (RB.png, ML.png, GH.png) ===== */
+/* Ukuran logo di dalam Orb (RB.png, ML.png, GH.png) */
 .orb-logo {
-  width: 72%; /* <<=== UKURAN LOGO DI DALAM ORB (% dari ukuran orb) */
+  width: 72%; /* Ukuran logo di dalam Orb (% dari ukuran orb) */
   height: 72%;
   object-fit: contain;
   transition: transform 0.35s ease;
@@ -770,8 +752,7 @@ header {
 
 #about.showing-about-modal .about-orb {
   filter: brightness(1.2) saturate(1.1);
-  /* Saat modal dibuka, orb tetap float tapi dengan scale lebih besar */
-  animation: orbFloatActive 5s ease-in-out infinite; /* <<=== ANIMASI SAAT MODAL AKTIF */
+  animation: orbFloatActive 5s ease-in-out infinite; /* Animasi saat modal aktif */
 }
 
 /* Animasi floating ORB saat modal aktif (dengan scale) */
@@ -799,13 +780,12 @@ header {
 }
 
 /* Animasi floating khusus untuk ORB (mengikuti karakter UCUP1.png) */
-/* ORB akan bergerak naik-turun seperti karakter */
 @keyframes orbFloat {
   0% { 
     transform: translate(-50%, -50%) translateY(0px); 
   }
   50% { 
-    transform: translate(-50%, -50%) translateY(-14px); /* <<=== JARAK FLOATING (sama dengan karakter) */
+    transform: translate(-50%, -50%) translateY(-14px); /* Jarak floating (sama dengan karakter) */
   }
   100% { 
     transform: translate(-50%, -50%) translateY(0px); 
@@ -815,7 +795,7 @@ header {
 /* ========================================================= */
 /* ===== MODAL (GLASSMORPHISM BOX "EXPLORE") - COLORED CARDS ===== */
 /* ========================================================= */
-/* BAGIAN INI MENGATUR UKURAN MODAL/KOTAK YANG MUNCUL SAAT ORB DIKLIK */
+/* Mengatur ukuran modal/kotak yang muncul saat Orb diklik */
 
 .about-modal {
   position: fixed;
@@ -834,46 +814,29 @@ header {
   pointer-events: auto;
 }
 
-/* ========================================================= */
-/* ===== UKURAN KOTAK GLASSMORPHISM (MODAL) ===== */
-/* ========================================================= */
+/* Ukuran kotak glassmorphism (modal) */
 .about-modal-inner {
-  /* ===== UKURAN MODAL ===== */
-  width: min(920px, 95%); /* <<=== UBAH LEBAR MODAL DI SINI (max 920px) */
-  max-width: 1000px; /* <<=== BATAS MAKSIMAL LEBAR MODAL */
-  
-  /* ===== WARNA BACKGROUND MODAL ===== */
-  /* UBAH rgba() untuk mengubah warna background modal */
+  width: min(920px, 95%); /* Lebar modal (max 920px) */
+  max-width: 1000px; /* Batas maksimal lebar modal */
   background: linear-gradient(
     135deg, 
-    rgba(10, 25, 60, 0.95) 0%,      /* <<=== Warna awal: biru gelap (opacity 0.95) */
-    rgba(15, 35, 80, 0.92) 50%,     /* <<=== Warna tengah: biru sedang (opacity 0.92) */
-    rgba(20, 40, 90, 0.95) 100%     /* <<=== Warna akhir: biru tua (opacity 0.95) */
+    rgba(10, 25, 60, 0.95) 0%,      /* Warna awal: biru gelap (opacity 0.95) */
+    rgba(15, 35, 80, 0.92) 50%,     /* Warna tengah: biru sedang (opacity 0.92) */
+    rgba(20, 40, 90, 0.95) 100%     /* Warna akhir: biru tua (opacity 0.95) */
   );
-  
-  border-radius: 18px; /* <<=== KELENGKUNGAN SUDUT MODAL */
-  
-  /* ===== PADDING DALAM MODAL ===== */
-  padding: 20px; /* <<=== JARAK KONTEN DARI TEPI MODAL */
-  
+  border-radius: 18px; /* Kelengkungan sudut modal */
+  padding: 20px; /* Jarak konten dari tepi modal */
   position: relative;
-  
-  /* ===== SHADOW & GLOW EFFECT MODAL ===== */
   box-shadow: 
     0 30px 80px rgba(0, 0, 0, 0.8),           /* Shadow hitam */
-    0 0 120px rgba(0, 150, 255, 0.15),        /* <<=== Glow biru (ubah warna di sini) */
+    0 0 120px rgba(0, 150, 255, 0.15),        /* Glow biru */
     inset 0 1px 0 rgba(255, 255, 255, 0.1);   /* Highlight atas */
-  
-  /* ===== WARNA BORDER MODAL ===== */
-  border: 2px solid rgba(100, 180, 255, 0.3); /* <<=== UBAH WARNA & KETEBALAN BORDER */
-  
-  /* ===== BLUR EFFECT ===== */
-  backdrop-filter: blur(25px) saturate(1.5); /* <<=== UBAH ANGKA blur() UNTUK INTENSITAS BLUR */
-  
+  border: 2px solid rgba(100, 180, 255, 0.3); /* Warna & ketebalan border */
+  backdrop-filter: blur(25px) saturate(1.5); /* Intensitas blur */
   overflow: hidden;
 }
 
-/* Grid overlay pattern (opsional, bisa dihapus jika tidak diinginkan) */
+/* Grid overlay pattern */
 .about-modal-inner::before {
   content: "";
   position: absolute;
@@ -881,8 +844,8 @@ header {
   background-image:
     linear-gradient(0deg, rgba(255,255,255,0.015) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-  background-size: 24px 24px; /* <<=== UKURAN GRID PATTERN */
-  opacity: 0.1; /* <<=== OPACITY GRID */
+  background-size: 24px 24px; /* Ukuran grid pattern */
+  opacity: 0.1; /* Opacity grid */
   pointer-events: none;
   mix-blend-mode: overlay;
 }
@@ -892,108 +855,97 @@ header {
   content: "";
   position: absolute;
   inset: -2px;
-  /* ===== WARNA GLOW LUAR MODAL ===== */
   background: linear-gradient(
     90deg, 
-    rgba(0, 150, 255, 0.15),   /* <<=== Warna glow kiri: biru terang */
-    rgba(100, 80, 255, 0.12)   /* <<=== Warna glow kanan: ungu */
+    rgba(0, 150, 255, 0.15),   /* Warna glow kiri: biru terang */
+    rgba(100, 80, 255, 0.12)   /* Warna glow kanan: ungu */
   );
-  filter: blur(15px); /* <<=== INTENSITAS BLUR GLOW */
-  opacity: 0.6; /* <<=== OPACITY GLOW */
+  filter: blur(15px); /* Intensitas blur glow */
+  opacity: 0.6; /* Opacity glow */
   pointer-events: none;
   z-index: -1;
 }
 
-/* ===== TOMBOL CLOSE (X) ===== */
+/* Tombol Close (X) */
 .modal-close {
   position: absolute;
   right: 14px;
   top: 8px;
   background: transparent;
   border: none;
-  color: #ffd700; /* <<=== WARNA TOMBOL X */
-  font-size: 28px; /* <<=== UKURAN TOMBOL X */
+  color: #ffd700; /* Warna tombol X */
+  font-size: 28px; /* Ukuran tombol X */
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
 }
 
 .modal-close:hover {
-  color: #fff; /* <<=== WARNA TOMBOL X SAAT HOVER */
+  color: #fff; /* Warna tombol X saat hover */
   transform: scale(1.1) rotate(90deg);
 }
 
-/* ===== JUDUL "EXPLORE" ===== */
+/* Judul "EXPLORE" */
 .modal-title {
   text-align: center;
   margin: 6px 0 14px 0;
-  color: #ffffff; /* <<=== WARNA TEXT JUDUL */
-  font-size: 22px; /* <<=== UKURAN FONT JUDUL "EXPLORE" */
+  color: #ffffff; /* Warna text judul */
+  font-size: 22px; /* Ukuran font judul "EXPLORE" */
   letter-spacing: 0.6px;
-  text-shadow: 0 2px 10px rgba(0, 150, 255, 0.3); /* <<=== SHADOW TEXT JUDUL */
+  text-shadow: 0 2px 10px rgba(0, 150, 255, 0.3); /* Shadow text judul */
 }
 
 /* ========================================================= */
 /* ===== GRID UNTUK 3 CARD (ROBLOX, ML, GITHUB) ===== */
 /* ========================================================= */
+
 .modal-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* <<=== 3 KOLOM (ubah jadi repeat(2, 1fr) untuk 2 kolom) */
-  gap: 14px; /* <<=== JARAK ANTAR CARD */
+  grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+  gap: 14px; /* Jarak antar card */
   padding: 6px;
 }
 
-/* ========================================================= */
-/* ===== BASE STYLE UNTUK SEMUA CARD ===== */
-/* ========================================================= */
+/* Base style untuk semua card */
 .modal-grid details {
-  padding: 14px; /* <<=== PADDING DALAM CARD */
-  border-radius: 12px; /* <<=== KELENGKUNGAN SUDUT CARD */
-  min-height: 160px; /* <<=== TINGGI MINIMAL CARD */
+  padding: 14px; /* Padding dalam card */
+  border-radius: 12px; /* Kelengkungan sudut card */
+  min-height: 160px; /* Tinggi minimal card */
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: #f5f5f5; /* <<=== WARNA TEXT DEFAULT */
-  
-  /* Shadow dasar untuk semua card */
+  color: #f5f5f5; /* Warna text default */
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  
-  backdrop-filter: blur(12px) saturate(1.3); /* <<=== BLUR EFFECT CARD */
+  backdrop-filter: blur(12px) saturate(1.3); /* Blur effect card */
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* ========================================================= */
-/* ===== 1️⃣ ROBLOX CARD - ABU-ABU TUA (DARK GRAY) ===== */
-/* ========================================================= */
+/* 1️⃣ ROBLOX CARD - ABU-ABU TUA (DARK GRAY) */
 .modal-grid details[data-game="roblox"] {
-  /* ===== WARNA BACKGROUND ROBLOX CARD ===== */
-  /* UBAH rgba() untuk mengubah warna abu-abu */
   background: linear-gradient(
     135deg,
-    rgba(40, 42, 48, 0.75) 0%,    /* <<=== Warna awal: abu-abu gelap (R:40, G:42, B:48, opacity:0.75) */
-    rgba(52, 54, 60, 0.7) 100%    /* <<=== Warna akhir: abu-abu lebih terang */
+    rgba(40, 42, 48, 0.75) 0%,    /* Warna awal: abu-abu gelap */
+    rgba(52, 54, 60, 0.7) 100%    /* Warna akhir: abu-abu lebih terang */
   );
-  
-  /* ===== WARNA BORDER ROBLOX CARD ===== */
-  border: 1.5px solid rgba(150, 150, 150, 0.35); /* <<=== Ketebalan & warna border abu-abu */
+  border: 1.5px solid rgba(150, 150, 150, 0.35); /* Ketebalan & warna border abu-abu */
 }
 
 /* Hover effect untuk Roblox */
 .modal-grid details[data-game="roblox"]:hover {
   background: linear-gradient(
     135deg,
-    rgba(45, 47, 53, 0.85) 0%,    /* <<=== Background saat hover: lebih terang */
+    rgba(45, 47, 53, 0.85) 0%,    /* Background saat hover: lebih terang */
     rgba(57, 59, 65, 0.8) 100%
   );
-  border-color: rgba(180, 180, 180, 0.5); /* <<=== Border lebih terang saat hover */
+  border-color: rgba(180, 180, 180, 0.5); /* Border lebih terang saat hover */
   box-shadow: 
     0 12px 35px rgba(0, 0, 0, 0.7),
-    0 0 25px rgba(150, 150, 150, 0.25); /* <<=== Glow abu-abu saat hover */
-  transform: translateY(-2px); /* <<=== Naik sedikit saat hover */
+    0 0 25px rgba(150, 150, 150, 0.25); /* Glow abu-abu saat hover */
+  transform: translateY(-2px); /* Naik sedikit saat hover */
 }
 
 /* Glow effect abu-abu untuk Roblox */
@@ -1003,47 +955,41 @@ header {
   inset: -2px;
   background: radial-gradient(
     circle at center,
-    rgba(150, 150, 150, 0.15),  /* <<=== Warna glow: abu-abu */
+    rgba(150, 150, 150, 0.15),  /* Warna glow: abu-abu */
     transparent 70%
   );
-  filter: blur(10px); /* <<=== Intensitas blur glow */
+  filter: blur(10px); /* Intensitas blur glow */
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
 }
 
 .modal-grid details[data-game="roblox"]:hover::after {
-  opacity: 1; /* <<=== Glow muncul saat hover */
+  opacity: 1; /* Glow muncul saat hover */
 }
 
-/* ========================================================= */
-/* ===== 2️⃣ MOBILE LEGENDS CARD - HIJAU TUA (DARK GREEN) ===== */
-/* ========================================================= */
+/* 2️⃣ MOBILE LEGENDS CARD - HIJAU TUA (DARK GREEN) */
 .modal-grid details[data-game="ml"] {
-  /* ===== WARNA BACKGROUND MOBILE LEGENDS CARD ===== */
-  /* UBAH rgba() untuk mengubah warna hijau */
   background: linear-gradient(
     135deg,
-    rgba(15, 60, 40, 0.75) 0%,    /* <<=== Warna awal: hijau gelap (R:15, G:60, B:40, opacity:0.75) */
-    rgba(20, 75, 50, 0.7) 100%    /* <<=== Warna akhir: hijau lebih terang */
+    rgba(15, 60, 40, 0.75) 0%,    /* Warna awal: hijau gelap */
+    rgba(20, 75, 50, 0.7) 100%    /* Warna akhir: hijau lebih terang */
   );
-  
-  /* ===== WARNA BORDER MOBILE LEGENDS CARD ===== */
-  border: 1.5px solid rgba(80, 200, 120, 0.35); /* <<=== Ketebalan & warna border hijau neon */
+  border: 1.5px solid rgba(80, 200, 120, 0.35); /* Ketebalan & warna border hijau neon */
 }
 
 /* Hover effect untuk Mobile Legends */
 .modal-grid details[data-game="ml"]:hover {
   background: linear-gradient(
     135deg,
-    rgba(20, 65, 45, 0.85) 0%,    /* <<=== Background saat hover: lebih terang */
+    rgba(20, 65, 45, 0.85) 0%,    /* Background saat hover: lebih terang */
     rgba(25, 80, 55, 0.8) 100%
   );
-  border-color: rgba(100, 220, 140, 0.5); /* <<=== Border lebih terang saat hover */
+  border-color: rgba(100, 220, 140, 0.5); /* Border lebih terang saat hover */
   box-shadow: 
     0 12px 35px rgba(0, 0, 0, 0.7),
-    0 0 25px rgba(80, 200, 120, 0.3); /* <<=== Glow hijau saat hover */
-  transform: translateY(-2px); /* <<=== Naik sedikit saat hover */
+    0 0 25px rgba(80, 200, 120, 0.3); /* Glow hijau saat hover */
+  transform: translateY(-2px); /* Naik sedikit saat hover */
 }
 
 /* Glow effect hijau untuk Mobile Legends */
@@ -1053,61 +999,53 @@ header {
   inset: -2px;
   background: radial-gradient(
     circle at center,
-    rgba(80, 200, 120, 0.2),  /* <<=== Warna glow: hijau neon */
+    rgba(80, 200, 120, 0.2),  /* Warna glow: hijau neon */
     transparent 70%
   );
-  filter: blur(10px); /* <<=== Intensitas blur glow */
+  filter: blur(10px); /* Intensitas blur glow */
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
 }
 
 .modal-grid details[data-game="ml"]:hover::after {
-  opacity: 1; /* <<=== Glow muncul saat hover */
+  opacity: 1; /* Glow muncul saat hover */
 }
 
-/* ========================================================= */
-/* ===== 3️⃣ GITHUB CARD - ABU-ABU MUDA/PUTIH (LIGHT GRAY/WHITE) ===== */
-/* ========================================================= */
+/* 3️⃣ GITHUB CARD - ABU-ABU MUDA/PUTIH (LIGHT GRAY/WHITE) */
 .modal-grid details[data-game="github"] {
-  /* ===== WARNA BACKGROUND GITHUB CARD ===== */
-  /* UBAH rgba() untuk mengubah warna abu-abu muda/putih */
   background: linear-gradient(
     135deg,
-    rgba(200, 205, 210, 0.35) 0%,   /* <<=== Warna awal: abu-abu muda (R:200, G:205, B:210, opacity:0.35) */
-    rgba(220, 225, 230, 0.3) 100%   /* <<=== Warna akhir: lebih terang mendekati putih */
+    rgba(200, 205, 210, 0.35) 0%,   /* Warna awal: abu-abu muda */
+    rgba(220, 225, 230, 0.3) 100%   /* Warna akhir: lebih terang mendekati putih */
   );
-  
-  /* ===== WARNA BORDER GITHUB CARD ===== */
-  border: 1.5px solid rgba(240, 245, 250, 0.4); /* <<=== Ketebalan & warna border putih kebiruan */
-  
-  /* ===== WARNA TEXT GITHUB (KHUSUS KARENA BACKGROUND TERANG) ===== */
-  color: #1a1a1a; /* <<=== Text color gelap untuk kontras dengan background terang */
+  border: 1.5px solid rgba(240, 245, 250, 0.4); /* Ketebalan & warna border putih kebiruan */
+  color: #1a1a1a; /* Text color gelap untuk kontras dengan background terang */
 }
 
 /* Title text untuk GitHub (biar tetap readable) */
 .modal-grid details[data-game="github"] .game-title {
-  color: #000000 !important; /* <<=== UBAH JADI HITAM */
+  color: #000000 !important; /* Ubah jadi hitam */
   text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
 /* Paragraph text untuk GitHub */
 .modal-grid details[data-game="github"] p {
-  color: #2d2d2d !important; /* <<=== Warna paragraph: gelap untuk kontras */
+  color: #2d2d2d !important; /* Warna paragraph: gelap untuk kontras */
 }
 
 /* Hover effect untuk GitHub */
 .modal-grid details[data-game="github"]:hover {
   background: linear-gradient(
     135deg,
-    rgba(210, 215, 220, 0.45) 0%,   /* <<=== Background saat hover: lebih solid */
+    rgba(210, 215, 220, 0.45) 0%,   /* Background saat hover: lebih solid */
     rgba(230, 235, 240, 0.4) 100%
   );
-  border-color: rgba(250, 255, 255, 0.6); /* <<=== Border lebih terang saat hover */
+  border-color: rgba(250, 255, 255, 0.6); /* Border lebih terang saat hover */
   box-shadow: 
     0 12px 35px rgba(0, 0, 0, 0.5),
-    0 0 30px rgba(240, 245, 250, 0.4); /* <<=== Glow putih saat hover */
-  transform: translateY(-2px); /* <<=== Naik sedikit saat hover */
+    0 0 30px rgba(240, 245, 250, 0.4); /* Glow putih saat hover */
+  transform: translateY(-2px); /* Naik sedikit saat hover */
 }
 
 /* Glow effect putih untuk GitHub */
@@ -1117,123 +1055,113 @@ header {
   inset: -2px;
   background: radial-gradient(
     circle at center,
-    rgba(255, 255, 255, 0.3),  /* <<=== Warna glow: putih */
+    rgba(255, 255, 255, 0.3),  /* Warna glow: putih */
     transparent 70%
   );
-  filter: blur(12px); /* <<=== Intensitas blur glow */
+  filter: blur(12px); /* Intensitas blur glow */
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: -1;
 }
 
 .modal-grid details[data-game="github"]:hover::after {
-  opacity: 1; /* <<=== Glow muncul saat hover */
+  opacity: 1; /* Glow muncul saat hover */
 }
 
-/* ========================================================= */
-/* ===== STYLING UNTUK SUMMARY & CONTENT ===== */
-/* ========================================================= */
-
+/* Styling untuk Summary & Content */
 .modal-grid summary {
   cursor: pointer;
   font-weight: 700;
-  font-size: 16px; /* <<=== UKURAN FONT SUMMARY */
+  font-size: 16px; /* Ukuran font summary */
   list-style: none;
   user-select: none;
 }
 
-/* ===== WARNA TEXT SUMMARY UNTUK SETIAP CARD ===== */
+/* Warna text summary untuk setiap card */
 .modal-grid details[data-game="roblox"] summary {
-  color: #d0d0d0; /* <<=== Warna text summary Roblox: abu-abu terang */
+  color: #d0d0d0; /* Warna text summary Roblox: abu-abu terang */
 }
 
 .modal-grid details[data-game="ml"] summary {
-  color: #5dffaa; /* <<=== Warna text summary Mobile Legends: hijau neon */
+  color: #5dffaa; /* Warna text summary Mobile Legends: hijau neon */
 }
 
 .modal-grid details[data-game="github"] summary {
-  color: #0969da; /* <<=== Warna text summary GitHub: biru GitHub */
+  color: #0969da; /* Warna text summary GitHub: biru GitHub */
 }
 
 .modal-grid p {
   margin: 0;
-  font-size: 13px; /* <<=== UKURAN FONT PARAGRAPH */
+  font-size: 13px; /* Ukuran font paragraph */
   line-height: 1.45;
 }
 
 /* Default paragraph colors */
 .modal-grid details[data-game="roblox"] p,
 .modal-grid details[data-game="ml"] p {
-  color: #e8e8e8; /* <<=== Warna paragraph untuk Roblox & ML: putih keabuan */
+  color: #e8e8e8; /* Warna paragraph untuk Roblox & ML: putih keabuan */
 }
 
-/* ===== TOMBOL "Free Accessories Tutorial" / "Tips & Trick" / "Lihat Proyek" ===== */
+/* Tombol "Free Accessories Tutorial" / "Tips & Trick" / "Lihat Proyek" */
 .modal-grid .about-btn {
   margin-top: auto;
   align-self: center;
-  
-  /* ===== WARNA BACKGROUND TOMBOL ===== */
   background: linear-gradient(
     90deg, 
-    rgba(60, 100, 255, 1),    /* <<=== Warna kiri: biru */
-    rgba(0, 180, 255, 1)      /* <<=== Warna kanan: cyan */
+    rgba(60, 100, 255, 1),    /* Warna kiri: biru */
+    rgba(0, 180, 255, 1)      /* Warna kanan: cyan */
   );
-  
-  color: #fff; /* <<=== WARNA TEXT TOMBOL */
-  padding: 8px 12px; /* <<=== PADDING TOMBOL */
-  border-radius: 10px; /* <<=== KELENGKUNGAN SUDUT TOMBOL */
+  color: #fff; /* Warna text tombol */
+  padding: 8px 12px; /* Padding tombol */
+  border-radius: 10px; /* Kelengkungan sudut tombol */
   text-decoration: none;
   font-weight: 700;
-  font-size: 13px; /* <<=== UKURAN FONT TOMBOL */
-  box-shadow: 0 6px 18px rgba(0, 150, 255, 0.35); /* <<=== SHADOW TOMBOL */
+  font-size: 13px; /* Ukuran font tombol */
+  box-shadow: 0 6px 18px rgba(0, 150, 255, 0.35); /* Shadow tombol */
   transition: all 0.3s ease;
 }
 
 .modal-grid .about-btn:hover {
-  transform: translateY(-2px); /* <<=== Naik saat hover */
-  box-shadow: 0 8px 25px rgba(0, 150, 255, 0.5); /* <<=== Shadow lebih besar saat hover */
+  transform: translateY(-2px); /* Naik saat hover */
+  box-shadow: 0 8px 25px rgba(0, 150, 255, 0.5); /* Shadow lebih besar saat hover */
 }
 
-/* ========================================================= */
-/* ===== RESPONSIVE - TABLET ===== */
-/* ========================================================= */
+/* Responsive - Tablet */
 @media (max-width: 920px) {
   .modal-grid {
-    grid-template-columns: repeat(2, 1fr); /* <<=== 2 KOLOM DI TABLET */
+    grid-template-columns: repeat(2, 1fr); /* 2 kolom di tablet */
   }
 }
 
-/* ========================================================= */
-/* ===== RESPONSIVE - MOBILE ===== */
-/* ========================================================= */
+/* Responsive - Mobile */
 @media (max-width: 600px) {
   .modal-grid {
-    grid-template-columns: 1fr; /* <<=== 1 KOLOM DI MOBILE */
+    grid-template-columns: 1fr; /* 1 kolom di mobile */
   }
 
-  /* ===== RESPONSIVE: UKURAN ORB DI MOBILE ===== */
+  /* Responsive: Ukuran Orb di mobile */
   .about-orb {
-    width: 110px; /* <<=== UKURAN ORB DI MOBILE */
+    width: 110px; /* Ukuran Orb di mobile */
     height: 110px;
     left: 70%;
   }
 
-  /* ===== RESPONSIVE: UKURAN UCUP1.PNG DI MOBILE ===== */
+  /* Responsive: Ukuran UCUP1.PNG di mobile */
   .about-orb-character {
-    width: 320px; /* <<=== UKURAN UCUP1.PNG DI MOBILE */
+    width: 320px; /* Ukuran UCUP1.PNG di mobile */
   }
 
   .about-modal-inner {
-    padding: 14px; /* <<=== PADDING MODAL DI MOBILE */
+    padding: 14px; /* Padding modal di mobile */
   }
 
-  /* ===== RESPONSIVE: UKURAN UCUP.PNG DI MOBILE ===== */
+  /* Responsive: Ukuran UCUP.PNG di mobile */
   .character-slide .character img {
-    width: 280px; /* <<=== UKURAN UCUP.PNG DI MOBILE */
+    width: 280px; /* Ukuran UCUP.PNG di mobile */
   }
 
   .home-section.show-animation.slide-active .character-slide {
-    transform: translateX(-20px); /* <<=== GESER KARAKTER DI MOBILE */
+    transform: translateX(-20px); /* Geser karakter di mobile */
   }
 }
 
@@ -1289,12 +1217,10 @@ header {
   transition: all 0.3s ease;
 }
 
-/* ===== UKURAN LOGO GAME (RB.PNG, ML.PNG, GH.PNG) ===== */
+/* Ukuran logo game (RB.PNG, ML.PNG, GH.PNG) */
 .game-summary img {
-  /* ===== UKURAN LOGO DALAM KEADAAN NORMAL ===== */
-  width: 150px; /* <<=== UBAH UKURAN LOGO RB/ML/GH DI SINI (NORMAL) */
+  width: 150px; /* Ukuran logo dalam keadaan normal */
   height: 150px;
-  
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.35));
@@ -1302,11 +1228,11 @@ header {
 }
 
 .game-summary:hover img {
-  transform: scale(1.12); /* <<=== PEMBESARAN SAAT HOVER (1.12 = 112%) */
+  transform: scale(1.12); /* Pembesaran saat hover (1.12 = 112%) */
 }
 
 .game-title {
-  font-size: 16px; /* <<=== UKURAN FONT TITLE GAME */
+  font-size: 16px; /* Ukuran font title game */
   font-weight: 700;
   color: #7be3ff;
   text-align: center;
@@ -1315,7 +1241,7 @@ header {
 }
 
 .game-summary:hover .game-title {
-  color: #a0f0ff; /* <<=== WARNA TITLE SAAT HOVER */
+  color: #a0f0ff; /* Warna title saat hover */
 }
 
 .game-content {
@@ -1325,21 +1251,19 @@ header {
   margin-top: 10px;
 }
 
-/* ========================================================= */
-/* ===== MODE FOCUS: KETIKA CARD DIKLIK/DIBUKA ===== */
-/* ========================================================= */
+/* Mode Focus: ketika card diklik/dibuka */
 .modal-grid.has-active-card {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   gap: 0;
   padding: 20px;
-  min-height: 400px; /* <<=== TINGGI MINIMAL SAAT CARD DIBUKA */
+  min-height: 400px; /* Tinggi minimal saat card dibuka */
 }
 
 /* Card yang TIDAK aktif: langsung hilang tanpa transisi */
 .modal-grid.has-active-card .game-item:not(.active-card) {
-  display: none !important; /* <<=== LANGSUNG HILANG (tidak pakai transisi) */
+  display: none !important; /* Langsung hilang (tidak pakai transisi) */
   opacity: 0;
   pointer-events: none;
   transform: scale(0);
@@ -1348,92 +1272,85 @@ header {
   overflow: hidden;
 }
 
-/* ===== UKURAN CARD SAAT DALAM MODE FOCUS (CARD AKTIF) ===== */
+/* Ukuran card saat dalam mode focus (card aktif) */
 .modal-grid.has-active-card .game-item.active-card {
   opacity: 1 !important;
   pointer-events: auto !important;
-  transform: scale(1.05); /* <<=== PEMBESARAN CARD SAAT DIBUKA */
+  transform: scale(1.05); /* Pembesaran card saat dibuka */
   filter: none;
   z-index: 50;
-  
-  /* ===== UKURAN CARD SAAT DIBUKA ===== */
-  max-width: 600px; /* <<=== LEBAR MAKSIMAL CARD SAAT DIBUKA */
+  max-width: 600px; /* Lebar maksimal card saat dibuka */
   width: 100%;
-  min-height: 350px; /* <<=== TINGGI MINIMAL CARD SAAT DIBUKA */
+  min-height: 350px; /* Tinggi minimal card saat dibuka */
 }
 
-/* ========================================================= */
-/* ===== ENHANCED STYLES SAAT CARD DIBUKA (MODE FOCUS) ===== */
-/* ========================================================= */
+/* Enhanced styles saat card dibuka (mode focus) */
 
 /* 1️⃣ ROBLOX CARD - SAAT DIBUKA */
 .modal-grid.has-active-card .game-item.active-card[data-game="roblox"] {
-  /* ===== WARNA ROBLOX CARD SAAT DIBUKA ===== */
   background: linear-gradient(
     135deg,
-    rgba(45, 47, 53, 0.9) 0%,     /* <<=== Background lebih solid saat dibuka */
+    rgba(45, 47, 53, 0.9) 0%,     /* Background lebih solid saat dibuka */
     rgba(57, 59, 65, 0.85) 100%
   ) !important;
-  border-color: rgba(200, 200, 200, 0.5); /* <<=== Border lebih terang */
+  border-color: rgba(200, 200, 200, 0.5); /* Border lebih terang */
   box-shadow: 
-    0 0 40px rgba(150, 150, 150, 0.3),  /* <<=== Glow abu-abu */
+    0 0 40px rgba(150, 150, 150, 0.3),  /* Glow abu-abu */
     0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 /* 2️⃣ MOBILE LEGENDS CARD - SAAT DIBUKA */
 .modal-grid.has-active-card .game-item.active-card[data-game="ml"] {
-  /* ===== WARNA ML CARD SAAT DIBUKA ===== */
   background: linear-gradient(
     135deg,
-    rgba(20, 65, 45, 0.9) 0%,     /* <<=== Background lebih solid saat dibuka */
+    rgba(20, 65, 45, 0.9) 0%,     /* Background lebih solid saat dibuka */
     rgba(25, 80, 55, 0.85) 100%
   ) !important;
-  border-color: rgba(120, 240, 160, 0.5); /* <<=== Border lebih terang */
+  border-color: rgba(120, 240, 160, 0.5); /* Border lebih terang */
   box-shadow: 
-    0 0 40px rgba(80, 200, 120, 0.4),   /* <<=== Glow hijau */
+    0 0 40px rgba(80, 200, 120, 0.4),   /* Glow hijau */
     0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 /* 3️⃣ GITHUB CARD - SAAT DIBUKA */
 .modal-grid.has-active-card .game-item.active-card[data-game="github"] {
-  /* ===== WARNA GITHUB CARD SAAT DIBUKA ===== */
   background: linear-gradient(
     135deg,
-    rgba(220, 225, 230, 0.5) 0%,  /* <<=== Background lebih solid saat dibuka */
+    rgba(220, 225, 230, 0.5) 0%,  /* Background lebih solid saat dibuka */
     rgba(240, 245, 250, 0.45) 100%
   ) !important;
-  border-color: rgba(255, 255, 255, 0.7); /* <<=== Border lebih terang */
+  border-color: rgba(255, 255, 255, 0.7); /* Border lebih terang */
   box-shadow: 
-    0 0 50px rgba(255, 255, 255, 0.5),  /* <<=== Glow putih */
+    0 0 50px rgba(255, 255, 255, 0.5),  /* Glow putih */
     0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
-/* ===== UKURAN LOGO SAAT CARD DIBUKA (MODE FOCUS) ===== */
+/* Ukuran logo saat card dibuka (mode focus) */
 .modal-grid.has-active-card .game-item.active-card .game-summary img {
-  width: 100px; /* <<=== UKURAN LOGO SAAT CARD DIBUKA */
+  width: 100px; /* Ukuran logo saat card dibuka */
   height: 100px;
   transform: scale(1.1);
   filter: drop-shadow(0 0 12px rgba(123, 227, 255, 0.6));
 }
 
-/* ===== UKURAN TITLE SAAT CARD DIBUKA ===== */
+/* Ukuran title saat card dibuka */
 .modal-grid.has-active-card .game-item.active-card .game-title {
-  font-size: 22px !important; /* <<=== UKURAN FONT TITLE SAAT DIBUKA */
+  font-size: 22px !important; /* Ukuran font title saat dibuka */
   font-weight: 800;
 }
 
-/* ===== UKURAN PARAGRAPH SAAT CARD DIBUKA ===== */
+/* Ukuran paragraph saat card dibuka */
 .modal-grid.has-active-card .game-item.active-card p {
-  font-size: 15px !important; /* <<=== UKURAN FONT PARAGRAPH SAAT DIBUKA */
+  font-size: 15px !important; /* Ukuran font paragraph saat dibuka */
   line-height: 1.6 !important;
   margin: 12px 0 !important;
   text-align: justify;
 }
 
-/* ===== UKURAN TOMBOL SAAT CARD DIBUKA ===== */
+/* Ukuran tombol saat card dibuka */
 .modal-grid.has-active-card .game-item.active-card .about-btn {
-  font-size: 15px !important; /* <<=== UKURAN FONT TOMBOL SAAT DIBUKA */
-  padding: 12px 24px !important; /* <<=== PADDING TOMBOL SAAT DIBUKA */
+  font-size: 15px !important; /* Ukuran font tombol saat dibuka */
+  padding: 12px 24px !important; /* Padding tombol saat dibuka */
   margin-top: 20px !important;
   box-shadow: 0 8px 24px rgba(80, 40, 200, 0.3);
   transform: scale(1.05);
@@ -1444,7 +1361,7 @@ header {
   box-shadow: 0 10px 30px rgba(0, 200, 255, 0.4);
 }
 
-/* ===== DETAILS ELEMENT ===== */
+/* Details element */
 details summary {
   cursor: pointer;
   user-select: none;
@@ -1459,45 +1376,41 @@ details summary::-webkit-details-marker {
   display: none;
 }
 
-/* ========================================================= */
-/* ===== RESPONSIVE - TABLET (UNTUK MODE FOCUS) ===== */
-/* ========================================================= */
+/* Responsive - Tablet (untuk mode focus) */
 @media (max-width: 920px) {
   .modal-grid.has-active-card .game-item.active-card {
-    max-width: 90%; /* <<=== LEBAR CARD DIBUKA DI TABLET */
+    max-width: 90%; /* Lebar card dibuka di tablet */
   }
 }
 
-/* ========================================================= */
-/* ===== RESPONSIVE - MOBILE (UNTUK MODE FOCUS) ===== */
-/* ========================================================= */
+/* Responsive - Mobile (untuk mode focus) */
 @media (max-width: 600px) {
-  /* ===== RESPONSIVE: UKURAN LOGO DI MOBILE ===== */
+  /* Responsive: Ukuran logo di mobile */
   .game-summary img {
-    width: 60px; /* <<=== UKURAN LOGO RB/ML/GH DI MOBILE */
+    width: 60px; /* Ukuran logo RB/ML/GH di mobile */
     height: 60px;
   }
 
   .game-title {
-    font-size: 14px; /* <<=== UKURAN FONT TITLE DI MOBILE */
+    font-size: 14px; /* Ukuran font title di mobile */
   }
 
   .modal-grid.has-active-card .game-item.active-card {
-    max-width: 95%; /* <<=== LEBAR CARD DIBUKA DI MOBILE */
-    min-height: 300px; /* <<=== TINGGI CARD DIBUKA DI MOBILE */
+    max-width: 95%; /* Lebar card dibuka di mobile */
+    min-height: 300px; /* Tinggi card dibuka di mobile */
   }
   
   .modal-grid.has-active-card .game-item.active-card .game-summary img {
-    width: 80px; /* <<=== UKURAN LOGO SAAT DIBUKA DI MOBILE */
+    width: 80px; /* Ukuran logo saat dibuka di mobile */
     height: 80px;
   }
   
   .modal-grid.has-active-card .game-item.active-card .game-title {
-    font-size: 20px !important; /* <<=== UKURAN TITLE SAAT DIBUKA DI MOBILE */
+    font-size: 20px !important; /* Ukuran title saat dibuka di mobile */
   }
   
   .modal-grid.has-active-card .game-item.active-card p {
-    font-size: 14px !important; /* <<=== UKURAN PARAGRAPH SAAT DIBUKA DI MOBILE */
+    font-size: 14px !important; /* Ukuran paragraph saat dibuka di mobile */
   }
 }
 
@@ -1534,7 +1447,7 @@ details summary::-webkit-details-marker {
 }
 
 /* ========================================================= */
-/* ===== STAGE 1: CHARACTER + PHONE (INITIAL) - FIXED ===== */
+/* ===== STAGE 1: CHARACTER + PHONE (INITIAL) ===== */
 /* ========================================================= */
 
 .contact-initial-container {
@@ -1546,11 +1459,11 @@ details summary::-webkit-details-marker {
 }
 
 .contact-character {
-  width: 450px;
+  width: 450px; /* Ukuran karakter UCUP3.PNG */
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
-  animation: floatCharacter 4s ease-in-out infinite;
+  animation: floatCharacter 4s ease-in-out infinite; /* Animasi mengambang */
   z-index: 1;
 }
 
@@ -1559,7 +1472,7 @@ details summary::-webkit-details-marker {
   50% { transform: translateY(-15px); }
 }
 
-/* ✅ PERBAIKAN: Phone wrapper & positioning */
+/* Phone wrapper & positioning */
 .phone-wrapper {
   position: relative;
   display: flex;
@@ -1569,44 +1482,44 @@ details summary::-webkit-details-marker {
 }
 
 .phone-image {
-  width: 55Opx; /* ✅ UKURAN LEBIH BESAR */
+  width: 550px; /* Ukuran gambar PHONE.PNG */
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 0 20px rgba(100, 180, 255, 0.5));
   display: block;
 }
 
-/* ✅ PERBAIKAN: Screen area untuk button (di dalam phone) */
+/* Screen area untuk button (di dalam phone) */
 .phone-screen {
   position: absolute;
-  top: 22%; /* ✅ POSISI VERTIKAL BUTTON DI DALAM PHONE */
+  top: 22%; /* Posisi vertikal button di dalam phone */
   left: 50%;
   transform: translateX(-50%);
-  width: 70%; /* ✅ LEBAR AREA SCREEN */
+  width: 70%; /* Lebar area screen */
   display: flex;
   justify-content: center;
   align-items: center;
   pointer-events: none; /* Screen tidak block click */
 }
 
-/* ✅ PERBAIKAN: Press Me Button */
+/* Press Me Button */
 .press-me-btn {
   background: linear-gradient(135deg, rgba(120, 200, 255, 0.95), rgba(80, 140, 220, 0.95));
   border: 3px solid rgba(255, 255, 255, 0.8);
   border-radius: 16px;
   padding: 16px 32px;
-  font-size: 24px; /* ✅ UKURAN FONT LEBIH BESAR */
+  font-size: 24px; /* Ukuran font button */
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #ffffff;
   cursor: pointer;
-  pointer-events: auto; /* ✅ BUTTON BISA DIKLIK */
+  pointer-events: auto; /* Button bisa diklik */
   box-shadow: 
     0 8px 30px rgba(100, 180, 255, 0.6),
     inset 0 2px 10px rgba(255, 255, 255, 0.4);
   transition: all 0.3s ease;
-  animation: pulseGlow 2s ease-in-out infinite;
+  animation: pulseGlow 2s ease-in-out infinite; /* Animasi glow berdenyut */
   white-space: nowrap;
 }
 
@@ -1635,19 +1548,19 @@ details summary::-webkit-details-marker {
 }
 
 /* ========================================================= */
-/* ===== STAGE 2: LOADING (SCI-FI + MATRIX) - FIXED ===== */
+/* ===== STAGE 2: LOADING (SCI-FI + MATRIX) ===== */
 /* ========================================================= */
 
 .contact-stage-2 {
-  background: transparent; /* ✅ TRANSPARAN, tidak hitam penuh */
+  background: transparent; /* Transparan, tidak hitam penuh */
 }
 
-/* ✅ PERBAIKAN: Glassmorphism Container untuk keseluruhan */
+/* Glassmorphism Container untuk keseluruhan */
 .contact-stage-2::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85); /* ✅ BLUR BACKGROUND */
+  background: rgba(0, 0, 0, 0.85); /* Blur background */
   backdrop-filter: blur(12px);
   z-index: 0;
 }
@@ -1658,11 +1571,11 @@ details summary::-webkit-details-marker {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.5; /* ✅ LEBIH TRANSPARAN */
+  opacity: 0.5; /* Lebih transparan */
   z-index: 1;
 }
 
-/* ✅ PERBAIKAN: Glassmorphism Box untuk Sci-Fi Sign */
+/* Glassmorphism Box untuk Sci-Fi Sign */
 .scifi-loading-wrapper {
   position: relative;
   z-index: 10;
@@ -1670,7 +1583,7 @@ details summary::-webkit-details-marker {
     135deg,
     rgba(15, 35, 80, 0.85),
     rgba(25, 50, 100, 0.85)
-  ); /* ✅ WARNA BIRU GELAP TRANSPARAN */
+  ); /* Warna biru gelap transparan */
   backdrop-filter: blur(20px);
   border: 2px solid rgba(100, 180, 255, 0.4);
   border-radius: 24px;
@@ -1690,8 +1603,8 @@ details summary::-webkit-details-marker {
 }
 
 .scifi-top-cover {
-  width: 340px;
-  height: 38px;
+  width: 340px; /* Lebar cover atas */
+  height: 38px; /* Tinggi cover atas */
   border-bottom-left-radius: 22px;
   border-bottom-right-radius: 22px;
   background: linear-gradient(rgb(126,145,158), rgb(167,192,209));
@@ -1711,25 +1624,25 @@ details summary::-webkit-details-marker {
   margin-bottom: -145px;
 }
 
-/* ✅ PERBAIKAN: Warna kuning untuk "LOADING...." agar kontras */
+/* Warna kuning untuk "LOADING...." agar kontras */
 .scifi-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 48px;
-  color: #FFD700; /* ✅ WARNA KUNING EMAS */
+  font-size: 48px; /* Ukuran font loading title */
+  color: #FFD700; /* Warna kuning emas */
   text-shadow: 
     0px 0px 12px rgba(255, 215, 0, 0.8),
     0px 0px 24px rgba(255, 215, 0, 0.5);
   opacity: 1;
   margin: 10px 0;
   text-transform: uppercase;
-  animation: loadingPulse 1.5s ease-in-out infinite;
+  animation: loadingPulse 1.5s ease-in-out infinite; /* Animasi berdenyut */
 }
 
-/* ✅ PERBAIKAN: Warna putih untuk subtitle agar terlihat */
+/* Warna putih untuk subtitle agar terlihat */
 .scifi-subtitle {
   font-family: 'Orbitron', sans-serif;
-  font-size: 20px;
-  color: #FFFFFF; /* ✅ WARNA PUTIH */
+  font-size: 20px; /* Ukuran font subtitle */
+  color: #FFFFFF; /* Warna putih */
   text-shadow: 
     0px 0px 8px rgba(255, 255, 255, 0.8),
     0px 0px 16px rgba(177, 201, 220, 0.6);
@@ -1754,10 +1667,10 @@ details summary::-webkit-details-marker {
 
 .scifi-edges-1 {
   background: rgb(0,0,0);
-  width: 520px;
+  width: 520px; /* Lebar container edges */
   border-top: 16px solid rgba(204,232,254,0.85);
   border-radius: 24px;
-  transform: perspective(300px) rotateX(-22deg);
+  transform: perspective(300px) rotateX(-22deg); /* Efek 3D tilt */
   border-left: 20px solid rgba(204,232,254,0.85);
   border-right: 20px solid rgba(204,232,254,0.85);
   border-bottom: 24px solid rgba(204,232,254,0.85);
@@ -1765,7 +1678,7 @@ details summary::-webkit-details-marker {
 }
 
 .scifi-edges-2 {
-  height: 115px;
+  height: 115px; /* Tinggi edges dalam */
   box-shadow: 0 0 12px 3px rgb(204,232,254), 0 0 8px 3px rgb(177,232,254) inset;
   margin: 2px;
   border-top: 12px solid rgba(204,232,254,0.85);
@@ -1777,11 +1690,11 @@ details summary::-webkit-details-marker {
 
 .scifi-slider {
   height: calc(100% - 26px);
-  width: 9px;
+  width: 9px; /* Lebar slider animasi */
   filter: blur(1.5px);
   background: rgba(177,220,254,0.6);
   position: absolute;
-  animation: sliderMove 4s linear infinite;
+  animation: sliderMove 4s linear infinite; /* Animasi slider bergerak */
 }
 
 @keyframes sliderMove {
@@ -1806,7 +1719,6 @@ details summary::-webkit-details-marker {
 /* ===== STAGE 3: ORBIT (dengan glassmorphism box) ===== */
 /* ========================================================= */
 
-/* ✅ PERBAIKAN: Tambahkan glassmorphism container untuk orbit */
 .contact-stage-3 {
   display: flex;
   justify-content: center;
@@ -1819,23 +1731,21 @@ details summary::-webkit-details-marker {
     135deg,
     rgba(15, 35, 80, 0.75),
     rgba(25, 50, 100, 0.75)
-  ); /* ✅ GLASSMORPHISM BACKGROUND */
+  ); /* Glassmorphism background */
   backdrop-filter: blur(20px);
   border: 2px solid rgba(100, 180, 255, 0.3);
   border-radius: 24px;
-  padding: 80px;
+  padding: 80px; /* Padding container orbit */
   box-shadow: 
     0 30px 80px rgba(0, 0, 0, 0.7),
     0 0 100px rgba(100, 180, 255, 0.2);
 }
 
 .contact-stage-3 .orbit-center {
-  display: none !important; /* ✅ Hide center point "Follow Me" */
+  display: none !important; /* Hide center point "Follow Me" */
 }
 
-/* ========================================================= */
-/* ===== ORBIT PATHS (DASHED CIRCLES) ===== */
-/* ========================================================= */
+/* Orbit Paths (dashed circles) */
 .orbit-path {
   position: absolute;
   top: 50%;
@@ -1847,26 +1757,24 @@ details summary::-webkit-details-marker {
 }
 
 #orbit-1 {
-  width: 200px;
+  width: 200px; /* Diameter orbit 1 */
   height: 200px;
-  animation: rotate-orbit 20s linear infinite;
+  animation: rotate-orbit 20s linear infinite; /* Animasi rotasi */
 }
 
 #orbit-2 {
-  width: 350px;
+  width: 350px; /* Diameter orbit 2 */
   height: 350px;
   animation: rotate-orbit 30s linear infinite;
 }
 
 #orbit-3 {
-  width: 500px;
+  width: 500px; /* Diameter orbit 3 */
   height: 500px;
   animation: rotate-orbit 40s linear infinite;
 }
 
-/* ========================================================= */
-/* ===== SOCIAL ITEM CONTAINER (ICON + LABEL) ===== */
-/* ========================================================= */
+/* Social Item Container (icon + label) */
 .social-item {
   position: absolute;
   display: flex;
@@ -1878,11 +1786,9 @@ details summary::-webkit-details-marker {
   z-index: 1000 !important;
 }
 
-/* ========================================================= */
-/* ===== SOCIAL MEDIA ICONS ===== */
-/* ========================================================= */
+/* Social Media Icons */
 .social-icon {
-  width: 60px;
+  width: 60px; /* Ukuran icon media sosial */
   height: 60px;
   border-radius: 50%;
   display: flex !important;
@@ -1901,16 +1807,13 @@ details summary::-webkit-details-marker {
 }
 
 .social-icon i {
-  font-size: 28px;
+  font-size: 28px; /* Ukuran icon font */
   transition: all 0.3s ease;
   z-index: 1001;
   pointer-events: none;
 }
 
-/* ========================================================= */
-/* ===== COUNTER-ROTATION (ICON TETAP TEGAK) ===== */
-/* ========================================================= */
-
+/* Counter-rotation (icon tetap tegak) */
 #orbit-1 .social-item {
   animation: counter-rotate-icon-orbit1 20s linear infinite;
 }
@@ -1923,10 +1826,7 @@ details summary::-webkit-details-marker {
   animation: counter-rotate-icon-orbit3 40s linear infinite;
 }
 
-/* ========================================================= */
-/* ===== POSITIONING ON ORBITS ===== */
-/* ========================================================= */
-
+/* Positioning on orbits */
 #orbit-1 .social-item {
   top: -30px;
   left: 50%;
@@ -1963,17 +1863,15 @@ details summary::-webkit-details-marker {
   margin-left: 0;
 }
 
-/* ========================================================= */
-/* ===== SMART LABEL - BASE STYLE ===== */
-/* ========================================================= */
+/* Smart Label - Base Style */
 .social-label {
   position: absolute;
-  font-size: 13px;
+  font-size: 13px; /* Ukuran font label */
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   white-space: nowrap;
-  padding: 8px 14px;
+  padding: 8px 14px; /* Padding label */
   border-radius: 8px;
   background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(10px);
@@ -2125,7 +2023,7 @@ details summary::-webkit-details-marker {
 }
 
 .social-icon:hover {
-  transform: scale(1.2) !important;
+  transform: scale(1.2) !important; /* Pembesaran saat hover */
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
   z-index: 1004 !important;
 }
@@ -2307,42 +2205,39 @@ details summary::-webkit-details-marker {
   #orbit-3 .social-item { animation: counter-rotate-icon-orbit3 45s linear infinite; }
 }
 
-/* ========================================================= */
-/* ===== RESPONSIVE ===== */
-/* ========================================================= */
-
+/* Responsive umum */
 @media (max-width: 768px) {
   .contact-character {
-    width: 300px;
+    width: 300px; /* Ukuran karakter di tablet */
   }
   
   .phone-image {
-    width: 280px;
+    width: 280px; /* Ukuran phone di tablet */
   }
   
   .press-me-btn {
-    font-size: 18px;
+    font-size: 18px; /* Ukuran font button di tablet */
     padding: 12px 24px;
   }
   
   .scifi-loading-wrapper {
-    padding: 40px 50px;
+    padding: 40px 50px; /* Padding loading di tablet */
   }
   
   .scifi-top-cover {
-    width: 280px;
+    width: 280px; /* Lebar cover di tablet */
   }
   
   .scifi-edges-1 {
-    width: 420px;
+    width: 420px; /* Lebar edges di tablet */
   }
   
   .scifi-title {
-    font-size: 36px;
+    font-size: 36px; /* Ukuran font title di tablet */
   }
   
   .contact-stage-3 .orbit-container {
-    padding: 50px;
+    padding: 50px; /* Padding orbit di tablet */
   }
 }
 
@@ -2353,36 +2248,36 @@ details summary::-webkit-details-marker {
   }
   
   .contact-character {
-    width: 250px;
+    width: 250px; /* Ukuran karakter di mobile */
   }
   
   .phone-image {
-    width: 240px;
+    width: 240px; /* Ukuran phone di mobile */
   }
   
   .press-me-btn {
-    font-size: 16px;
+    font-size: 16px; /* Ukuran font button di mobile */
     padding: 10px 20px;
   }
   
   .scifi-loading-wrapper {
-    padding: 30px 40px;
+    padding: 30px 40px; /* Padding loading di mobile */
   }
   
   .scifi-top-cover {
-    width: 240px;
+    width: 240px; /* Lebar cover di mobile */
   }
   
   .scifi-edges-1 {
-    width: 350px;
+    width: 350px; /* Lebar edges di mobile */
   }
   
   .scifi-title {
-    font-size: 28px;
+    font-size: 28px; /* Ukuran font title di mobile */
   }
   
   .contact-stage-3 .orbit-container {
-    padding: 40px;
+    padding: 40px; /* Padding orbit di mobile */
   }
 }
 
@@ -2391,16 +2286,16 @@ details summary::-webkit-details-marker {
 /* ========================================================= */
 
 footer {
-  background: rgba(0, 0, 0, 0.6); /* <<=== WARNA BACKGROUND FOOTER */
-  padding: 20px;
+  background: rgba(0, 0, 0, 0.6); /* Warna background footer */
+  padding: 20px; /* Padding footer */
   text-align: center;
-  color: #fff; /* <<=== WARNA TEXT FOOTER */
+  color: #fff; /* Warna text footer */
   backdrop-filter: blur(8px);
 }
 
 footer p {
   margin: 0;
-  font-size: 14px; /* <<=== UKURAN FONT FOOTER */
+  font-size: 14px; /* Ukuran font footer */
 }
 
 /* ========================================================= */
@@ -2408,7 +2303,7 @@ footer p {
 /* ===== BLUR UNTUK ABOUT MODAL vs SPEED MODAL ===== */
 /* ========================================================= */
 
-/* ===== BLUR UNTUK ABOUT MODAL (seperti sebelumnya) ===== */
+/* Blur untuk About Modal */
 body.blur-background .home-section > *:not(.about-modal),
 body.blur-background .about-orb-section > *:not(.about-modal),
 body.blur-background #contact > *,
@@ -2429,10 +2324,9 @@ body.blur-background .about-orb-container {
   transition: filter 0.3s ease;
 }
 
-/* ===== BLUR UNTUK SPEED MODAL (BARU) ===== */
-/* Starfield TIDAK di-blur untuk speed modal */
+/* Blur untuk Speed Modal */
 body.speed-modal-open .star-field {
-  filter: none !important; /* ✅ BINTANG TETAP JELAS */
+  filter: none !important; /* Bintang tetap jelas */
 }
 
 /* Konten utama tetap blur untuk speed modal */
@@ -2444,7 +2338,7 @@ body.speed-modal-open footer > * {
   transition: filter 0.3s ease;
 }
 
-/* ===== SHARED RULES (untuk kedua modal) ===== */
+/* Shared rules (untuk kedua modal) */
 
 /* JANGAN blur navbar*/
 body.blur-background header,
@@ -2481,4 +2375,3 @@ body.speed-modal-open .speed-control-content,
 body.speed-modal-open .speed-control-content * {
   filter: none !important;
 }
-

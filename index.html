@@ -5,17 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personal Website | UcupEsgul</title>
 
-  <!-- ✅ TAMBAHKAN INI - Font Awesome Icons -->
+  <!-- ===== FONT AWESOME ICONS ===== -->
+  <!-- Menyediakan icon untuk media sosial dan UI lainnya -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <!-- ===== MAIN STYLE ===== -->
+  <!-- File CSS utama untuk styling website -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
   <!-- ===== STARFIELD BACKGROUND ===== -->
-  <!-- Partikel bintang yang bergerak - TIDAK AKAN MENUTUPI KONTEN -->
+  <!-- Background partikel bintang bergerak yang tidak mengganggu konten -->
   <div class="star-field">
     <div class="layer"></div>
     <div class="layer"></div>
@@ -23,24 +25,28 @@
   </div>
 
   <!-- ========================================================= -->
-  <!-- ===== NAVBAR BARU (ANIMATED BUTTON-GROUP) ===== -->
+  <!-- ===== NAVIGATION BAR ===== -->
   <!-- ========================================================= -->
   <header>
     <div class="button-group">
+      <!-- HOME BUTTON - Navigasi ke section Home -->
       <div data-target="home" class="active">Home</div>
       
-      <!-- ABOUT MENU WITH DROPDOWN -->
+      <!-- ABOUT BUTTON WITH DROPDOWN - Navigasi ke section About dengan submenu -->
       <div class="about-menu-wrapper" data-target="about">
         About
         <div class="dropdown-menu" id="aboutDropdown">
+          <!-- Link ke halaman Roblox -->
           <a href="MoreAbout/RB/rb_information.html" class="dropdown-item">
             <img src="Images/RB.png" alt="Roblox">
             <span>Roblox</span>
           </a>
+          <!-- Link ke halaman Mobile Legends -->
           <a href="MoreAbout/ML/ml_information.html" class="dropdown-item">
             <img src="Images/ML.png" alt="Mobile Legend">
             <span>Mobile Legends</span>
           </a>
+          <!-- Link ke halaman GitHub -->
           <a href="MoreAbout/GH/gh_information.html" class="dropdown-item">
             <img src="Images/GH.png" alt="GitHub">
             <span>GitHub</span>
@@ -48,12 +54,16 @@
         </div>
       </div>
       
+      <!-- CONTACT BUTTON - Navigasi ke section Contact -->
       <div data-target="contact">Contact</div>
+      
+      <!-- SPEED CONTROL BUTTON - Tombol untuk mengontrol kecepatan partikel -->
       <div id="speedControlBtn">Speed Control</div>
     </div>
   </header>
 
   <!-- ===== SPEED CONTROL MODAL ===== -->
+  <!-- Modal popup untuk mengatur kecepatan animasi partikel -->
   <div class="speed-control-modal" id="speedModal">
     <div class="speed-control-content">
       <button class="close-btn" id="speedModalClose">&times;</button>
@@ -82,12 +92,13 @@
     </div>
   </div>
 
+  <!-- ========================================================= -->
   <!-- ===== HOME SECTION ===== -->
-  <!-- SECTION INI BERISI ANIMASI KARAKTER UCUP.PNG DAN INFO TEXT -->
+  <!-- ========================================================= -->
+  <!-- Section utama yang berisi perkenalan dan karakter utama -->
   <section id="home" class="home-section fade-element blur-out">
     
-    <!-- Info Slide (muncul dari bawah) - DI KIRI -->
-    <!-- UNTUK MENGUBAH ISI TEXT, EDIT DI DALAM TAG <div class="intro"> -->
+    <!-- Bagian kiri: Informasi teks perkenalan -->
     <div class="intro-slide slide-info">
       <div class="intro">
         <h1>CODE NAME : UCUP ESGUL</h1>
@@ -98,8 +109,7 @@
       </div>
     </div>
 
-    <!-- Character Slide (muncul dari atas) - DI KANAN -->
-    <!-- GAMBAR UCUP.PNG - UNTUK MENGUBAH UKURAN & POSISI, CEK DI style.css BAGIAN .character-slide -->
+    <!-- Bagian kanan: Gambar karakter utama -->
     <div class="character-slide slide-char">
       <div class="character">
         <img
@@ -112,21 +122,21 @@
 
   </section>
 
-  <!-- ===== ABOUT SECTION (ORB) ===== -->
-  <!-- SECTION INI BERISI KARAKTER UCUP1.PNG DAN ORB YANG BISA DIKLIK -->
+  <!-- ========================================================= -->
+  <!-- ===== ABOUT SECTION ===== -->
+  <!-- ========================================================= -->
+  <!-- Section yang menampilkan informasi tentang hobi dan proyek -->
   <section id="about" class="about-orb-section fade-element blur-out">
 
     <div class="about-orb-container">
-      <!-- GAMBAR UCUP1.PNG - UNTUK MENGUBAH UKURAN & POSISI, CEK DI style.css BAGIAN .about-orb-character -->
+      <!-- Gambar karakter untuk section About -->
       <img src="Images/UCUP1.png"
            alt="UcupEsgul About"
            class="about-orb-character" />
 
-      <!-- ORB TRIGGER - TOMBOL BULAT YANG BISA DIKLIK -->
-      <!-- UNTUK MENGUBAH UKURAN & POSISI ORB, CEK DI style.css BAGIAN .about-orb -->
+      <!-- Orb interaktif yang dapat diklik untuk membuka modal -->
       <div class="about-orb" id="aboutOrb" role="button" tabindex="0">
-        <!-- LOGO DI DALAM ORB - AKAN BERPUTAR OTOMATIS (RB.png → ML.png → GH.png) -->
-        <!-- AUTO ROTATE DIATUR DI script.js -->
+        <!-- Logo dalam orb yang berotasi otomatis -->
         <img id="orbLogo"
              src="Images/RB.png"
              alt="Orb Logo"
@@ -135,22 +145,19 @@
     </div>
 
     <!-- ===== ABOUT MODAL ===== -->
-    <!-- MODAL INI MUNCUL SAAT ORB DIKLIK -->
-    <!-- UNTUK MENGUBAH UKURAN MODAL, CEK DI style.css BAGIAN .about-modal-inner -->
+    <!-- Modal yang muncul saat orb diklik -->
     <div id="aboutModal" class="about-modal" aria-hidden="true" role="dialog">
       <div class="about-modal-inner">
-        <!-- TOMBOL CLOSE (X) -->
+        <!-- Tombol close modal -->
         <button class="modal-close" id="modalClose">&times;</button>
 
-        <!-- JUDUL MODAL -->
+        <!-- Judul modal -->
         <h2 class="modal-title">Explore</h2>
 
-        <!-- GRID CONTAINER UNTUK 3 CARD (ROBLOX, ML, GITHUB) -->
-        <!-- UNTUK MENGUBAH UKURAN CARD, CEK DI style.css BAGIAN .modal-grid details -->
+        <!-- Grid berisi 3 card informasi -->
         <div class="modal-grid">
 
-          <!-- ROBLOX CARD -->
-          <!-- LOGO RB.PNG - UNTUK MENGUBAH UKURAN LOGO, CEK DI style.css BAGIAN .game-summary img -->
+          <!-- Card 1: Roblox -->
           <details class="game-item" data-game="roblox">
             <summary class="game-summary">
               <img src="Images/RB.png" alt="Roblox">
@@ -163,8 +170,7 @@
             </div>
           </details>
 
-          <!-- MOBILE LEGEND CARD -->
-          <!-- LOGO ML.PNG - UNTUK MENGUBAH UKURAN LOGO, CEK DI style.css BAGIAN .game-summary img -->
+          <!-- Card 2: Mobile Legends -->
           <details class="game-item" data-game="ml">
             <summary class="game-summary">
               <img src="Images/ML.png" alt="Mobile Legend">
@@ -177,8 +183,7 @@
             </div>
           </details>
 
-          <!-- GITHUB CARD -->
-          <!-- LOGO GH.PNG - UNTUK MENGUBAH UKURAN LOGO, CEK DI style.css BAGIAN .game-summary img -->
+          <!-- Card 3: GitHub -->
           <details class="game-item" data-game="github">
             <summary class="game-summary">
               <img src="Images/GH.png" alt="GitHub">
@@ -198,118 +203,122 @@
   </section>
 
   <!-- ========================================================= -->
-<!-- ===== CONTACT SECTION - MULTI STAGE (UPDATED) ===== -->
-<!-- ========================================================= -->
-<section id="contact" class="fade-element blur-out">
-  
-  <!-- ========== STAGE 1: CHARACTER + PHONE (INITIAL) ========== -->
-  <div class="contact-stage contact-stage-1 active">
-    <div class="contact-initial-container">
-      <!-- Character UCUP3.png -->
-      <img src="Images/UCUP3.png" alt="Ucup Character" class="contact-character">
-      
-      <!-- Phone with Press Me button INSIDE -->
-      <div class="phone-wrapper">
-        <img src="Images/PHONE.png" alt="Phone" class="phone-image">
-        <div class="phone-screen">
-          <button class="press-me-btn" id="pressMeBtn">PRESS ME!!!</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== STAGE 2: LOADING (SCI-FI + MATRIX) ========== -->
-  <div class="contact-stage contact-stage-2">
-    <!-- Matrix Background Canvas -->
-    <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+  <!-- ===== CONTACT SECTION ===== -->
+  <!-- ========================================================= -->
+  <!-- Section dengan 3 tahap untuk menampilkan media sosial -->
+  <section id="contact" class="fade-element blur-out">
     
-    <!-- ✅ PERBAIKAN: Glassmorphism Wrapper -->
-    <div class="scifi-loading-wrapper">
-      <!-- Sci-Fi Sign Box -->
-      <div class="scifi-loading-box">
-        <div class="scifi-top-cover"></div>
+    <!-- ========== STAGE 1: AWAL ========== -->
+    <!-- Tampilan awal dengan karakter dan telepon -->
+    <div class="contact-stage contact-stage-1 active">
+      <div class="contact-initial-container">
+        <!-- Karakter untuk section Contact -->
+        <img src="Images/UCUP3.png" alt="Ucup Character" class="contact-character">
         
-        <div class="scifi-content">
-          <h2 class="scifi-title">LOADING....</h2>
-          <p class="scifi-subtitle">Mohon tunggu sebentar.</p>
-        </div>
-        
-        <div class="scifi-edges-1">
-          <div class="scifi-edges-2">
-            <div class="scifi-slider"></div>
-            <div class="scifi-line"></div>
+        <!-- Telepon dengan tombol interaktif -->
+        <div class="phone-wrapper">
+          <img src="Images/PHONE.png" alt="Phone" class="phone-image">
+          <div class="phone-screen">
+            <button class="press-me-btn" id="pressMeBtn">PRESS ME!!!</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ========== STAGE 3: ORBIT SOCIAL MEDIA (FINAL) ========== -->
-  <div class="contact-stage contact-stage-3">
-    <div class="orbit-container">
-      <!-- ❌ TIDAK ADA "Follow Me" center point lagi -->
+    <!-- ========== STAGE 2: LOADING ========== -->
+    <!-- Animasi loading dengan efek matrix -->
+    <div class="contact-stage contact-stage-2">
+      <!-- Canvas untuk efek matrix background -->
+      <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
       
-      <!-- Orbit 1 - GitHub -->
-      <div class="orbit-path" id="orbit-1">
-        <div class="social-item">
-          <a href="https://github.com/Kevin420-KS" class="social-icon" id="github-icon" aria-label="GitHub" target="_blank">
-            <i class="fa-brands fa-github"></i>
-          </a>
-          <span class="social-label">GitHub</span>
-        </div>
-      </div>
-
-      <!-- Orbit 2 - LinkedIn, Spotify -->
-      <div class="orbit-path" id="orbit-2">
-        <div class="social-item">
-          <a href="https://www.linkedin.com/in/kevin-setiawan-889b1a323/" class="social-icon" id="linkedin-icon" aria-label="LinkedIn" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-          <span class="social-label">LinkedIn</span>
-        </div>
-        <div class="social-item">
-          <a href="https://open.spotify.com/playlist/6j9auWzHjFTOchxzfELX2w?si=87d485f9ef83487c&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn5zSGR-UZPU-XW9S1AO6cr_z9sUgxyaVjUAglsciUjCqonbPJ1XIRu9sNYT8_aem_yGR8UTILlcMtCgZ5gGphhg&brid=Spd89_IieDc-Q2ZXVKJQvw" class="social-icon" id="spotify-icon" aria-label="Spotify" target="_blank">
-            <i class="fa-brands fa-spotify"></i>
-          </a>
-          <span class="social-label">Spotify</span>
-        </div>
-      </div>
-
-      <!-- Orbit 3 - Instagram, YouTube, TikTok -->
-      <div class="orbit-path" id="orbit-3">
-        <div class="social-item">
-          <a href="https://www.instagram.com/no_logic_thinker/" class="social-icon" id="instagram-icon" aria-label="Instagram" target="_blank">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <span class="social-label">Instagram</span>
-        </div>
-        <div class="social-item">
-          <a href="https://www.youtube.com/@Ucup3sgul" class="social-icon" id="youtube-icon" aria-label="YouTube" target="_blank">
-            <i class="fa-brands fa-youtube"></i>
-          </a>
-          <span class="social-label">YouTube</span>
-        </div>
-        <div class="social-item">
-          <a href="https://www.tiktok.com/@ucupesgul_roblox" class="social-icon" id="tiktok-icon" aria-label="TikTok" target="_blank">
-            <i class="fa-brands fa-tiktok"></i>
-          </a>
-          <span class="social-label">TikTok</span>
+      <!-- Container untuk animasi loading sci-fi -->
+      <div class="scifi-loading-wrapper">
+        <div class="scifi-loading-box">
+          <div class="scifi-top-cover"></div>
+          
+          <div class="scifi-content">
+            <h2 class="scifi-title">LOADING....</h2>
+            <p class="scifi-subtitle">Mohon tunggu sebentar.</p>
+          </div>
+          
+          <div class="scifi-edges-1">
+            <div class="scifi-edges-2">
+              <div class="scifi-slider"></div>
+              <div class="scifi-line"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-</section>
+    <!-- ========== STAGE 3: MEDIA SOSIAL ========== -->
+    <!-- Tampilan orbit dengan link media sosial -->
+    <div class="contact-stage contact-stage-3">
+      <div class="orbit-container">
+        <!-- Orbit 1: GitHub -->
+        <div class="orbit-path" id="orbit-1">
+          <div class="social-item">
+            <a href="https://github.com/Kevin420-KS" class="social-icon" id="github-icon" aria-label="GitHub" target="_blank">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <span class="social-label">GitHub</span>
+          </div>
+        </div>
+
+        <!-- Orbit 2: LinkedIn & Spotify -->
+        <div class="orbit-path" id="orbit-2">
+          <div class="social-item">
+            <a href="https://www.linkedin.com/in/kevin-setiawan-889b1a323/" class="social-icon" id="linkedin-icon" aria-label="LinkedIn" target="_blank">
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <span class="social-label">LinkedIn</span>
+          </div>
+          <div class="social-item">
+            <a href="https://open.spotify.com/playlist/6j9auWzHjFTOchxzfELX2w?si=87d485f9ef83487c&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn5zSGR-UZPU-XW9S1AO6cr_z9sUgxyaVjUAglsciUjCqonbPJ1XIRu9sNYT8_aem_yGR8UTILlcMtCgZ5gGphhg&brid=Spd89_IieDc-Q2ZXVKJQvw" class="social-icon" id="spotify-icon" aria-label="Spotify" target="_blank">
+              <i class="fa-brands fa-spotify"></i>
+            </a>
+            <span class="social-label">Spotify</span>
+          </div>
+        </div>
+
+        <!-- Orbit 3: Instagram, YouTube, TikTok -->
+        <div class="orbit-path" id="orbit-3">
+          <div class="social-item">
+            <a href="https://www.instagram.com/no_logic_thinker/" class="social-icon" id="instagram-icon" aria-label="Instagram" target="_blank">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <span class="social-label">Instagram</span>
+          </div>
+          <div class="social-item">
+            <a href="https://www.youtube.com/@Ucup3sgul" class="social-icon" id="youtube-icon" aria-label="YouTube" target="_blank">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <span class="social-label">YouTube</span>
+          </div>
+          <div class="social-item">
+            <a href="https://www.tiktok.com/@ucupesgul_roblox" class="social-icon" id="tiktok-icon" aria-label="TikTok" target="_blank">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <span class="social-label">TikTok</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <!-- ===== FOOTER ===== -->
+  <!-- Bagian footer website -->
   <footer>
     <p>&copy; 2025 - Personal Website by UcupEsgul</p>
   </footer>
 
   <!-- ===== MAIN SCRIPT ===== -->
+  <!-- File JavaScript utama untuk interaktivitas -->
   <script src="script.js"></script>
 
-  <!-- ===== POPUP (EXTRA) ===== -->
+  <!-- ===== POPUP TAMBAHAN ===== -->
+  <!-- Popup untuk menampilkan detail game saat diklik dari dropdown -->
   <div class="about-popup" id="gamePopup" aria-hidden="true">
     <div class="about-popup-content">
 
